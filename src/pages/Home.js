@@ -1,5 +1,6 @@
 import Header from "../layout/header/Header";
 import background1 from "../assets/images/background1.jpg";
+
 import "./page.css";
 
 function Home() {

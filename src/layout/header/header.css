@@ -5,21 +5,22 @@
 
 .nav * {
   font-size: 16px;
-  color: white;
   text-decoration: none;
-}
-.nav a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   height: 70px;
-  position: sticky;
-  top: 0%;
+}
+
+.nav-container * {
+  color: white;
+}
+
+.nav-container > * {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
@@ -28,10 +29,7 @@
 
 .textButton-group {
   flex-grow: 1;
-
-  display: flex;
   justify-content: space-around;
-  align-items: center;
 }
 
 .textButton-group .textButton {
@@ -44,44 +42,33 @@
 }
 
 .authButton-group {
-  display: flex;
-  align-items: center;
-}
-
-.authButton {
-  width: 100px;
+  align-self: center;
+  flex-grow: 0.2;
+  justify-content: flex-end;
   height: 40px;
-  border: none;
-  border-radius: 20px;
-}
-
-.authButton:hover {
-  background-color: #2e2275;
-}
-
-.button-login {
-  background-color: #08a521;
-}
-.button-signup {
-  background-color: #d4283b;
 }
 
 .textButton-outside-group {
   margin-top: 10px;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  height: 240px;
+  border-radius: 5px;
+  height: 250px;
   display: none;
   flex-direction: column;
 }
 
 .textButton-outside-group .textButton {
   flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   color: rgba(0, 0, 0, 0.5);
 }
 
-.textButton-outside-group a:hover {
+.textButton-outside-group .textButton:hover {
   background-color: rgba(0, 0, 0, 0.5);
   color: rgba(255, 255, 255, 1);
   border-radius: 5px;

@@ -1,33 +1,51 @@
-import { Link } from "react-router-dom";
 import "./profile.css";
-import OptionDropdown from "./OptionDropdown";
 
-import avatar from "../../assets/images/avatar1.jpg";
-
+import { Link } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { useClickOutSide } from "../../hooks/useClickOutside";
 
+import Modal from "../modal/Modal";
+import OptionDropdown from "./OptionDropdown";
+import ChangePassword from "../../features/auth/changePassword/ChangePassword";
+
+import avatar from "../../assets/images/avatar1.jpg";
+
 function ProfileDropdown() {
   const [dropdown, setDropdown] = useState(false);
-  const closeDropdown = useCallback(() => setDropdown(false), []);
-  const dropdownEl = useClickOutSide(closeDropdown);
+  const [modalChangeIsOpen, setModalChangeIsOpen] = useState(false);
+
+  const openModalChange = () => setModalChangeIsOpen(true);
+  const closeModalChange = () => setModalChangeIsOpen(false);
+
+  const closeDropdown = () => setDropdown(false);
+  const toggleDropdown = () => setDropdown((previous) => !previous);
+
+  const dropdownEl = useClickOutSide(useCallback(closeDropdown, []));
+
+  const handleChangePassword = () => {
+    openModalChange();
+    closeDropdown();
+  };
 
   return (
     <div className="profile-dropdown-group" ref={dropdownEl}>
-      <Link onClick={() => setDropdown((previous) => !previous)}>
+      <Link onClick={toggleDropdown}>
         <img src={avatar} alt="profile"></img>
       </Link>
       <ul className={`profile-dropdown-content ${dropdown ? "display-flex" : ""}`}>
         <OptionDropdown title="View profile">
           <i class="fa-solid fa-user"></i>
         </OptionDropdown>
-        <OptionDropdown title="Change password">
+        <OptionDropdown title="Change password" onClick={handleChangePassword}>
           <i class="fa-solid fa-unlock"></i>
         </OptionDropdown>
         <OptionDropdown title="Logout">
           <i class="fa-solid fa-right-from-bracket"></i>
         </OptionDropdown>
       </ul>
+      <Modal header="Change password" isOpen={modalChangeIsOpen} closeModal={closeModalChange}>
+        <ChangePassword closeModal={closeModalChange} />
+      </Modal>
     </div>
   );
 }

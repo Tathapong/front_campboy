@@ -12,6 +12,7 @@ code {
 
 * {
   box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .col-1 {
