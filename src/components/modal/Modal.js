@@ -6,10 +6,8 @@ function Modal(props) {
   return (
     <div className={`modal ${isOpen ? "display-block" : "display-none"}`} onClick={closeModal}>
       <div className={`modal-content `} onClick={(ev) => ev.stopPropagation()}>
-        <div className="modal-header">
-          {header}
-          <i class="fa-solid fa-xmark" onClick={closeModal}></i>
-        </div>
+        <i class="fa-solid fa-xmark" onClick={closeModal}></i>
+        <div className="modal-header">{header}</div>
         <div className="modal-body">{children}</div>
       </div>
     </div>

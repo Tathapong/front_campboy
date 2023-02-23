@@ -1,0 +1,12 @@
+.camp-column-card-list-group {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 1200px) {
+  .camp-column-card-list-group {
+    grid-template-columns: auto auto;
+    justify-content: center;
+  }
+}

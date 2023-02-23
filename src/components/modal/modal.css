@@ -23,8 +23,8 @@
   margin: auto;
   padding: 40px;
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--dropShadow);
 
   animation-name: animatetop;
   animation-duration: 0.3s;
@@ -49,13 +49,15 @@
   font-weight: bold;
 }
 
-.modal-header > i {
+.modal-content > .fa-xmark {
+  margin: 20px;
   color: black;
   cursor: pointer;
   font-size: 20px;
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1;
 }
 
 .modal-body {
@@ -71,7 +73,10 @@
 }
 
 @media only screen and (max-width: 576px) {
+  .modal {
+    padding-top: 50px;
+  }
   .modal-content {
-    padding: 20px;
+    padding: 10px;
   }
 }

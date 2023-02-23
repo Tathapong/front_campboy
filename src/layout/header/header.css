@@ -1,5 +1,5 @@
 .nav {
-  margin: 0% auto;
+  margin: var(--marginHorizontalCenter);
   padding-top: 20px;
 }
 
@@ -38,21 +38,20 @@
 
 .textButton-group .textButton:hover {
   border-bottom: 1px solid white;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  text-shadow: var(--dropShadow);
 }
 
 .authButton-group {
   align-self: center;
   flex-grow: 0.2;
   justify-content: flex-end;
-  height: 40px;
 }
 
 .textButton-outside-group {
   margin-top: 10px;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   height: 250px;
   display: none;
   flex-direction: column;
@@ -71,7 +70,7 @@
 .textButton-outside-group .textButton:hover {
   background-color: rgba(0, 0, 0, 0.5);
   color: rgba(255, 255, 255, 1);
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
 }
 
 /* For Desktop (shrink header) */
@@ -96,8 +95,5 @@
   }
   .textButton-outside-group {
     display: flex;
-  }
-  .textButton:hover {
-    border-bottom: none;
   }
 }

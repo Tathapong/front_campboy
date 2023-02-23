@@ -1,20 +1,20 @@
 .button {
   cursor: pointer;
-  height: 40px;
+  height: 50px;
   max-height: 100%;
   width: 100%;
 
-  margin-block: 20px;
+  margin-block: 10px;
 
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   background-color: #43aeea;
 }
 
 .button:hover {
   background-color: #2e749c;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--dropShadow);
 }
 
 .button-auth-login {
@@ -26,6 +26,7 @@
 }
 button[class*="button-auth"] {
   margin-inline: 5px;
+  height: 40px;
 }
 
 button[class*="button-auth"]:hover {

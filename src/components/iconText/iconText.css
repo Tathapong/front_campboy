@@ -1,0 +1,20 @@
+.icon-text-group {
+  display: flex;
+}
+
+.icon-text-group * {
+  text-decoration: none;
+}
+
+.icon-text-group .location {
+  color: #ee4d2d;
+}
+
+.icon-text-group .location i {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.icon-text-group a.location {
+  font-size: 14px;
+}

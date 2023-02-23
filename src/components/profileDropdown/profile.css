@@ -19,7 +19,7 @@
   display: none;
   flex-direction: column;
   width: 220px;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   background-color: rgb(84, 92, 62);
 }
 
@@ -33,7 +33,7 @@
 
 .profile-dropdown-content li:hover {
   background-color: rgb(138, 151, 100);
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
 }
 
 .profile-dropdown-group i {

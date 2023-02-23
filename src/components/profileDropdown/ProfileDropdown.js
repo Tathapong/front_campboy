@@ -6,7 +6,7 @@ import { useClickOutSide } from "../../hooks/useClickOutside";
 
 import Modal from "../modal/Modal";
 import OptionDropdown from "./OptionDropdown";
-import ChangePassword from "../../features/auth/changePassword/ChangePassword";
+import ChangePasswordForm from "../../features/auth/changePassword/ChangePasswordForm";
 
 import avatar from "../../assets/images/avatar1.jpg";
 
@@ -44,7 +44,7 @@ function ProfileDropdown() {
         </OptionDropdown>
       </ul>
       <Modal header="Change password" isOpen={modalChangeIsOpen} closeModal={closeModalChange}>
-        <ChangePassword closeModal={closeModalChange} />
+        <ChangePasswordForm closeModal={closeModalChange} />
       </Modal>
     </div>
   );

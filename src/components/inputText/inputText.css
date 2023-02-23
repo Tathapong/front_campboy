@@ -6,7 +6,7 @@
   color: white;
   padding-left: 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   outline: none;
 }
 
@@ -16,5 +16,5 @@
 
 .inputText:focus {
   background-color: #a6c8db;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--dropShadow);
 }

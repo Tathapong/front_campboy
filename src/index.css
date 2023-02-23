@@ -1,3 +1,9 @@
+:root {
+  --dropShadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  --marginHorizontalCenter: 0% auto;
+  --borderRadius: 5px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",

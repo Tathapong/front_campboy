@@ -1,8 +1,9 @@
-import "./changePassword.css";
+import "./changePasswordForm.css";
+
 import Button from "../../../components/button/Button";
 import InputText from "../../../components/inputText/InputText";
 
-function ChangePassword(props) {
+function ChangePasswordForm(props) {
   const { closeModal } = props;
   return (
     <form className="changePassword-form">
@@ -19,4 +20,4 @@ function ChangePassword(props) {
   );
 }
 
-export default ChangePassword;
+export default ChangePasswordForm;

@@ -10,7 +10,7 @@ import Logo from "./Logo";
 import TextButton from "./TextButton";
 import Button from "../../components/button/Button";
 import ProfileDropdown from "../../components/profileDropdown/ProfileDropdown";
-import ForgotPassword from "../../features/auth/forgotPassword/ForgotPassword";
+import ForgotPasswordForm from "../../features/auth/forgotPassword/ForgotPasswordForm";
 
 function Header() {
   const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
@@ -71,7 +71,7 @@ function Header() {
         <SignupForm switchToModalLogin={switchToModalLogin} />
       </Modal>
       <Modal header="Forgot password" isOpen={modalForgotIsOpen} closeModal={closeModalForgot}>
-        <ForgotPassword />
+        <ForgotPasswordForm />
       </Modal>
     </div>
   );

@@ -1,9 +1,9 @@
-import "./forgotPassword.css";
-import React from "react";
+import "./forgotPasswordForm.css";
+
 import Button from "../../../components/button/Button";
 import InputText from "../../../components/inputText/InputText";
 
-function ForgotPassword() {
+function ForgotPasswordForm() {
   return (
     <form className="forgotPassword-form">
       <span>Enter your email address</span>
@@ -13,4 +13,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ForgotPasswordForm;

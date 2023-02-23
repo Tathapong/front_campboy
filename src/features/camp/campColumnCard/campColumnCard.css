@@ -1,0 +1,63 @@
+.camp-column-card-group {
+  padding: 10px;
+  margin: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+  box-shadow: var(--dropShadow);
+}
+
+.camp-column-card-group:hover {
+  background-color: #dadada;
+}
+
+.camp-column-card-group * {
+  text-decoration: none;
+}
+
+.camp-column-card-group .camp-image {
+  max-width: 100%;
+  width: 220px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.camp-column-card-group .camp-name {
+  --fontSize: 14px;
+  font-size: var(--fontSize);
+  font-weight: bold;
+  letter-spacing: calc(0.05 * var(--fontSize));
+  text-align: start;
+  color: #3227b0;
+}
+
+.camp-review-group {
+  flex-wrap: wrap;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+
+.camp-review-group .camp-review {
+  min-width: fit-content;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 576px) {
+  .camp-column-card-group .camp-name {
+    font-size: 12px;
+  }
+
+  .camp-column-card-group .icon-text-group a:nth-child(2) {
+    font-size: 12px;
+  }
+
+  .camp-column-card-group .camp-image {
+    height: 150px;
+  }
+}
