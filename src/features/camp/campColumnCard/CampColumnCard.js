@@ -14,10 +14,10 @@ function CampColumnCard(props) {
         <i class="fa-solid fa-location-dot"></i>
       </IconText>
       <Link className="camp-name">{campName}</Link>
-      <div className="camp-review-group">
+      <Link className="camp-review-group">
         <StarRating />
-        <Link className="camp-review">{noReview} Reviews</Link>
-      </div>
+        <span className="camp-review">{noReview} Reviews</span>
+      </Link>
     </div>
   );
 }

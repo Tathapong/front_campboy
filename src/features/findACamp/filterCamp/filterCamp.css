@@ -1,0 +1,53 @@
+.filter-camp-group {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  padding: 10px;
+}
+
+.filter-camp-group > .header {
+  grid-area: 1 / 1 / span 1 / span 3;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-align: start;
+}
+
+.filter-camp-group > [class*="sub-"] {
+  padding-block: 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.filter-camp-group > [class*="sub-"] > .title {
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 12px;
+  color: #747474;
+}
+
+.filter-camp-group > .sub-facility {
+  grid-area: 2 /2 / span 2 / span 1;
+}
+
+@media only screen and (max-width: 768px) {
+  .filter-camp-group > [class*="sub-"] > .check-box-group > .label {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .filter-camp-group {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .filter-camp-group > .header {
+    grid-area: 1/1 / span 1 / span 2;
+  }
+  .filter-camp-group > .sub-facility {
+    grid-area: 2/2 / span 3 / span 1;
+  }
+}

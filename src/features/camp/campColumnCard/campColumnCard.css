@@ -1,6 +1,6 @@
 .camp-column-card-group {
   padding: 10px;
-  margin: 10px;
+  margin: 5px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -14,11 +14,8 @@
   background-color: #dadada;
 }
 
-.camp-column-card-group * {
-  text-decoration: none;
-}
-
 .camp-column-card-group .camp-image {
+  cursor: pointer;
   max-width: 100%;
   width: 220px;
   height: 200px;
@@ -42,7 +39,6 @@
 }
 
 .camp-review-group .camp-review {
-  min-width: fit-content;
   font-size: 12px;
   display: flex;
   align-items: center;

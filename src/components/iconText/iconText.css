@@ -2,19 +2,45 @@
   display: flex;
 }
 
-.icon-text-group * {
-  text-decoration: none;
-}
-
-.icon-text-group .location {
-  color: #ee4d2d;
-}
-
-.icon-text-group .location i {
-  font-size: 20px;
+.icon-text-group > .icon > i {
   margin-right: 5px;
 }
 
-.icon-text-group a.location {
-  font-size: 14px;
+.icon-text-group > span:nth-child(2) {
+  display: flex;
+  align-items: center;
+  font-size: clamp(12px, 1vw, 14px);
+}
+
+.icon-text-group > .location {
+  color: #ee4d2d;
+}
+
+.icon-text-group > .location > i {
+  font-size: 20px;
+}
+
+.icon-text-group > .like {
+  color: #ff0000;
+}
+
+.icon-text-group > span.facility:first-child {
+  color: #3589b9;
+  width: 30px;
+}
+
+.icon-text-group > .like > i {
+  font-size: 18px;
+}
+
+.icon-text-group > .view-all-post {
+  color: #43aeea;
+}
+
+.icon-text-group > .view-all-post:first-child {
+  order: 1;
+}
+
+.icon-text-group > .view-all-post:first-child > i {
+  margin-inline: 5px 0px;
 }

@@ -4,10 +4,10 @@ function IconText(props) {
   const { children, name, type = "" } = props;
 
   return (
-    <span className="icon-text-group">
+    <Link className="icon-text-group">
       <span className={`icon ${type}`}>{children}</span>
-      <Link className={`${type}`}>{name}</Link>
-    </span>
+      <span className={`${type}`}>{name}</span>
+    </Link>
   );
 }
 

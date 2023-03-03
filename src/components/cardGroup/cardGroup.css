@@ -1,5 +1,9 @@
 .card-group {
-  margin: 0% auto;
+  margin-inline: auto;
+  margin-bottom: 100px;
+  max-width: 91.66%;
+
+  width: fit-content;
 }
 
 .card-header {
@@ -29,10 +33,12 @@
   background-color: #cf6e2a;
 }
 
-@media only screen and (max-width: 992px) {
-  .card-group {
-    width: 91.66%;
-  }
+[class*="more-post"] .card-header {
+  background-color: #41b0c1;
+}
+
+[class*="recent-review"] .card-header {
+  background-color: #74855e;
 }
 
 @media only screen and (max-width: 768px) {

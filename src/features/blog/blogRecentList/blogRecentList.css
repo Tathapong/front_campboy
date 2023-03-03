@@ -1,0 +1,8 @@
+.blog-recent-list-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  padding-block: 20px;
+  padding-inline: 10px;
+}
