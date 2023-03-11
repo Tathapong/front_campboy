@@ -1,0 +1,25 @@
+.price-tag {
+  background-color: red;
+  color: white;
+  border-radius: var(--borderRadius);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 10px;
+  padding-block: 5px;
+
+  box-shadow: var(--dropShadow);
+}
+
+.price-tag > span:first-child {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.price-tag > span:last-child {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}

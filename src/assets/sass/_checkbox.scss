@@ -1,0 +1,13 @@
+.check-box-group {
+  @include flex-start-center;
+}
+
+.check-box-group .input {
+  width: 20px;
+  height: 20px;
+}
+
+.check-box-group .label {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}

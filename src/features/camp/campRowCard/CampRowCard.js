@@ -6,23 +6,25 @@ import StarRating from "../../../components/starRating/StarRating";
 import IconText from "../../../components/iconText/IconText";
 
 function CampRowCard(props) {
-  const { campName = "Camp name", star = 0, province = "Province", campImage = camp, price = 0 } = props;
+  const { campName = "Camp name", star = 0, province = "Province", campImage = camp, price = 0, campId = "" } = props;
   return (
     <div className="camp-row-card-group">
       <div className="camp-image">
-        <img src={campImage} alt="camp" />
+        <Link className="image" to={`/camp/${campId}`}>
+          <img src={campImage} alt="camp" />
+        </Link>
         <div className="price">
           <span>THB</span>
           <span>{price}</span>
         </div>
       </div>
       <div className="info">
-        <Link className="camp-name">{campName}</Link>
+        <Link className="camp-name" to={`/camp/${campId}`}>
+          {campName}
+        </Link>
 
         <StarRating type={star} />
-        <IconText name={province} type="location">
-          <i class="fa-solid fa-location-dot"></i>
-        </IconText>
+        <IconText name={province} type="location" />
         <div className="facility-group">
           <IconText name="Free WiFi" type="facility">
             <i class="fa-solid fa-wifi"></i>

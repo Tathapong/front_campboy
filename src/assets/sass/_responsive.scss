@@ -1,0 +1,23 @@
+@media only screen and (max-width: 576px) {
+  .carousel-group {
+    height: 400px;
+  }
+  .check-box-group .label .star-rating-group i {
+    font-size: 0.8rem;
+  }
+  .modal-group {
+    padding-top: 50px;
+  }
+  .modal-group .modal-content {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .card-group .card-header {
+    font-size: 16px;
+  }
+  .card-group .card-body {
+    padding: 5px;
+  }
+}

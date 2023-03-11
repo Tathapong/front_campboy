@@ -10,9 +10,7 @@ function CampColumnCard(props) {
   return (
     <div className="camp-column-card-group">
       <img className="camp-image" src={image} alt="camp" />
-      <IconText type="location" name={province}>
-        <i class="fa-solid fa-location-dot"></i>
-      </IconText>
+      <IconText type="location" name={province} />
       <Link className="camp-name">{campName}</Link>
       <Link className="camp-review-group">
         <StarRating />

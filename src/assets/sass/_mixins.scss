@@ -1,0 +1,49 @@
+// Flex
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-start-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+@mixin flex-start-center {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+// Position
+@mixin absolute-vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+// Border
+@mixin border-radius-top($size: 3px) {
+  border-radius: $size $size 0px 0px;
+}
+@mixin border-radius-bottom($size: $borderRadius) {
+  border-radius: 0px 0px $size $size;
+}
+@mixin border-radius-box-shadow($size: $borderRadius) {
+  border-radius: $size;
+  box-shadow: $dropShadow;
+}
+
+// Font
+@mixin font-bold-space($percent: 0.05em) {
+  font-weight: bold;
+  letter-spacing: $percent;
+}

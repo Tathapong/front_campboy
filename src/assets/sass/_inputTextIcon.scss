@@ -1,0 +1,22 @@
+.input-text-icon-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-text-icon-group .input-text-icon {
+  @extend .input-text;
+  margin-block: 0;
+  padding-left: 35px;
+  background-color: #5d8f6e;
+}
+
+.input-text-icon-group .input-text-icon:focus {
+  background-color: #3e614a;
+}
+
+.input-text-icon-group i {
+  @include absolute-vertical-center;
+  left: 10px;
+  font-size: 1.2rem;
+  color: white;
+}

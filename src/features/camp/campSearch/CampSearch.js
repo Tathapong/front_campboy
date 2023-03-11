@@ -8,7 +8,7 @@ function CampSearch() {
       <InputTextIcon placeholder="Where do you want to camp?">
         <i class="fa-solid fa-magnifying-glass"></i>
       </InputTextIcon>
-      <div className="random-group">
+      <div className="random">
         <span>or random camp</span>
         <span>
           <i class="fa-solid fa-dice-three"></i>

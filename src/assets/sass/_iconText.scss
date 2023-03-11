@@ -1,0 +1,33 @@
+.icon-text-group {
+  display: flex;
+}
+
+.icon-text-group .icon {
+  margin-right: 5px;
+}
+
+.icon-text-group .text {
+  @include flex-start-center;
+  font-size: clamp(12px, 1vw, 14px);
+}
+
+.icon-text-group[class*="location"] * {
+  color: #ee4d2d;
+}
+.icon-text-group[class*="like"] * {
+  color: #ff0000;
+}
+.icon-text-group[class*="view-all-post"] * {
+  color: #43aeea;
+}
+
+.icon-text-group[class*="view-all-post"] .icon {
+  order: 1;
+  margin-inline: 5px 0px;
+}
+
+.icon-text-group[class*="facility"] i {
+  color: #3589b9;
+  width: 30px;
+  text-align: center;
+}

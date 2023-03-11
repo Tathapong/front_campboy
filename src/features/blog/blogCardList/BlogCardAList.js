@@ -11,9 +11,7 @@ function BlogCardAList() {
         <BlogCardA />
       </div>
       <div className="blog-recent">
-        <IconText name="View All Post" type="view-all-post">
-          <i class="fa-solid fa-arrow-right"></i>
-        </IconText>
+        <IconText name="View All Post" type="view-all-post" />
         <div className="blog-recent-list-title">RECENT POSTS</div>
         <BlogRecentList />
       </div>

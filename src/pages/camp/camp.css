@@ -1,0 +1,74 @@
+.camp-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.camp-container > .title-share {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: first baseline;
+  gap: 50px;
+}
+
+.camp-container > .title-share > .title {
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-align: start;
+  color: #4a65f3;
+}
+
+.camp-container > .information-group {
+  width: 100%;
+  display: flex;
+  /* display: grid; */
+  gap: 5px;
+  /* grid-template-columns: auto auto; */
+}
+
+.camp-container > .information-group > .group-1 > .overview,
+.camp-container > .information-group > .group-1 > .general-information,
+.camp-container > .information-group > .group-1 > .service,
+.camp-container > .information-group > .group-1 > .activity,
+.camp-container > .information-group > .group-1 > .rule {
+  grid-column: 1;
+}
+
+.camp-container > .information-group > .group-2 > .map,
+.camp-container > .information-group > .group-2 > .contact {
+  grid-column: 2;
+}
+
+.camp-container > .information-group > .group-1 > .overview .content {
+  padding-inline: 40px;
+  font-size: 14px;
+}
+
+.camp-container > .information-group > .group-1 > .general-information .content,
+.camp-container > .information-group > .group-1 > .service .content,
+.camp-container > .information-group > .group-1 > .activity .content,
+.camp-container > .information-group > .group-1 > .rule .content {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 20px;
+  row-gap: 10px;
+  padding-inline: 40px;
+  padding-block: 10px;
+}
+
+.camp-container > .information-group > .group-2 > .map .content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 400px;
+  border: none;
+}
+
+.camp-container > .information-group > .group-2 > .contact .content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

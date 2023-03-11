@@ -1,0 +1,29 @@
+.icon-text-info-group {
+  @include flex-start-start;
+}
+
+.icon-text-info-group .icon-group {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.icon-text-info-group .icon-group .image {
+  width: 100%;
+  height: 100%;
+}
+
+.icon-text-info-group .info-group {
+  @include flex-column;
+}
+
+.icon-text-info-group .info-group .title {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #008890;
+}
+
+.icon-text-info-group .info-group .sub-title {
+  font-size: 0.75rem;
+  color: #546364;
+}

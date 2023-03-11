@@ -1,11 +1,9 @@
-import "./inputTextIcon.css";
-
 function InputTextIcon(props) {
   const { placeholder = "Enter input", type = "text", children } = props;
 
   return (
     <div className="input-text-icon-group">
-      <input className="inputText" placeholder={placeholder} type={type}></input>
+      <input className="input-text-icon" placeholder={placeholder} type={type}></input>
       {children}
     </div>
   );

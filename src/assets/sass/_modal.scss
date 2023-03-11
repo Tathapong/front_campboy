@@ -1,30 +1,31 @@
-.modal {
-  display: none;
+.modal-group {
   position: fixed;
   z-index: 1;
   padding-top: 100px;
-  left: 0%;
-  top: 0%;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal * {
+.modal-group .modal-header {
   color: black;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.modal-content {
+.modal-group .modal-content {
+  @include flex-column;
+  @include border-radius-box-shadow;
   width: fit-content;
   max-width: 83.33%;
+
   position: relative;
-  display: flex;
-  flex-direction: column;
   margin: auto;
   padding: 40px;
   background-color: white;
-  border-radius: var(--borderRadius);
-  box-shadow: var(--dropShadow);
 
   animation-name: animatetop;
   animation-duration: 0.3s;
@@ -41,15 +42,7 @@
   }
 }
 
-.modal-header {
-  color: black;
-  position: relative;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.modal-content > .fa-xmark {
+.modal-group .modal-content .fa-xmark {
   margin: 20px;
   color: black;
   cursor: pointer;
@@ -58,25 +51,4 @@
   top: 0;
   right: 0;
   z-index: 1;
-}
-
-.modal-body {
-  flex-grow: 1;
-}
-
-.display-block {
-  display: block;
-}
-
-.display-none {
-  display: none;
-}
-
-@media only screen and (max-width: 576px) {
-  .modal {
-    padding-top: 50px;
-  }
-  .modal-content {
-    padding: 10px;
-  }
 }

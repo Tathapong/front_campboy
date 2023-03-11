@@ -26,9 +26,7 @@ function BlogCardA() {
         <hr />
         <div className="footer">
           <ProfileTitle name="john mayer" />
-          <IconText name="47 Likes" type="like">
-            <i class="fa-solid fa-heart"></i>
-          </IconText>
+          <IconText name="47 Likes" type="like" />
         </div>
       </div>
     </div>

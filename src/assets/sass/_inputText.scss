@@ -1,0 +1,20 @@
+.input-text {
+  width: 100%;
+  margin-block: 5px;
+  height: 50px;
+  padding-inline: 20px;
+  border: none;
+  border-radius: $borderRadius;
+  background-color: #afafaf;
+  color: white;
+  outline: none;
+}
+
+.input-text::placeholder {
+  color: white;
+}
+
+.input-text:focus {
+  background-color: #a6c8db;
+  box-shadow: $dropShadow;
+}

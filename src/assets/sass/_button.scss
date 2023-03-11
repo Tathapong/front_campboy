@@ -1,0 +1,64 @@
+.btn {
+  cursor: pointer;
+  height: 50px;
+  width: 100%;
+
+  color: white;
+  border: none;
+  border-radius: $borderRadius;
+  background-color: #43aeea;
+}
+
+.btn:hover {
+  background-color: #2e749c;
+  box-shadow: $dropShadow;
+}
+
+.btn-auth-login {
+  background-color: #08a521;
+}
+
+.btn-auth-signup {
+  background-color: #d4283b;
+}
+
+[class*="btn-auth"] {
+  margin-inline: 5px;
+  height: 40px;
+}
+
+[class*="btn-auth"]:hover {
+  background-color: #2e2275;
+}
+
+[class*="btn-contact-tel"] {
+  background-color: #d3a874;
+}
+
+[class*="btn-contact-tel"]:hover {
+  background-color: #a78459;
+}
+
+[class*="btn-contact-facebook"] {
+  background-color: #1d9bf0;
+}
+
+[class*="btn-contact-facebook"]:hover {
+  background-color: #1774b3;
+}
+
+[class*="btn-contact-line"] {
+  background-color: #27bd63;
+}
+
+[class*="btn-contact-line"]:hover {
+  background-color: #1b8144;
+}
+
+[class*="btn-contact-website"] {
+  background-color: #ff543e;
+}
+
+[class*="btn-contact-website"]:hover {
+  background-color: #a53628;
+}

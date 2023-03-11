@@ -1,16 +1,17 @@
 import "./selectBox.css";
 
 function SelectBox(props) {
-  // list = [{value,title}]
   const { list = [] } = props;
   return (
-    <select className="select-box-group">
-      <option value="" disabled selected>
+    <select className="select-box-group" defaultValue="">
+      <option value="" disabled>
         Select
       </option>
 
-      {list.map((item) => (
-        <option value={item.value}>{item.title}</option>
+      {list.map((item, index) => (
+        <option value={item.value} key={index}>
+          {item.title}
+        </option>
       ))}
     </select>
   );

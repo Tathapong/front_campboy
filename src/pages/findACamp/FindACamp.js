@@ -1,5 +1,6 @@
 import "./findACamp.css";
-import camp from "../../assets/location/location.json";
+
+import camp from "../../assets/data/data.json";
 
 import background from "../../assets/images/background2.jpg";
 import SearchCamp from "../../features/findACamp/searchCamp/SearchCamp";
@@ -21,7 +22,7 @@ function FindACamp() {
   const campList = Array.from(camp);
   return (
     <div className="find-a-camp col-11">
-      <img src={background} alt="background" className="background" />
+      <img src={background} alt="background" className="image-background" />
       <form className="search-filter">
         <SearchCamp />
         <Filter />

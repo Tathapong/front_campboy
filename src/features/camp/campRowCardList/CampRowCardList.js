@@ -6,7 +6,17 @@ function CampRowCardList(props) {
   return (
     <div className="camp-row-card-list-group">
       {campList.map((item) => {
-        return <CampRowCard campName={item.camp} province={item.province} star="5" price="250" />;
+        return (
+          <CampRowCard
+            campName={item.camp}
+            province={item.province}
+            star="5"
+            price="250"
+            campImage={item.images[0]}
+            key={item.id}
+            campId={item.id}
+          />
+        );
       })}
     </div>
   );

@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.camp-search-group .random-group span:first-child {
+.camp-search-group .random span:first-child {
   display: inline-block;
   margin-right: 10px;
   font-size: 14px;
@@ -14,7 +14,7 @@
   color: #615a5a;
 }
 
-.camp-search-group .random-group span:nth-child(2) {
+.camp-search-group .random span:nth-child(2) {
   display: inline-block;
   background-color: white;
   border-radius: 50%;
@@ -25,11 +25,11 @@
   cursor: pointer;
 }
 
-.camp-search-group .random-group span:nth-child(2):hover {
+.camp-search-group .random span:nth-child(2):hover {
   background-color: #bebebe;
 }
 
-.camp-search-group .random-group span:nth-child(2) i {
+.camp-search-group .random span:nth-child(2) i {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -40,12 +40,12 @@
   color: #615a5a;
 }
 
-.camp-search-group .random-group span:nth-child(2) i:hover {
+.camp-search-group .random span:nth-child(2) i:hover {
   color: white;
 }
 
 @media only screen and (max-width: 576px) {
-  .camp-search-group .random-group span:first-child {
+  .camp-search-group .random span:first-child {
     color: white;
   }
 }

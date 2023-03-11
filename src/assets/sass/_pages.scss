@@ -1,0 +1,6 @@
+// Home page
+.home-page-container {
+  @include flex-column;
+  gap: 50px;
+  margin-inline: auto;
+}

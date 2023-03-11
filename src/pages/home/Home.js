@@ -9,19 +9,19 @@ import ReviewCardList from "../../features/camp/reviewCardList/ReviewCardList";
 
 function Home() {
   return (
-    <div>
-      <img src={background} alt="background" className="background" />
+    <div className="home-page-container col-11">
+      <img src={background} alt="background" className="image-background" />
       <CampSearch />
 
-      <CardGroup type="top-camp" header="Top Campgrounds">
+      <CardGroup className="card-group-top-camp" header="Top Campgrounds">
         <CampColumnCardList />
       </CardGroup>
 
-      <CardGroup type="more-post" header="More Posts">
+      <CardGroup className="card-group-more-post" header="More Posts">
         <BlogCardAList />
       </CardGroup>
 
-      <CardGroup type="recent-review" header="Recent Reviews">
+      <CardGroup className="card-group-recent-review" header="Recent Reviews">
         <ReviewCardList />
       </CardGroup>
     </div>

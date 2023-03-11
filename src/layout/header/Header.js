@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Modal from "../../components/modal/Modal";
 import LoginForm from "../../features/auth/loginForm/LoginForm";
-import SignupForm from "../../features/auth/signupForm/signupForm";
+import SignupForm from "../../features/auth/signupForm/SignupForm";
 
 import Logo from "./Logo";
 import TextButton from "./TextButton";
@@ -55,8 +55,8 @@ function Header() {
           </div>
 
           <div className="authButton-group">
-            <Button name="Login" classOption="button-auth-login" onClick={openModalLogin} />
-            <Button name="Signup" classOption="button-auth-signup" onClick={openModalSignup} />
+            <Button name="Login" className="btn-auth-login mx-5 h-40-px" onClick={openModalLogin} />
+            <Button name="Signup" className="btn-auth-signup mx-5 h-40-px" onClick={openModalSignup} />
             <ProfileDropdown />
           </div>
         </div>

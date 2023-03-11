@@ -1,10 +1,9 @@
-import "./button.css";
-
 function Button(props) {
-  const { name, type = "button", onClick, classOption = "" } = props;
+  const { name, type = "button", onClick, className = "", children } = props;
   return (
-    <button className={`button ${classOption}`} onClick={onClick} type={type}>
+    <button className={`btn ${className}`} onClick={onClick} type={type}>
       {name}
+      {children}
     </button>
   );
 }

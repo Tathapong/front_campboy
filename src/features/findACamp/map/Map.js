@@ -4,7 +4,7 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { useNavigate } from "react-router-dom";
 
 function Map(props) {
-  const { campList } = props;
+  const { campList, zoom = 7 } = props;
 
   const navigate = useNavigate();
   const mapEl = useRef();
@@ -29,7 +29,7 @@ function Map(props) {
     loader.load().then((google) => {
       const map = new google.maps.Map(mapEl.current, {
         center: center,
-        zoom: 7
+        zoom: +zoom
       });
 
       campList.map((item) => {
