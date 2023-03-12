@@ -1,5 +1,3 @@
-import "./shareSocial.css";
-
 function ShareSocial() {
   return (
     <div className="share-social-group">

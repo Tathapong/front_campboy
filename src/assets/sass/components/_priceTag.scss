@@ -1,0 +1,19 @@
+.price-tag {
+  @include flex-start-center;
+  @include border-radius-box-shadow;
+  background-color: red;
+  color: white;
+  gap: 10px;
+  padding-inline: 10px;
+  padding-block: 5px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.price-tag .baht {
+  font-size: 0.9rem;
+}
+
+.price-tag .price {
+  font-size: 1.2rem;
+}

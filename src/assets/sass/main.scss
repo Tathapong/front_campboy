@@ -1,19 +1,31 @@
 @import "variables";
-@import "common";
+@import "globals";
 @import "mixins";
-@import "pages";
+@import "./pages/homePage";
 
 // Component
-@import "button";
-@import "cardGroup";
-@import "carousel";
-@import "checkbox";
-@import "iconText";
-@import "iconTextInfo";
-@import "informationCard";
-@import "inputText";
-@import "inputTextIcon";
-@import "modal";
+@import "./components/button";
+@import "./components/cardGroup";
+@import "./components/carousel";
+@import "./components/checkbox";
+@import "./components/iconText";
+@import "./components/iconTextInfo";
+@import "./components/informationCard";
+@import "./components/inputText";
+@import "./components/inputTextIcon";
+@import "./components/modal";
+@import "./components/priceTag";
+@import "./components/profileDropdown";
+@import "./components/profileTitle";
+@import "./components/selectBox";
+@import "./components/shareSocial";
+@import "./components/starRating";
 
-// Responsive
-@import "responsive";
+@import "./components/responsive";
+
+//Layout
+@import "./layouts/header";
+@import "./layouts/responsive";
+
+//Feature Component
+@import "./features/auth/authFeature";

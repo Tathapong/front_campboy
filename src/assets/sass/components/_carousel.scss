@@ -1,11 +1,14 @@
 .carousel-group {
+  box-shadow: $dropShadow;
+  margin-top: 50px;
   width: 100%;
+  margin-inline: auto;
+  max-width: 968px;
   height: 544px;
   position: relative;
 }
 
 .carousel-group .image {
-  border-radius: $borderRadius;
   width: 100%;
   height: 100%;
   object-fit: contain;

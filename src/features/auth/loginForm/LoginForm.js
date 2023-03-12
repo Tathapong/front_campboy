@@ -1,5 +1,3 @@
-import "./loginForm.css";
-
 import { Link } from "react-router-dom";
 
 import Button from "../../../components/button/Button";
@@ -9,13 +7,15 @@ function LoginForm(props) {
   const { switchToModalSignup, switchToModalForgot } = props;
 
   return (
-    <form className="login-form">
+    <form className="login-auth-form">
       <div className="input-group">
         <InputText placeholder="Email" />
         <InputText placeholder="Password" type="password" />
+        <Link onClick={switchToModalForgot}>Forgot password?</Link>
       </div>
-      <Link onClick={switchToModalForgot}>Forgot password?</Link>
-      <Button name="Login" type="submit" />
+      <div className="button-group">
+        <Button name="Login" type="submit" />
+      </div>
       <div>
         <span>Don't have an account? </span>
         <Link onClick={switchToModalSignup}>Signup</Link>

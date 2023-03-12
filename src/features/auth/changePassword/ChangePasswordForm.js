@@ -1,12 +1,10 @@
-import "./changePasswordForm.css";
-
 import Button from "../../../components/button/Button";
 import InputText from "../../../components/inputText/InputText";
 
 function ChangePasswordForm(props) {
   const { closeModal } = props;
   return (
-    <form className="changePassword-form">
+    <form className="change-password-auth-form">
       <div className="input-group">
         <InputText placeholder="Old password" />
         <InputText placeholder="New password" />

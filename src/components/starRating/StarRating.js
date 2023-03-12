@@ -1,4 +1,3 @@
-import "./starRating.css";
 function StarRating(props) {
   const { type = 5 } = props;
   const star = [];

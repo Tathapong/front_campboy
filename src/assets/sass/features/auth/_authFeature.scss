@@ -1,0 +1,30 @@
+[class*="auth-form"] {
+  @include flex-column;
+  margin-top: 20px;
+  gap: 20px;
+  width: 400px;
+  max-width: 100%;
+}
+[class*="auth-form"] .input-group {
+  @include flex-column;
+}
+
+[class*="auth-form"] .button-group {
+  @include flex-row;
+}
+
+[class*="auth-form"] button {
+  margin-inline: 5px;
+}
+
+[class*="auth-form"] a {
+  color: #2864ff;
+  text-align: center;
+}
+
+.forgot-password-auth-form .title {
+  text-align: center;
+  margin-block: 10px;
+  font-weight: bold;
+  color: #757575;
+}

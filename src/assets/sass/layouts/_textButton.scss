@@ -1,0 +1,7 @@
+.text-button {
+  padding-block: 10px;
+}
+.text-button:hover {
+  border-bottom: 1px solid white;
+  text-shadow: $dropShadow;
+}

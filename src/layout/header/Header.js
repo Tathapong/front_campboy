@@ -1,5 +1,3 @@
-import "./header.css";
-
 import { useState } from "react";
 
 import Modal from "../../components/modal/Modal";
@@ -47,20 +45,20 @@ function Header() {
       <div className="nav col-8">
         <div className="nav-container">
           <Logo />
-          <div className="textButton-group">
+          <div className="text-button-group">
             <TextButton name="Home" to="/" />
             <TextButton name="Find a camp" to="/findacamp" />
             <TextButton name="Blog" to="/blog" />
-            <TextButton name="JoinCamp" to="/join" />
+            <TextButton name="Join camp" to="/join" />
           </div>
 
-          <div className="authButton-group">
+          <div className="auth-button-group">
             <Button name="Login" className="btn-auth-login mx-5 h-40-px" onClick={openModalLogin} />
             <Button name="Signup" className="btn-auth-signup mx-5 h-40-px" onClick={openModalSignup} />
             <ProfileDropdown />
           </div>
         </div>
-        <div className="textButton-outside-group">
+        <div className="text-button-outside-group">
           <TextButton name="Home" to="/" />
           <TextButton name="Find a camp" to="/findacamp" />
           <TextButton name="Blog" to="blog" />

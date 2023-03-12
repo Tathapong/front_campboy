@@ -1,5 +1,3 @@
-import "./profile.css";
-
 import { Link } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { useClickOutSide } from "../../hooks/useClickOutside";
@@ -30,9 +28,9 @@ function ProfileDropdown() {
   return (
     <div className="profile-dropdown-group" ref={dropdownEl}>
       <Link onClick={toggleDropdown}>
-        <img src={avatar} alt="profile"></img>
+        <img src={avatar} alt="profile" className="profile-image"></img>
       </Link>
-      <ul className={`profile-dropdown-content ${dropdown ? "display-flex" : ""}`}>
+      <ul className={`profile-dropdown-content ${dropdown ? "d-flex" : "d-none"}`}>
         <OptionDropdown title="View profile">
           <i class="fa-solid fa-user"></i>
         </OptionDropdown>

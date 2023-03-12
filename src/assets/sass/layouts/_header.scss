@@ -1,0 +1,61 @@
+@import "./textButton";
+@import "./logo";
+
+.nav {
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.nav * {
+  font-size: 1rem;
+}
+
+.nav-container {
+  @include flex-space-between;
+  height: 70px;
+}
+
+.nav-container * {
+  color: white;
+}
+
+.nav-container > * {
+  @include flex-start-center;
+}
+
+.text-button-group {
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+.auth-button-group {
+  align-self: center;
+  flex-grow: 0.2;
+  justify-content: flex-end;
+}
+
+.text-button-outside-group {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: var(--borderRadius);
+  height: 250px;
+  display: none;
+  flex-direction: column;
+}
+
+.text-button-outside-group .text-button {
+  flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.text-button-outside-group .text-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 1);
+  border-radius: var(--borderRadius);
+}
