@@ -1,4 +1,3 @@
-import "./blogCardA.css";
 import { Link } from "react-router-dom";
 import blog1 from "../../../assets/images/blog1.jpg";
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
@@ -9,8 +8,8 @@ function BlogCardA() {
     <div className="blog-card-a-group">
       <div className="date">Feb 9, 2022</div>
 
-      <Link className="image">
-        <img src={blog1} alt="blog-img" />
+      <Link className="image-group">
+        <img src={blog1} alt="blog-img" className="image" />
       </Link>
       <div className="content-footer">
         <Link className="title">Must-Visit RV and Camping Rallies, Shows, and Events for 2023</Link>

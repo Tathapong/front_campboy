@@ -11,7 +11,7 @@
 }
 
 .nav-container {
-  @include flex-space-between;
+  @include flex-space-between-stretch;
   height: 70px;
 }
 

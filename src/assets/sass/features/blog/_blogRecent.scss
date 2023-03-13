@@ -1,0 +1,31 @@
+.blog-recent-group {
+  display: flex;
+}
+.blog-recent-group:hover {
+  background-color: #dadada;
+}
+
+.blog-recent-group .image {
+  width: 180px;
+  height: 100px;
+  object-fit: cover;
+  box-shadow: $dropShadow;
+}
+
+.blog-recent-group .info {
+  @include flex-column;
+  justify-content: space-around;
+  margin-left: 10px;
+}
+
+.blog-recent-group .info .title {
+  @include font-bold-space(0.05em);
+  @include ellipsis-multiline(5);
+  font-size: clamp(12px, 1vw, 14px);
+}
+
+.blog-recent-group .info .date {
+  font-size: clamp(10px, 1vw, 12px);
+  color: #878686;
+  font-style: italic;
+}

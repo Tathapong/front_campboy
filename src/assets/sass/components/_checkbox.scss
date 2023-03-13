@@ -9,5 +9,5 @@
 
 .check-box-group .label {
   margin-left: 5px;
-  font-size: 0.8rem;
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
 }

@@ -1,4 +1,3 @@
-import "./map.css";
 import { useRef, useEffect } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useNavigate } from "react-router-dom";

@@ -11,7 +11,7 @@ import PriceTag from "../../components/priceTage/PriceTag";
 import ShareSocial from "../../components/shareSocial/ShareSocial";
 import InformationCard from "../../components/infomationCard/InformationCard";
 import IconTextInfo from "../../components/iconTextInfo/IconTextInfo";
-import Map from "../../features/findACamp/map/Map";
+import Map from "../../components/map/Map";
 import Button from "../../components/button/Button";
 
 function Camp() {

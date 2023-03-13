@@ -1,4 +1,3 @@
-import "./searchCamp.css";
 import InputTextIcon from "../../../components/inputTextIcon/InputTextIcon";
 import SelectBox from "../../../components/selectBox/SelectBox";
 

@@ -27,7 +27,7 @@
 
 .carousel-group .prev-next-group {
   @include absolute-vertical-center;
-  @include flex-space-between;
+  @include flex-space-between-stretch;
   width: 100%;
 }
 

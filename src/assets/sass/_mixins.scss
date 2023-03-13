@@ -18,19 +18,57 @@
   justify-content: start;
   align-items: center;
 }
+@mixin flex-center-stretch {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
 @mixin flex-center-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-@mixin flex-space-between {
+@mixin flex-space-between-stretch {
   display: flex;
   justify-content: space-between;
 }
+@mixin flex-space-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-@mixin flex-space-around {
+@mixin flex-space-around-stretch {
   display: flex;
   justify-content: space-around;
+}
+
+// Grid
+@mixin grid-auto($column: auto auto, $row: auto auto) {
+  display: grid;
+  grid-template-columns: $column;
+  grid-template-rows: $row;
+}
+
+@mixin grid-auto-row-2 {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+@mixin grid-auto-column-2 {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+// Ellipsis
+@mixin ellipsis-multiline($line: 3) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  display: -webkit-box !important;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
 
 // Position
