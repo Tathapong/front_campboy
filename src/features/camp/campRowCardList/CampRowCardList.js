@@ -1,5 +1,4 @@
 import CampRowCard from "../campRowCard/CampRowCard";
-import "./campRowCardList.css";
 
 function CampRowCardList(props) {
   const { campList } = props;

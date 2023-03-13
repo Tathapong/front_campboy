@@ -1,5 +1,3 @@
-import "./camp.css";
-
 import { useParams } from "react-router-dom";
 
 import camp from "../../assets/data/data.json";
@@ -7,7 +5,7 @@ import camp from "../../assets/data/data.json";
 import React from "react";
 import Carousel from "../../components/carousel/Carousel";
 import IconText from "../../components/iconText/IconText";
-import PriceTag from "../../components/priceTage/PriceTag";
+import PriceTag from "../../components/priceTag/PriceTag";
 import ShareSocial from "../../components/shareSocial/ShareSocial";
 import InformationCard from "../../components/infomationCard/InformationCard";
 import IconTextInfo from "../../components/iconTextInfo/IconTextInfo";

@@ -31,13 +31,24 @@
 
 //Feature Component
 @import "./features/auth/authFeature";
+
 @import "./features/blog/blogCardA";
 @import "./features/blog/morePost";
 @import "./features/blog/blogRecent";
+
+@import "./features/camp/campColumnCard";
+@import "./features/camp/campColumnCardList";
+@import "./features/camp/campRowCard";
+@import "./features/camp/campRowCardList";
+@import "./features/camp/reviewCard";
+@import "./features/camp/reviewCardList";
+@import "./features/camp/searchRandomCamp";
+
 @import "./features/findACamp/filterCamp";
 @import "./features/findACamp/searchCamp";
 @import "./features/responsive";
 
 //Page
+@import "./pages/campPage";
 @import "./pages/findACampPage";
 @import "./pages/responsive";

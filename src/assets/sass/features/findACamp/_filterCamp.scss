@@ -1,11 +1,11 @@
 .filter-camp-group {
   @include grid-auto(auto auto auto, auto auto);
   column-gap: 5px;
-}
 
-.filter-camp-group .header {
-  @include font-bold-space(0.05em);
-  grid-area: 1 / 1 / span 1 / span 3;
-  font-size: 1.1rem;
-  text-align: start;
+  .header {
+    @include font-bold-space(0.05em);
+    grid-area: 1 / 1 / span 1 / span 3;
+    font-size: 1.1rem;
+    text-align: start;
+  }
 }

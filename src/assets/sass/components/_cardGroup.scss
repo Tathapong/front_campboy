@@ -2,29 +2,39 @@
   margin-inline: auto;
 }
 
-.card-group > .card-header {
-  @include border-radius-top($borderRadius);
-  @include flex-center-center;
-  @include font-bold-space(0.05em);
-  color: white;
-  font-size: 1.2rem;
-  background-color: #757575;
-  height: 50px;
+.card-group {
+  .card-header {
+    @include border-radius-top($borderRadius);
+    @include flex-center-center;
+    @include font-bold-space(0.05em);
+    color: white;
+    font-size: 1.2rem;
+    background-color: #757575;
+    height: 50px;
+  }
 }
 
-.card-group .card-body {
-  @include border-radius-bottom($borderRadius);
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: $dropShadow;
+.card-group {
+  .card-body {
+    @include border-radius-bottom($borderRadius);
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: $dropShadow;
+  }
 }
 
-.card-group-top-camp .card-header {
-  background-color: #cf6e2a;
+.card-group-top-camp {
+  .card-header {
+    background-color: #cf6e2a;
+  }
 }
-.card-group-more-post .card-header {
-  background-color: #41b0c1;
+.card-group-more-post {
+  .card-header {
+    background-color: #41b0c1;
+  }
 }
-.card-group-recent-review .card-header {
-  background-color: #74855e;
+.card-group-recent-review {
+  .card-header {
+    background-color: #74855e;
+  }
 }

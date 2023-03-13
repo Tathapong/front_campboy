@@ -1,0 +1,68 @@
+.camp-container {
+  @include flex-column;
+  align-items: flex-start;
+  margin: 0 auto;
+
+  .title-share {
+    @include flex-space-between-stretch;
+    align-items: first baseline;
+    width: 100%;
+
+    .title {
+      @include font-bold-space(0.05em);
+      font-size: 30px;
+      color: #4a65f3;
+    }
+  }
+  .information-group {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+
+    .group-1 {
+      .overview,
+      .general-information,
+      .service,
+      .activity,
+      .rule {
+        grid-column: 1;
+      }
+
+      .overview .content {
+        padding-inline: 40px;
+        font-size: 14px;
+      }
+
+      .general-information,
+      .service,
+      .activity,
+      .rule {
+        .content {
+          @include grid-auto(auto auto, auto);
+          column-gap: 20px;
+          row-gap: 10px;
+          padding-inline: 40px;
+          padding-block: 10px;
+        }
+      }
+    }
+
+    .group-2 {
+      .map,
+      .contact {
+        grid-column: 2;
+      }
+
+      .map .content {
+        @include flex-column;
+        gap: 10px;
+        height: 400px;
+      }
+
+      .contact .content {
+        @include flex-column;
+        gap: 10px;
+      }
+    }
+  }
+}

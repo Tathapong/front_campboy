@@ -1,15 +1,17 @@
 .checkbox-list {
   @include flex-column;
   padding-block: 5px;
-}
 
-.checkbox-list .title {
-  text-transform: capitalize;
-  font-size: 0.75rem;
-  font-weight: bold;
-  color: #747474;
-}
+  .title {
+    text-transform: capitalize;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #747474;
+  }
 
-.checkbox-list .label .star-rating-group {
-  margin-left: 5px;
+  .label {
+    .star-rating-group {
+      margin-left: 5px;
+    }
+  }
 }

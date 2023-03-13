@@ -1,0 +1,10 @@
+.camp-row-card-list-group {
+  @include flex-column;
+  gap: 10px;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  height: 90vh;
+  padding-right: 10px;
+  overflow-y: auto;
+}

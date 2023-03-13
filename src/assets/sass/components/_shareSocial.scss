@@ -1,22 +1,23 @@
 .share-social-group {
   display: flex;
   gap: 5px;
+
+  i {
+    font-size: 24px;
+    cursor: pointer;
+  }
 }
 
-.share-social-group > i {
-  font-size: 24px;
-  cursor: pointer;
-}
+.share-social-group {
+  i[class*="facebook"],
+  i[class*="twitter"] {
+    color: #1d9bf0;
+  }
 
-.share-social-group > i[class*="facebook"],
-.share-social-group > i[class*="twitter"] {
-  color: #1d9bf0;
-}
-
-.share-social-group > i[class*="instagram"] {
-  color: #ff543e;
-}
-
-.share-social-group > i[class*="line"] {
-  color: #27bd63;
+  i[class*="instagram"] {
+    color: #ff543e;
+  }
+  i[class*="line"] {
+    color: #27bd63;
+  }
 }

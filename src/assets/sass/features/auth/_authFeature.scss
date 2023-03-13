@@ -4,27 +4,29 @@
   gap: 20px;
   width: 400px;
   max-width: 100%;
-}
-[class*="auth-form"] .input-group {
-  @include flex-column;
+
+  .input-group {
+    @include flex-column;
+  }
+  .button-group {
+    @include flex-row;
+  }
+
+  button {
+    margin-inline: 5px;
+  }
+
+  a {
+    color: #2864ff;
+    text-align: center;
+  }
 }
 
-[class*="auth-form"] .button-group {
-  @include flex-row;
-}
-
-[class*="auth-form"] button {
-  margin-inline: 5px;
-}
-
-[class*="auth-form"] a {
-  color: #2864ff;
-  text-align: center;
-}
-
-.forgot-password-auth-form .title {
-  text-align: center;
-  margin-block: 10px;
-  font-weight: bold;
-  color: #757575;
+.forgot-password-auth-form {
+  .title {
+    text-align: center;
+    margin-block: 10px;
+    font-weight: bold;
+    color: #757575;
+  }
 }

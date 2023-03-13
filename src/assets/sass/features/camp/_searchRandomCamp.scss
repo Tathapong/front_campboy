@@ -1,0 +1,38 @@
+.search-random-camp-group {
+  @include flex-column;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  margin: 100px auto;
+
+  .random-group {
+    @include flex-center-center;
+    gap: 10px;
+
+    .text {
+      font-size: 14px;
+      font-style: italic;
+      color: #615a5a;
+    }
+
+    .icon {
+      @include flex-center-center;
+      background-color: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .icon:hover {
+      background-color: #bebebe;
+    }
+
+    .icon i {
+      color: #615a5a;
+    }
+    .icon i:hover {
+      color: white;
+    }
+  }
+}

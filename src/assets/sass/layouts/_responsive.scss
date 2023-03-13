@@ -1,24 +1,24 @@
-/* For Desktop (shrink header) */
 @media only screen and (max-width: 992px) {
+  //+Header
   .nav {
     width: 91.66%;
   }
 }
 
-/* For Tablet */
 @media only screen and (max-width: 768px) {
+  //+Header
   .nav {
     width: 83.33%;
-  }
 
-  .nav-container {
-    position: relative;
-  }
+    .nav-container {
+      position: relative;
 
-  .text-button-group {
-    display: none;
-  }
-  .text-button-outside-group {
-    display: flex;
+      .text-button-group {
+        display: none;
+      }
+    }
+    .text-button-outside-group {
+      display: flex;
+    }
   }
 }

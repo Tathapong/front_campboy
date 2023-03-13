@@ -1,0 +1,58 @@
+.review-card-group {
+  @include grid-auto(auto, auto auto auto auto);
+  @include border-radius-box-shadow($borderRadius);
+  row-gap: 10px;
+  max-width: 782px;
+  background-color: white;
+  padding: 20px;
+
+  .province {
+    @include font-bold-space(0.05em);
+    font-size: clamp(0.75rem, 1vw, 0.85rem);
+    text-transform: capitalize;
+    color: #888eaa;
+  }
+
+  > .title {
+    @include flex-space-between-center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #7c7c7c;
+
+    .camp-name {
+      @include font-bold-space(0.05em);
+      font-size: clamp(0.85rem, 1vw, 1rem);
+      color: #0076c5;
+      text-transform: capitalize;
+    }
+
+    .date {
+      font-size: clamp(0.65rem, 1vw, 0.75rem);
+      color: #888eaa;
+    }
+  }
+
+  .summarize {
+    @include font-bold-space(0.05em);
+    font-size: clamp(0.85rem, 1vw, 0.9rem);
+  }
+  .content {
+    position: relative;
+
+    .star-rating-group {
+      position: absolute;
+      left: 0%;
+      top: 0%;
+      display: flex;
+    }
+
+    .review {
+      @include ellipsis-multiline(4);
+      font-size: clamp(0.85rem, 1vw, 0.9rem);
+      text-indent: 100px;
+    }
+  }
+}
+
+.review-card-group:hover {
+  background-color: #dadada;
+}

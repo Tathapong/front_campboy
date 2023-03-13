@@ -1,0 +1,60 @@
+.camp-row-card-group {
+  @include grid-auto(1fr 2fr, auto);
+
+  max-width: 768px;
+
+  background-color: white;
+  padding: 10px;
+  column-gap: 10px;
+  border-radius: $borderRadius;
+
+  .image-price {
+    height: 180px;
+    min-width: 180px;
+    max-width: 100%;
+    position: relative;
+
+    .price {
+      @include flex-center-center;
+      @include font-bold-space(0.05em);
+      gap: 5px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: #eb4351;
+      color: white;
+      padding: 3px;
+    }
+
+    .image-group .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .info-group {
+    @include flex-column;
+    align-items: flex-start;
+    gap: 5px;
+
+    .camp-name {
+      @include ellipsis-multiline(2);
+      font-size: 14px;
+      font-weight: bold;
+      color: #3227b0;
+      text-transform: capitalize;
+      min-width: 250px;
+    }
+
+    .facility-group {
+      @include grid-auto(auto auto, auto auto);
+
+      column-gap: 10px;
+      padding: 10px;
+
+      border-radius: $borderRadius;
+      border: 1px solid black;
+    }
+  }
+}

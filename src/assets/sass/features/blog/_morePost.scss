@@ -1,44 +1,34 @@
 .more-post-group {
   @include flex-center-stretch;
   gap: 20px;
-}
 
-.more-post-group .blog-card-a-list {
-  @include flex-column;
-  gap: 20px;
-  max-width: 782px;
-}
-
-.more-post-group .recent-post-group {
-  @include flex-column;
-  max-width: 432px;
-  min-width: 324px;
-}
-
-.more-post-group .recent-post-group > a[class*="icon"] {
-  align-self: flex-end;
-}
-
-.blog-recent-list-title {
-  align-self: flex-start;
-  font-weight: bold;
-  color: #1a2f77;
-  margin-block: 10px;
-}
-
-.blog-recent-list {
-  @include flex-column;
-  gap: 10px;
-  background-color: white;
-  padding: 10px;
-}
-
-@media only screen and (max-width: 968px) {
-  .more-post-group {
-    flex-direction: column;
+  .blog-card-a-list {
+    @include flex-column;
+    gap: 20px;
+    max-width: 782px;
   }
-  .more-post-group > .recent-post-group {
-    max-width: 100%;
-    min-width: 0;
+
+  .recent-post-group {
+    @include flex-column;
+    max-width: 432px;
+    min-width: 324px;
+
+    a[class*="icon"] {
+      align-self: flex-end;
+    }
+
+    .blog-recent-list-title {
+      align-self: flex-start;
+      font-weight: bold;
+      color: #1a2f77;
+      margin-block: 10px;
+    }
+
+    .blog-recent-list {
+      @include flex-column;
+      gap: 10px;
+      background-color: white;
+      padding: 10px;
+    }
   }
 }

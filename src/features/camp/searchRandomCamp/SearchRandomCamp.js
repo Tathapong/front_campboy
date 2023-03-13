@@ -1,16 +1,14 @@
-import "./campSearch.css";
-
 import InputTextIcon from "../../../components/inputTextIcon/InputTextIcon";
 
-function CampSearch() {
+function SearchRandomCamp() {
   return (
-    <div className="camp-search-group">
+    <div className="search-random-camp-group">
       <InputTextIcon placeholder="Where do you want to camp?">
         <i class="fa-solid fa-magnifying-glass"></i>
       </InputTextIcon>
-      <div className="random">
-        <span>or random camp</span>
-        <span>
+      <div className="random-group">
+        <span className="text">or random camp</span>
+        <span className="icon">
           <i class="fa-solid fa-dice-three"></i>
         </span>
       </div>
@@ -18,4 +16,4 @@ function CampSearch() {
   );
 }
 
-export default CampSearch;
+export default SearchRandomCamp;

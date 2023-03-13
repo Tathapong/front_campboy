@@ -1,5 +1,3 @@
-import "./campRowCard.css";
-
 import camp from "../../../assets/images/camp1.jpg";
 import { Link } from "react-router-dom";
 import StarRating from "../../../components/starRating/StarRating";
@@ -9,22 +7,25 @@ function CampRowCard(props) {
   const { campName = "Camp name", star = 0, province = "Province", campImage = camp, price = 0, campId = "" } = props;
   return (
     <div className="camp-row-card-group">
-      <div className="camp-image">
-        <Link className="image" to={`/camp/${campId}`}>
-          <img src={campImage} alt="camp" />
+      <div className="image-price">
+        <Link className="image-group" to={`/camp/${campId}`}>
+          <img src={campImage} alt="camp" className="image" />
         </Link>
+
         <div className="price">
           <span>THB</span>
           <span>{price}</span>
         </div>
       </div>
-      <div className="info">
+
+      <div className="info-group">
         <Link className="camp-name" to={`/camp/${campId}`}>
           {campName}
         </Link>
 
         <StarRating type={star} />
         <IconText name={province} type="location" />
+
         <div className="facility-group">
           <IconText name="Free WiFi" type="facility">
             <i class="fa-solid fa-wifi"></i>

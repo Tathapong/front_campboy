@@ -1,0 +1,4 @@
+.review-card-list-group {
+  @include flex-column;
+  gap: 10px;
+}

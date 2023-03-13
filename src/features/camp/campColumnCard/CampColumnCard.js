@@ -1,4 +1,3 @@
-import "./campColumnCard.css";
 import { Link } from "react-router-dom";
 import camp1 from "../../../assets/images/camp1.jpg";
 

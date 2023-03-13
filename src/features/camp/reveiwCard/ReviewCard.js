@@ -1,5 +1,3 @@
-import "./reviewCard.css";
-
 import { Link } from "react-router-dom";
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
 import StarRating from "../../../components/starRating/StarRating";

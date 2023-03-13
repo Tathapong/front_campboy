@@ -1,27 +1,27 @@
 .profile-title-group {
   @include flex-start-center;
-}
 
-.profile-title-group .image {
-  @include flex-start-center;
-  width: 36px;
-  border-radius: 50%;
-}
+  .image {
+    @include flex-start-center;
+    width: 36px;
+    border-radius: 50%;
+  }
 
-.profile-title-group .profile-info {
-  @include flex-column;
-  @include flex-start-start;
-  margin-left: 10px;
-}
+  .profile-info {
+    @include flex-column;
+    @include flex-start-start;
+    margin-left: 10px;
 
-.profile-title-group .profile-info .title {
-  font-size: 0.75rem;
-  font-weight: bold;
-  text-transform: capitalize;
-}
+    .title {
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
 
-.profile-title-group .profile-info .option {
-  font-size: 0.6rem;
-  color: #757575;
-  font-style: italic;
+    .option {
+      font-size: 0.6rem;
+      color: #757575;
+      font-style: italic;
+    }
+  }
 }

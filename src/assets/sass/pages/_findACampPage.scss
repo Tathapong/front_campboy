@@ -1,54 +1,53 @@
 .find-a-camp {
   @include grid-auto(1fr 1fr, auto auto);
-
   margin-inline: auto;
   margin-bottom: 100px;
   row-gap: 20px;
   column-gap: 10px;
-}
 
-.find-a-camp .search-filter-group {
-  margin-top: 20px;
-  margin-inline: auto;
+  .search-filter-group {
+    margin-top: 20px;
+    margin-inline: auto;
 
-  background-color: white;
-  border-radius: $borderRadius;
+    background-color: white;
+    border-radius: $borderRadius;
 
-  grid-area: 1 / 1 / span 1 / span 2;
+    grid-area: 1 / 1 / span 1 / span 2;
 
-  @include flex-column;
-  align-items: center;
-  padding: 20px;
-}
+    @include flex-column;
+    align-items: center;
+    padding: 20px;
+  }
 
-.find-a-camp .result-group {
-  @include flex-column;
-  grid-area: 2 / 1 / span 1 / span 1;
-  gap: 10px;
-}
+  .result-group {
+    @include flex-column;
+    grid-area: 2 / 1 / span 1 / span 1;
+    gap: 10px;
 
-.find-a-camp .result-group .filter-group {
-  @include flex-column;
-  width: 200px;
-}
+    .filter-group {
+      @include flex-column;
+      width: 200px;
 
-.find-a-camp .result-group .filter-group .title {
-  @include font-bold-space(0.05em);
-  background-color: #d25c5c;
-  color: white;
-  padding-block: 5px;
-  text-align: center;
-}
+      .title {
+        @include font-bold-space(0.05em);
+        background-color: #d25c5c;
+        color: white;
+        padding-block: 5px;
+        text-align: center;
+      }
 
-.find-a-camp .result-group .filter-group .select-box-group {
-  border-radius: 0;
-}
+      .select-box-group {
+        border-radius: 0;
+      }
+    }
+  }
 
-.find-a-camp > .map {
-  @include border-radius-box-shadow;
-  background-color: white;
-  padding: 10px;
+  .map {
+    @include border-radius-box-shadow;
+    background-color: white;
+    padding: 10px;
 
-  grid-area: 2 / 2 / span 1 / span 1;
-  min-width: 400px;
+    grid-area: 2 / 2 / span 1 / span 1;
+    min-width: 400px;
+  }
 }

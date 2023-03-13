@@ -1,4 +1,3 @@
-import "./reviewCardList.css";
 import ReviewCard from "../reveiwCard/ReviewCard";
 
 function ReviewCardList() {

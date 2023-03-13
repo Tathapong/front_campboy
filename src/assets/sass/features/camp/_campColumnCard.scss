@@ -1,0 +1,39 @@
+.camp-column-card-group {
+  @include flex-column;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+  background-color: white;
+  gap: 10px;
+  box-shadow: $dropShadow;
+
+  .camp-image {
+    cursor: pointer;
+    max-width: 100%;
+
+    width: 220px;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .camp-name {
+    font-size: clamp(0.75rem, 1vw, 0.85rem);
+    font-weight: bold;
+    color: #3227b0;
+  }
+
+  .camp-review-group {
+    @include flex-space-between-stretch;
+    align-self: stretch;
+    flex-wrap: wrap;
+
+    .camp-review {
+      @include flex-start-center;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.camp-column-card-group:hover {
+  background-color: #dadada;
+}

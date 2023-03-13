@@ -1,14 +1,14 @@
 .icon-text-group {
   display: flex;
-}
 
-.icon-text-group .icon {
-  margin-right: 5px;
-}
+  .icon {
+    margin-right: 5px;
+  }
 
-.icon-text-group .text {
-  @include flex-start-center;
-  font-size: clamp(12px, 1vw, 14px);
+  .text {
+    @include flex-start-center;
+    font-size: clamp(12px, 1vw, 14px);
+  }
 }
 
 .icon-text-group[class*="location"] * {
