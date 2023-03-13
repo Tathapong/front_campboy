@@ -1,12 +1,11 @@
-.find-a-camp {
+.find-a-camp-container {
   @include grid-auto(1fr 1fr, auto auto);
+
   margin-inline: auto;
-  margin-bottom: 100px;
   row-gap: 20px;
   column-gap: 10px;
 
   .search-filter-group {
-    margin-top: 20px;
     margin-inline: auto;
 
     background-color: white;

@@ -1,7 +1,6 @@
 @import "variables";
 @import "globals";
 @import "mixins";
-@import "./pages/homePage";
 
 // Component
 @import "./components/button";
@@ -26,10 +25,11 @@
 @import "./components/responsive";
 
 //Layout
-@import "./layouts/header";
+@import "./layouts/container/container";
+@import "./layouts/header/header";
 @import "./layouts/responsive";
 
-//Feature Component
+//Feature
 @import "./features/auth/authFeature";
 
 @import "./features/blog/blogCardA";
@@ -38,17 +38,17 @@
 
 @import "./features/camp/campColumnCard";
 @import "./features/camp/campColumnCardList";
+@import "./features/camp/campContainer";
 @import "./features/camp/campRowCard";
 @import "./features/camp/campRowCardList";
 @import "./features/camp/reviewCard";
 @import "./features/camp/reviewCardList";
 @import "./features/camp/searchRandomCamp";
 
+@import "./features/findACamp/findACampContainer";
 @import "./features/findACamp/filterCamp";
 @import "./features/findACamp/searchCamp";
-@import "./features/responsive";
 
-//Page
-@import "./pages/campPage";
-@import "./pages/findACampPage";
-@import "./pages/responsive";
+@import "./features/home/homeContainer";
+
+@import "./features/responsive";

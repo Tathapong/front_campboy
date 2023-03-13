@@ -54,9 +54,52 @@
 }
 
 @media only screen and (max-width: 768px) {
+  //+AuthFeature
+  [class*="auth-form"] {
+    font-size: 0.85rem;
+  }
+
   //+SearchRandomCamp
   .search-random-camp-group .random-group .text {
     color: white;
+  }
+
+  //+CampContainer
+  .camp-container {
+    .title-share {
+      flex-direction: column;
+      gap: 20px;
+      .title {
+        order: 1;
+      }
+    }
+
+    .information-group {
+      flex-direction: column;
+
+      .group-1,
+      .group-2 {
+        width: 100%;
+      }
+    }
+  }
+
+  //+CampContainer
+  .camp-container {
+    .camp-name {
+      font-size: 1.3rem;
+    }
+    .information-group {
+      .group-1 {
+        .content {
+          padding-inline: 10px;
+        }
+
+        .overview .content {
+          font-size: 0.75rem;
+        }
+      }
+    }
   }
 }
 
@@ -73,6 +116,35 @@
     .recent-post-group {
       max-width: 100%;
       min-width: 0;
+    }
+  }
+  //+FindACampContainer
+  .find-a-camp-container {
+    @include grid-auto(auto, auto auto auto);
+
+    .search-filter-group {
+      grid-area: 1 / 1 / span 1 / span 1;
+    }
+
+    .result-group {
+      grid-area: 2 / 1 / span 1 / span 1;
+    }
+    .map {
+      height: 50vh;
+      min-width: 200px;
+      grid-area: 3 / 1 / span 1 / span 1;
+    }
+  }
+
+  //+CampContainer
+  .camp-container {
+    .information-group {
+      flex-direction: column;
+
+      .group-1,
+      .group-2 {
+        width: 100%;
+      }
     }
   }
 }

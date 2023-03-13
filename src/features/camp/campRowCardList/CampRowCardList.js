@@ -14,6 +14,7 @@ function CampRowCardList(props) {
             campImage={item.images[0]}
             key={item.id}
             campId={item.id}
+            services={item.information["สิ่งอำนวยความสะดวก"]}
           />
         );
       })}

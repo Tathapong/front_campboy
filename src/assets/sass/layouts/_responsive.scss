@@ -2,14 +2,16 @@
   //+Header
   .nav {
     width: 91.66%;
+
+    .text-button {
+      font-size: 0.85rem;
+    }
   }
 }
 
 @media only screen and (max-width: 768px) {
   //+Header
   .nav {
-    width: 83.33%;
-
     .nav-container {
       position: relative;
 

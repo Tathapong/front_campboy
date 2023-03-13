@@ -47,7 +47,8 @@
 
     .review {
       @include ellipsis-multiline(4);
-      font-size: clamp(0.85rem, 1vw, 0.9rem);
+      font-size: clamp(0.75rem, 1vw, 0.9rem);
+      line-height: 150%;
       text-indent: 100px;
     }
   }

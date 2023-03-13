@@ -1,36 +1,41 @@
 .camp-container {
   @include flex-column;
+
   align-items: flex-start;
-  margin: 0 auto;
+  margin-inline: auto;
 
-  .title-share {
+  .location-share {
     @include flex-space-between-stretch;
-    align-items: first baseline;
     width: 100%;
-
-    .title {
-      @include font-bold-space(0.05em);
-      font-size: 30px;
-      color: #4a65f3;
-    }
+    margin-block: 5px;
+    align-items: center;
   }
+
+  .camp-name {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #4a65f3;
+  }
+
   .information-group {
+    margin-top: 10px;
     width: 100%;
     display: flex;
-    gap: 5px;
+    gap: 15px;
+
+    .group-1,
+    .group-2 {
+      @include flex-column;
+      gap: 15px;
+    }
 
     .group-1 {
-      .overview,
-      .general-information,
-      .service,
-      .activity,
-      .rule {
-        grid-column: 1;
+      .content {
+        padding-inline: 30px;
       }
 
       .overview .content {
-        padding-inline: 40px;
-        font-size: 14px;
+        font-size: 0.85rem;
       }
 
       .general-information,
@@ -41,26 +46,21 @@
           @include grid-auto(auto auto, auto);
           column-gap: 20px;
           row-gap: 10px;
-          padding-inline: 40px;
           padding-block: 10px;
         }
       }
     }
 
     .group-2 {
-      .map,
-      .contact {
-        grid-column: 2;
-      }
-
-      .map .content {
+      .content {
         @include flex-column;
+      }
+      .map .content {
         gap: 10px;
         height: 400px;
       }
 
       .contact .content {
-        @include flex-column;
         gap: 10px;
       }
     }

@@ -24,6 +24,7 @@
   }
   .option-dropdown {
     @include flex-start-center;
+    color: white;
     gap: 10px;
     cursor: pointer;
     padding-left: 20px;

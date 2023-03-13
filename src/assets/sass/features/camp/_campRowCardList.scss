@@ -3,8 +3,30 @@
   gap: 10px;
 
   background-color: rgba(0, 0, 0, 0.5);
+  border-radius: $borderRadius;
 
   height: 90vh;
   padding-right: 10px;
   overflow-y: auto;
+}
+
+/* width */
+.camp-row-card-list-group::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+.camp-row-card-list-group::-webkit-scrollbar-track {
+  background: #e4e4e4;
+}
+
+/* Handle */
+.camp-row-card-list-group::-webkit-scrollbar-thumb {
+  background: #eb4351;
+  border-radius: 25%;
+}
+
+/* Handle on hover */
+.camp-row-card-list-group::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

@@ -1,17 +1,48 @@
 @media only screen and (max-width: 576px) {
+  //+Carousel
   .carousel-group {
     height: 400px;
+
+    .dot-group {
+      gap: 3px;
+    }
   }
+
+  //+CheckboxGroup
   .check-box-group {
     .label .star-rating-group i {
       font-size: 0.8rem;
     }
   }
+
+  //+Modal
   .modal-group {
     padding-top: 50px;
 
+    .modal-header {
+      font-size: 1.2rem;
+    }
+
     .modal-content {
       padding-inline: 10px;
+    }
+  }
+
+  //+IconTextInfo
+  .icon-text-info-group {
+    .icon-group {
+      .image {
+        width: 25 px;
+        height: 25px;
+      }
+    }
+    .info-group {
+      .title {
+        font-size: 0.75rem;
+      }
+      .sub-title {
+        font-size: 0.65rem;
+      }
     }
   }
 }

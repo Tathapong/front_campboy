@@ -5,17 +5,9 @@
   margin: 0 auto;
   padding-top: 20px;
 
-  * {
-    font-size: 1rem;
-  }
-
   .nav-container {
     @include flex-space-between-stretch;
     height: 70px;
-
-    * {
-      color: white;
-    }
 
     > * {
       @include flex-start-center;

@@ -8,10 +8,12 @@
   background-color: #afafaf;
   color: white;
   outline: none;
+  font-size: 1rem;
 }
 
 .input-text::placeholder {
-  color: white;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
 }
 
 .input-text:focus {

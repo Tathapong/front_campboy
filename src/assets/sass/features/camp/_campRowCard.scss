@@ -48,9 +48,9 @@
     }
 
     .facility-group {
-      @include grid-auto(auto auto, auto auto);
-
-      column-gap: 10px;
+      @include grid-auto(1fr 1fr, auto);
+      width: 100%;
+      gap: 10px;
       padding: 10px;
 
       border-radius: $borderRadius;
