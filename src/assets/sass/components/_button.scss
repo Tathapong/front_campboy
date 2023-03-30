@@ -31,11 +31,11 @@
   background-color: #2e2275;
 }
 
-[class*="btn-contact-tel"] {
+[class*="btn-contact-phone"] {
   background-color: #d3a874;
 }
 
-[class*="btn-contact-tel"]:hover {
+[class*="btn-contact-phone"]:hover {
   background-color: #a78459;
 }
 
@@ -61,4 +61,11 @@
 
 [class*="btn-contact-website"]:hover {
   background-color: #a53628;
+}
+
+[class*="btn-cancel"] {
+  background-color: #aaa;
+}
+[class*="btn-cancel"]:hover {
+  background-color: #777;
 }

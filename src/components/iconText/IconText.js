@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function IconText(props) {
-  const { children, name, type = "" } = props;
+  const { children, name, type = "", to, state } = props;
   let iconTag;
 
   switch (type) {
@@ -27,7 +27,7 @@ function IconText(props) {
   }
 
   return (
-    <Link className={`icon-text-group ${type}`}>
+    <Link className={`icon-text-group ${type}`} to={to} state={state}>
       {iconTag}
       <span className="text">{name}</span>
     </Link>

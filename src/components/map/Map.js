@@ -3,14 +3,12 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { useNavigate } from "react-router-dom";
 
 function Map(props) {
-  const { campList, zoom = 7 } = props;
-
+  const { locationList, zoom = 7 } = props;
   const navigate = useNavigate();
   const mapEl = useRef();
 
-  const locations = campList.map((item) => item.location);
-
-  const center = locations.reduce(
+  // Center of map
+  const center = locationList.reduce(
     (acc, item, index, arr) => {
       acc.lat += item.lat / arr.length;
       acc.lng += item.lng / arr.length;
@@ -31,14 +29,14 @@ function Map(props) {
         zoom: +zoom
       });
 
-      campList.map((item) => {
+      locationList.map((item) => {
         const marker = new google.maps.Marker({
-          position: item.location,
+          position: item,
           map
         });
 
         const infowindow = new google.maps.InfoWindow({
-          content: `<div style="font-size:14px">${item.camp}</div>`
+          content: `<div style="font-size:14px">${item.name}</div>`
         });
 
         marker.addListener("mouseover", () => infowindow.open({ anchor: marker, map }));
@@ -46,7 +44,7 @@ function Map(props) {
         marker.addListener("click", () => navigate("/camp/" + item.id));
       });
     });
-  }, []);
+  }, [locationList]);
 
   return <div id="map" ref={mapEl}></div>;
 }

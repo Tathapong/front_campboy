@@ -7,7 +7,7 @@
 
   .text {
     @include flex-start-center;
-    font-size: clamp(12px, 1vw, 14px);
+    font-size: clamp(0.625rem, 1vw, 0.75rem);
   }
 }
 

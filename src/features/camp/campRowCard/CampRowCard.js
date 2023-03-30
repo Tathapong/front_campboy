@@ -1,45 +1,39 @@
-import camp from "../../../assets/images/camp1.jpg";
 import { Link } from "react-router-dom";
+
+import capFirstLetter from "../../../utilities/capFirstLetter";
+
 import StarRating from "../../../components/starRating/StarRating";
 import IconText from "../../../components/iconText/IconText";
 import IconTextInfo from "../../../components/iconTextInfo/IconTextInfo";
 
 function CampRowCard(props) {
-  const {
-    campName = "Camp name",
-    star = 0,
-    province = "Province",
-    campImage = camp,
-    price = 0,
-    campId = "",
-    services
-  } = props;
+  const { camp, star = 0 } = props;
 
   return (
     <div className="camp-row-card-group">
-      <div className="image-price">
-        <Link className="image-group" to={`/camp/${campId}`}>
-          <img src={campImage} alt="camp" className="image" />
+      <div className="image-group">
+        <Link to={`/camp/${camp.id}`}>
+          <img src={camp.CampImages[0].image} alt="camp" className="image" />
         </Link>
-
-        <div className="price">
-          <span>THB</span>
-          <span>{price}</span>
-        </div>
       </div>
 
       <div className="info-group">
-        <Link className="camp-name" to={`/camp/${campId}`}>
-          {campName}
+        <Link className="camp-name" to={`/camp/${camp.id}`}>
+          {camp.name}
         </Link>
 
         <StarRating type={star} />
-        <IconText name={province} type="location" />
+        <IconText name={capFirstLetter(camp.Province.name)} type="location" />
 
         <div className="facility-group">
-          {services.map((item, index) => {
-            if (index < 4) return <IconTextInfo title={item.title} iconImage={item.src} />;
-          })}
+          {camp.CampInformations.map((item, index) => (
+            <IconTextInfo
+              key={item.id}
+              title={item.InformationItem.title}
+              iconImage={item.InformationItem.iconImage}
+              subTitle1={item.subTitle1}
+            />
+          ))}
         </div>
       </div>
     </div>

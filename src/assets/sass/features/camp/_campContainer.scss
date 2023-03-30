@@ -35,7 +35,7 @@
       }
 
       .overview .content {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
       }
 
       .general-information,
@@ -43,7 +43,7 @@
       .activity,
       .rule {
         .content {
-          @include grid-auto(auto auto, auto);
+          @include grid-auto(1fr 1fr, auto);
           column-gap: 20px;
           row-gap: 10px;
           padding-block: 10px;

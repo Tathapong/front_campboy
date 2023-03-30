@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectMe } from "../../stores/myUserSlice";
 
 import Modal from "../../components/modal/Modal";
 import LoginForm from "../../features/auth/loginForm/LoginForm";
@@ -7,7 +9,7 @@ import SignupForm from "../../features/auth/signupForm/SignupForm";
 import Logo from "./Logo";
 import TextButton from "./TextButton";
 import Button from "../../components/button/Button";
-import ProfileDropdown from "../../components/profileDropdown/ProfileDropdown";
+import ProfileDropdown from "./ProfileDropdown";
 import ForgotPasswordForm from "../../features/auth/forgotPassword/ForgotPasswordForm";
 
 function Header() {
@@ -39,6 +41,7 @@ function Header() {
     openModalForgot();
   };
 
+  const myUser = useSelector(selectMe);
   return (
     <div className="nav col-8">
       <div className="nav-container">
@@ -51,9 +54,14 @@ function Header() {
         </div>
 
         <div className="auth-button-group">
-          <Button name="Login" className="btn-auth-login mx-5 h-40-px" onClick={openModalLogin} />
-          <Button name="Signup" className="btn-auth-signup mx-5 h-40-px" onClick={openModalSignup} />
-          <ProfileDropdown />
+          {myUser ? (
+            <ProfileDropdown />
+          ) : (
+            <>
+              <Button name="Login" className="btn-auth-login mx-5 h-40-px" onClick={openModalLogin} />
+              <Button name="Signup" className="btn-auth-signup mx-5 h-40-px" onClick={openModalSignup} />
+            </>
+          )}
         </div>
       </div>
       <div className="text-button-outside-group">
@@ -63,10 +71,14 @@ function Header() {
         <TextButton name="Join camp" to="join" />
       </div>
       <Modal header="Login" isOpen={modalLoginIsOpen} closeModal={closeModalLogin}>
-        <LoginForm switchToModalSignup={switchToModalSignup} switchToModalForgot={switchToModalForgot} />
+        <LoginForm
+          switchToModalSignup={switchToModalSignup}
+          switchToModalForgot={switchToModalForgot}
+          closeModalLogin={closeModalLogin}
+        />
       </Modal>
       <Modal header="Signup" isOpen={modalSignupIsOpen} closeModal={closeModalSignup}>
-        <SignupForm switchToModalLogin={switchToModalLogin} />
+        <SignupForm switchToModalLogin={switchToModalLogin} closeModalSignup={closeModalSignup} />
       </Modal>
       <Modal header="Forgot password" isOpen={modalForgotIsOpen} closeModal={closeModalForgot}>
         <ForgotPasswordForm />

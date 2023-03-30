@@ -1,5 +1,5 @@
 .filter-camp-group {
-  @include grid-auto(auto auto auto, auto auto);
+  @include grid-auto(auto auto, auto);
   column-gap: 5px;
 
   .header {

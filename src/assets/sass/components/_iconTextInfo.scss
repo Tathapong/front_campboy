@@ -5,8 +5,8 @@
     margin-right: 10px;
 
     .image {
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
     }
   }
 
@@ -14,13 +14,18 @@
     @include flex-column;
 
     .title {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       font-weight: bold;
       color: #008890;
     }
 
-    .sub-title {
-      font-size: 0.75rem;
+    .sub-title1 {
+      font-size: 0.625rem;
+      font-weight: bold;
+      color: #546364;
+    }
+    .sub-title2 {
+      font-size: 0.625rem;
       color: #546364;
     }
   }

@@ -8,25 +8,13 @@
   column-gap: 10px;
   border-radius: $borderRadius;
 
-  .image-price {
-    height: 180px;
-    min-width: 180px;
-    max-width: 100%;
+  .image-group {
+    height: 200px;
+
+    min-width: 200px;
     position: relative;
 
-    .price {
-      @include flex-center-center;
-      @include font-bold-space(0.05em);
-      gap: 5px;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      background-color: #eb4351;
-      color: white;
-      padding: 3px;
-    }
-
-    .image-group .image {
+    .image {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -34,23 +22,20 @@
   }
 
   .info-group {
+    margin-block: auto;
     @include flex-column;
-    align-items: flex-start;
     gap: 5px;
 
     .camp-name {
       @include ellipsis-multiline(2);
-      font-size: 14px;
+      font-size: 0.75rem;
       font-weight: bold;
       color: #3227b0;
       text-transform: capitalize;
-      min-width: 250px;
     }
 
     .facility-group {
-      @include grid-auto(1fr 1fr, auto);
-      width: 100%;
-      gap: 10px;
+      @include grid-auto(1fr 1fr, auto auto);
       padding: 10px;
 
       border-radius: $borderRadius;
