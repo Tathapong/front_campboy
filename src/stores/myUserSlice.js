@@ -46,11 +46,11 @@ export const thunk_signup = (input) => async (dispatch, getState) => {
 };
 
 export const thunk_login =
-  ({ emailOrMobile, password }) =>
+  ({ email, password }) =>
   async (dispatch, getState) => {
     try {
       if (!getState().loading) dispatch(loadingActions.startLoading());
-      const res = await authService.login({ emailOrMobile, password });
+      const res = await authService.login({ email, password });
       addAccesToken(res.data.token);
       await dispatch(thunk_getMe(false));
     } catch (error) {
@@ -68,10 +68,8 @@ export const thunk_changePassword =
   async (dispatch, getState) => {
     try {
       if (!getState().loading) dispatch(loadingActions.startLoading());
-      const res = await authService.changePassword({ oldPassword, newPassword, confirmPassword });
-      removeAccesToken();
-      addAccesToken(res.data.token);
-      await dispatch(thunk_getMe(false));
+      await authService.changePassword({ oldPassword, newPassword, confirmPassword });
+      await dispatch(thunk_logout());
     } catch (error) {
       throw error.response.data;
     } finally {

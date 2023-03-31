@@ -12,14 +12,14 @@ function LoginForm(props) {
   const inputEl = useRef([]);
   const { switchToModalSignup, switchToModalForgot, closeModalLogin } = props;
 
-  const [emailOrMobile, setEmailOrMobile] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmitForm = async (ev) => {
     ev.preventDefault();
     try {
-      await dispatch(thunk_login({ emailOrMobile, password }));
-      setEmailOrMobile("");
+      await dispatch(thunk_login({ email, password }));
+      setEmail("");
       setPassword("");
       inputEl.current[0].value = "";
       inputEl.current[1].value = "";
@@ -34,7 +34,7 @@ function LoginForm(props) {
   return (
     <form className="login-auth-form" onSubmit={handleSubmitForm}>
       <div className="input-group">
-        <InputText placeholder="Email or Mobile" setValue={setEmailOrMobile} ref={(el) => (inputEl.current[0] = el)} />
+        <InputText placeholder="Email address" setValue={setEmail} ref={(el) => (inputEl.current[0] = el)} />
         <InputText
           placeholder="Password"
           type="password"

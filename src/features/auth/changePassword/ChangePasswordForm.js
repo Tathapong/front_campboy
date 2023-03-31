@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 
 function ChangePasswordForm(props) {
   const dispatch = useDispatch();
-  const inputEl = useRef([]);
 
   const { closeModal } = props;
 
@@ -22,40 +21,19 @@ function ChangePasswordForm(props) {
       ev.preventDefault();
       const data = { oldPassword, newPassword, confirmPassword };
       await dispatch(thunk_changePassword(data));
-      inputEl.current[0].value = "";
-      inputEl.current[1].value = "";
-      inputEl.current[2].value = "";
-      setOldPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
-      closeModal();
       toast.success("password have changed");
     } catch (error) {
       toast.error(error.message);
+      console.log(error);
     }
   };
 
   return (
     <form className="change-password-auth-form" onSubmit={handleSubmit}>
       <div className="input-group">
-        <InputText
-          type="password"
-          placeholder="Old password"
-          setValue={setOldPassword}
-          ref={(el) => (inputEl.current[0] = el)}
-        />
-        <InputText
-          type="password"
-          placeholder="New password"
-          setValue={setNewPassword}
-          ref={(el) => (inputEl.current[1] = el)}
-        />
-        <InputText
-          type="password"
-          placeholder="Confirm new password"
-          setValue={setConfirmPassword}
-          ref={(el) => (inputEl.current[2] = el)}
-        />
+        <InputText type="password" placeholder="Old password" setValue={setOldPassword} />
+        <InputText type="password" placeholder="New password" setValue={setNewPassword} />
+        <InputText type="password" placeholder="Confirm new password" setValue={setConfirmPassword} />
       </div>
       <div className="button-group">
         <Button name="Confirm" type="submit" />

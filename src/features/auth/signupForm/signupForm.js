@@ -14,14 +14,14 @@ function SignupForm(props) {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [emailOrMobile, setEmailOrMobile] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (ev) => {
     try {
       ev.preventDefault();
-      const input = { firstName, lastName, emailOrMobile, password, confirmPassword };
+      const input = { firstName, lastName, email, password, confirmPassword };
       await dispatch(thunk_signup(input));
       inputEl.current.map((item) => (item.value = ""));
       closeModalSignup();
@@ -37,7 +37,7 @@ function SignupForm(props) {
       <div className="input-group">
         <InputText placeholder="First name" ref={(el) => (inputEl.current[0] = el)} setValue={setFirstName} />
         <InputText placeholder="Last name" ref={(el) => (inputEl.current[1] = el)} setValue={setLastName} />
-        <InputText placeholder="Email or Mobile" ref={(el) => (inputEl.current[2] = el)} setValue={setEmailOrMobile} />
+        <InputText placeholder="Email address" ref={(el) => (inputEl.current[2] = el)} setValue={setEmail} />
         <InputText
           type="password"
           placeholder="Password"
