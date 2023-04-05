@@ -7,6 +7,11 @@
 
   .input-group {
     @include flex-column;
+
+    .text-error {
+      color: red;
+      font-style: italic;
+    }
   }
   .button-group {
     @include flex-row;
@@ -28,5 +33,47 @@
     margin-block: 10px;
     font-weight: bold;
     color: #757575;
+  }
+}
+
+.verify-auth-form {
+  align-items: center;
+  font-size: 14px;
+  text-align: center;
+
+  .email {
+    color: #2864ff;
+  }
+
+  [class*="icon"] {
+    font-size: 64px;
+    color: green;
+  }
+}
+
+.verify-confirm {
+  @include flex-column;
+  align-items: center;
+  font-size: 14px;
+  width: fit-content;
+  gap: 20px;
+  margin-inline: auto;
+  margin-top: 50px;
+
+  [class*="icon"] {
+    font-size: 64px;
+    color: green;
+  }
+}
+
+.reset-password-auth-form {
+  @include border-radius-box-shadow;
+  margin-inline: auto;
+  padding: 20px;
+  border: 1px solid black;
+
+  .title,
+  .sub-title {
+    text-align: center;
   }
 }

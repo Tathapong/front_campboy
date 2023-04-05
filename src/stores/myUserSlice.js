@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { actions as loadingActions } from "./loadingSlice";
 import * as authService from "../api/authApi";
-import { addAccesToken, removeAccesToken } from "../utilities/localStorage";
+import { addAccesToken, removeAccesToken, addResendEmail, removeResendEmail } from "../utilities/localStorage";
 
 const initialState = null;
 
@@ -14,6 +14,7 @@ const userSlice = createSlice({
   }
 });
 
+///+                                                                                                                              +
 export const thunk_getMe =
   (isGetMe = true) =>
   async (dispatch) => {
@@ -24,58 +25,85 @@ export const thunk_getMe =
       if (isGetMe) dispatch(actions.setMyUser(user));
       else setTimeout(() => dispatch(actions.setMyUser(user)), 1);
     } catch (error) {
-      if (isGetMe) throw error.response.data;
-      else throw error;
+      throw error;
     } finally {
       isGetMe && dispatch(loadingActions.stopLoading());
     }
   };
 
+///+                                                                                                                              +
 export const thunk_signup = (input) => async (dispatch, getState) => {
   try {
     if (!getState().loading) dispatch(loadingActions.startLoading());
-    const res = await authService.signup(input);
-    const { token } = res.data;
-    addAccesToken(token);
-    await dispatch(thunk_getMe(false));
+    await authService.signup(input);
+    addResendEmail(input.email);
   } catch (error) {
-    throw error.response.data;
+    throw error;
   } finally {
     if (getState().loading) dispatch(loadingActions.stopLoading());
   }
 };
 
+///+                                                                                                                              +
 export const thunk_login =
   ({ email, password }) =>
   async (dispatch, getState) => {
     try {
       if (!getState().loading) dispatch(loadingActions.startLoading());
       const res = await authService.login({ email, password });
-      addAccesToken(res.data.token);
-      await dispatch(thunk_getMe(false));
+      const { verify } = res.data;
+
+      if (verify) {
+        addAccesToken(res.data.token);
+        removeResendEmail();
+        await dispatch(thunk_getMe(false));
+        return true;
+      } else {
+        addResendEmail(email);
+        return false;
+      }
     } catch (error) {
-      throw error.response.data;
+      throw error;
     } finally {
       if (getState().loading) dispatch(loadingActions.stopLoading());
     }
   };
+
+///+                                                                                                                              +
 export const thunk_logout = () => (dispatch) => {
   dispatch(actions.deleteMyUser());
   removeAccesToken();
 };
+
+///+                                                                                                                              +
 export const thunk_changePassword =
   ({ oldPassword, newPassword, confirmPassword }) =>
   async (dispatch, getState) => {
     try {
       if (!getState().loading) dispatch(loadingActions.startLoading());
-      await authService.changePassword({ oldPassword, newPassword, confirmPassword });
-      await dispatch(thunk_logout());
+      const res = await authService.changePassword({ oldPassword, newPassword, confirmPassword });
+      const { token } = res.data;
+
+      addAccesToken(token);
     } catch (error) {
-      throw error.response.data;
+      throw error;
     } finally {
       if (getState().loading) dispatch(loadingActions.stopLoading());
     }
   };
+
+///+                                                                                                                              +
+export const thunk_sendResetPassword = (email, type) => async (dispatch, getState) => {
+  try {
+    if (!getState().loading) dispatch(loadingActions.startLoading());
+    await authService.sendEmail({ email, type });
+    addResendEmail(email);
+  } catch (error) {
+    throw error;
+  } finally {
+    if (getState().loading) dispatch(loadingActions.stopLoading());
+  }
+};
 
 export const selectMe = (state) => state.myUser;
 export default userSlice.reducer;

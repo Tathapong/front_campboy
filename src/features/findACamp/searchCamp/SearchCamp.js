@@ -19,12 +19,16 @@ function SearchCamp(props) {
     fetchProvince();
   }, []);
 
+  const onChangeDestination = (ev) => {
+    setDestination(ev.target.value);
+  };
+
   return (
     <div className="search-camp-group">
       <div className="header">Search</div>
       <div className="destination">
         <div className="title">Destination/ Camp name</div>
-        <InputTextIcon placeholder="Where do you want to camp?" setValue={setDestination}>
+        <InputTextIcon placeholder="Where do you want to camp?" onChange={onChangeDestination}>
           <i class="fa-solid fa-magnifying-glass"></i>
         </InputTextIcon>
       </div>

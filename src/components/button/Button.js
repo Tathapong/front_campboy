@@ -1,7 +1,7 @@
 import * as constant from "../../config/constant";
 
 function Button(props) {
-  const { type = "button", onClick, className = "", children, contact, name } = props;
+  const { type = "button", onClick, className = "", children, contact, name, disabled } = props;
 
   let title = name;
   if (contact) {
@@ -10,7 +10,7 @@ function Button(props) {
   }
 
   return (
-    <button className={`btn ${className}`} onClick={onClick} type={type}>
+    <button className={`btn ${className}`} onClick={onClick} type={type} disabled={disabled}>
       {title}
       {children}
     </button>

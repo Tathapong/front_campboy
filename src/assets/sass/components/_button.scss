@@ -69,3 +69,14 @@
 [class*="btn-cancel"]:hover {
   background-color: #777;
 }
+
+[class*="btn-disabled"] {
+  background-color: #aaa;
+}
+[class*="btn-disabled"]:hover {
+  background-color: #aaa;
+  box-shadow: none;
+}
+[class*="btn-disabled"]:disabled {
+  cursor: not-allowed;
+}

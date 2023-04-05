@@ -161,6 +161,19 @@ a {
   background-color: #777;
 }
 
+[class*=btn-disabled] {
+  background-color: #aaa;
+}
+
+[class*=btn-disabled]:hover {
+  background-color: #aaa;
+  box-shadow: none;
+}
+
+[class*=btn-disabled]:disabled {
+  cursor: not-allowed;
+}
+
 .card-group {
   margin-inline: auto;
 }
@@ -415,6 +428,10 @@ a {
 .input-text:focus, .input-text-icon-group .input-text-icon:focus {
   background-color: #a6c8db;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+[class*=input-error] {
+  border: 2px solid red;
 }
 
 .input-text-icon-group {
@@ -767,6 +784,10 @@ a {
   display: flex;
   flex-direction: column;
 }
+[class*=auth-form] .input-group .text-error {
+  color: red;
+  font-style: italic;
+}
 [class*=auth-form] .button-group {
   display: flex;
   flex-direction: row;
@@ -784,6 +805,46 @@ a {
   margin-block: 10px;
   font-weight: bold;
   color: #757575;
+}
+
+.verify-auth-form {
+  align-items: center;
+  font-size: 14px;
+  text-align: center;
+}
+.verify-auth-form .email {
+  color: #2864ff;
+}
+.verify-auth-form [class*=icon] {
+  font-size: 64px;
+  color: green;
+}
+
+.verify-confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  width: fit-content;
+  gap: 20px;
+  margin-inline: auto;
+  margin-top: 50px;
+}
+.verify-confirm [class*=icon] {
+  font-size: 64px;
+  color: green;
+}
+
+.reset-password-auth-form {
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  margin-inline: auto;
+  padding: 20px;
+  border: 1px solid black;
+}
+.reset-password-auth-form .title,
+.reset-password-auth-form .sub-title {
+  text-align: center;
 }
 
 .blog-card-a-group {
