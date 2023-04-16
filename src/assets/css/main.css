@@ -434,6 +434,11 @@ a {
   border: 2px solid red;
 }
 
+.text-error {
+  color: red;
+  font-style: italic;
+}
+
 .input-text-icon-group {
   position: relative;
   width: 100%;
@@ -651,6 +656,11 @@ a {
   color: #fd3b00;
 }
 
+.star-rating-form {
+  color: #fd3b00;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 576px) {
   .carousel-group {
     height: 400px;
@@ -779,14 +789,6 @@ a {
   gap: 20px;
   width: 400px;
   max-width: 100%;
-}
-[class*=auth-form] .input-group {
-  display: flex;
-  flex-direction: column;
-}
-[class*=auth-form] .input-group .text-error {
-  color: red;
-  font-style: italic;
 }
 [class*=auth-form] .button-group {
   display: flex;
@@ -1079,6 +1081,77 @@ a {
 .camp-container .information-group .group-2 .contact .content {
   gap: 10px;
 }
+.camp-container .review-group {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  padding: 20px;
+  gap: 10px;
+}
+.camp-container .review-group .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+.camp-container .review-group .header .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.camp-container .review-group .header .btn {
+  width: fit-content;
+}
+.camp-container .review-group .select-box-group {
+  width: 250px;
+}
+.camp-container .review-group .review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.camp-review-card-group {
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  padding: 25px;
+  background-color: #f8f8f8;
+}
+.camp-review-card-group .info-group {
+  margin-top: 20px;
+}
+.camp-review-card-group .info-group .summarize {
+  color: #4a65f3;
+  font-weight: bold;
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+.camp-review-card-group .info-group .date {
+  color: #756e6e;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+.camp-review-card-group .info-group .overview-rating {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+.camp-review-card-group .info-group .overview-rating .title {
+  color: #cd5353;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.camp-review-card-group .info-group .review .title {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.camp-review-card-group .info-group .review .content {
+  font-size: 0.75rem;
+}
 
 .camp-row-card-group {
   display: grid;
@@ -1104,9 +1177,15 @@ a {
   margin-block: auto;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 5px;
 }
-.camp-row-card-group .info-group .camp-name {
+.camp-row-card-group .info-group .camp-name-group {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+.camp-row-card-group .info-group .camp-name-group .camp-name {
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box !important;
@@ -1118,10 +1197,29 @@ a {
   color: #3227b0;
   text-transform: capitalize;
 }
+.camp-row-card-group .info-group .camp-name-group [class*=btn] {
+  width: 25px;
+  height: 25px;
+  background-color: #ddd;
+}
+.camp-row-card-group .info-group .camp-name-group [class*=btn] [class*=icon] {
+  color: red;
+}
+.camp-row-card-group .info-group .camp-name-group [class*=btn-active] {
+  background-color: red;
+}
+.camp-row-card-group .info-group .camp-name-group [class*=btn-active] [class*=icon] {
+  color: #fff;
+}
+.camp-row-card-group .info-group .rating-count {
+  font-size: 0.75rem;
+  color: #fd3b00;
+}
 .camp-row-card-group .info-group .facility-group {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
+  align-self: stretch;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid black;
@@ -1159,7 +1257,7 @@ a {
   background: #555;
 }
 
-.review-card-group {
+.recent-review-card-group {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto auto auto auto;
@@ -1170,46 +1268,46 @@ a {
   background-color: white;
   padding: 20px;
 }
-.review-card-group .province {
+.recent-review-card-group .province {
   font-weight: bold;
   letter-spacing: 0.05em;
   font-size: clamp(0.75rem, 1vw, 0.85rem);
   text-transform: capitalize;
   color: #888eaa;
 }
-.review-card-group > .title {
+.recent-review-card-group > .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
   border-bottom: 1px solid #7c7c7c;
 }
-.review-card-group > .title .camp-name {
+.recent-review-card-group > .title .camp-name {
   font-weight: bold;
   letter-spacing: 0.05em;
   font-size: clamp(0.85rem, 1vw, 1rem);
   color: #0076c5;
   text-transform: capitalize;
 }
-.review-card-group > .title .date {
+.recent-review-card-group > .title .date {
   font-size: clamp(0.65rem, 1vw, 0.75rem);
   color: #888eaa;
 }
-.review-card-group .summarize {
+.recent-review-card-group .summarize {
   font-weight: bold;
   letter-spacing: 0.05em;
   font-size: clamp(0.85rem, 1vw, 0.9rem);
 }
-.review-card-group .content {
+.recent-review-card-group .content {
   position: relative;
 }
-.review-card-group .content .star-rating-group {
+.recent-review-card-group .content .star-rating-group {
   position: absolute;
   left: 0%;
   top: 0%;
   display: flex;
 }
-.review-card-group .content .review {
+.recent-review-card-group .content .review {
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box !important;
@@ -1225,7 +1323,7 @@ a {
   background-color: #dadada;
 }
 
-.review-card-list-group {
+.recent-review-card-list-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1268,6 +1366,32 @@ a {
 }
 .search-random-camp-group .random-group .icon i:hover {
   color: white;
+}
+
+.write-a-review-form {
+  width: 500px;
+  max-width: 100%;
+}
+.write-a-review-form .input-text, .write-a-review-form .input-text-icon-group .input-text-icon, .input-text-icon-group .write-a-review-form .input-text-icon {
+  background-color: #d0b9a0;
+}
+.write-a-review-form [class*=review-input] {
+  height: 300px;
+}
+.write-a-review-form .button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.write-a-review-form .button-group [class*=btn-submit] {
+  background-color: #235659;
+  width: 100px;
+}
+.write-a-review-form .button-group [class*=btn-cancel] {
+  background-color: #5e6b73;
+  width: 100px;
 }
 
 .find-a-camp-container {
@@ -1466,6 +1590,9 @@ a {
     height: 50vh;
     min-width: 200px;
     grid-area: 3/1/span 1/span 1;
+  }
+  .camp-container {
+    width: 91.66%;
   }
   .camp-container .information-group {
     flex-direction: column;

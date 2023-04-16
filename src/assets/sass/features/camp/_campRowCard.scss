@@ -24,18 +24,48 @@
   .info-group {
     margin-block: auto;
     @include flex-column;
+    align-items: flex-start;
     gap: 5px;
 
-    .camp-name {
-      @include ellipsis-multiline(2);
+    .camp-name-group {
+      align-self: stretch;
+      @include flex-space-between-stretch;
+
+      .camp-name {
+        @include ellipsis-multiline(2);
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: #3227b0;
+        text-transform: capitalize;
+      }
+
+      [class*="btn"] {
+        width: 25px;
+        height: 25px;
+        background-color: #ddd;
+
+        [class*="icon"] {
+          color: red;
+        }
+      }
+
+      [class*="btn-active"] {
+        background-color: red;
+
+        [class*="icon"] {
+          color: #fff;
+        }
+      }
+    }
+
+    .rating-count {
       font-size: 0.75rem;
-      font-weight: bold;
-      color: #3227b0;
-      text-transform: capitalize;
+      color: #fd3b00;
     }
 
     .facility-group {
       @include grid-auto(1fr 1fr, auto auto);
+      align-self: stretch;
       padding: 10px;
 
       border-radius: $borderRadius;

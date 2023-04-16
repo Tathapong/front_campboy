@@ -74,9 +74,8 @@ function LoginForm(props) {
           ref={(el) => (inputEl.current[1] = el)}
           errorText={errorInput.password}
         />
-
-        <Link onClick={switchToModalForgot}>Forgot password?</Link>
       </div>
+      <Link onClick={switchToModalForgot}>Forgot password?</Link>
       <div className="button-group">
         <Button name="Login" type="submit" />
       </div>

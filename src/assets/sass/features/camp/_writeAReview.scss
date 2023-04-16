@@ -1,0 +1,26 @@
+.write-a-review-form {
+  width: 500px;
+  max-width: 100%;
+  .input-text {
+    background-color: #d0b9a0;
+  }
+
+  [class*="review-input"] {
+    height: 300px;
+  }
+
+  .button-group {
+    @include flex-center-center;
+    gap: 20px;
+    margin-top: 20px;
+
+    [class*="btn-submit"] {
+      background-color: #235659;
+      width: 100px;
+    }
+    [class*="btn-cancel"] {
+      background-color: #5e6b73;
+      width: 100px;
+    }
+  }
+}

@@ -1,25 +1,26 @@
 import { useRef, useState } from "react";
 
-import React from "react";
-
 function Carousel(props) {
   const { list } = props;
 
   const imageEl = useRef([]);
   const dotEl = useRef([]);
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const clickNextImage = () => {
+  function clickNextImage() {
     if (currentImageIndex < list.length - 1) setCurrentImageIndex((prev) => prev + 1);
     else setCurrentImageIndex(0);
-  };
+  }
 
-  const clickPreviousImage = () => {
+  function clickPreviousImage() {
     if (currentImageIndex > 0) setCurrentImageIndex((prev) => prev - 1);
     else setCurrentImageIndex(list.length - 1);
-  };
+  }
 
-  const clickSelectImage = (index) => setCurrentImageIndex(index);
+  function clickSelectImage(index) {
+    setCurrentImageIndex(index);
+  }
 
   return (
     <div className="carousel-group">

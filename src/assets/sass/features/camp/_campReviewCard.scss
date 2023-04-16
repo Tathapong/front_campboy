@@ -1,0 +1,44 @@
+.camp-review-card-group {
+  @include border-radius-box-shadow;
+  padding: 25px;
+  background-color: #f8f8f8;
+
+  .info-group {
+    margin-top: 20px;
+
+    .summarize {
+      color: #4a65f3;
+      font-weight: bold;
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    .date {
+      color: #756e6e;
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    .overview-rating {
+      @include flex-start-center;
+      gap: 10px;
+
+      .title {
+        color: #cd5353;
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+    }
+
+    .review {
+      .title {
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+      .content {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

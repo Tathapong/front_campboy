@@ -105,6 +105,32 @@ export const thunk_sendResetPassword = (email, type) => async (dispatch, getStat
   }
 };
 
+///+                                                                                                                              +
+export const thunk_verifyLink = (userId, hashedToken) => async (dispatch, getState) => {
+  try {
+    if (!getState().loading) dispatch(loadingActions.startLoading());
+    await authService.verifyLink({ userId, hashedToken });
+  } catch (error) {
+    throw error;
+  } finally {
+    if (getState().loading) dispatch(loadingActions.stopLoading());
+  }
+};
+
+///+                                                                                                                              +
+export const thunk_resetPassword =
+  (userId, hashedToken, newPassword, confirmPassword) => async (dispatch, getState) => {
+    try {
+      if (!getState().loading) dispatch(loadingActions.startLoading());
+      await authService.resetPassword({ userId, hashedToken, newPassword, confirmPassword });
+      dispatch(thunk_logout());
+    } catch (error) {
+      throw error;
+    } finally {
+      if (getState().loading) dispatch(loadingActions.stopLoading());
+    }
+  };
+
 export const selectMe = (state) => state.myUser;
 export default userSlice.reducer;
 export const actions = userSlice.actions;

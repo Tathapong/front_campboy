@@ -23,6 +23,7 @@
 @import "./components/selectBox";
 @import "./components/shareSocial";
 @import "./components/starRating";
+@import "./components/starRatingForm";
 
 @import "./components/responsive";
 
@@ -41,11 +42,13 @@
 @import "./features/camp/campColumnCard";
 @import "./features/camp/campColumnCardList";
 @import "./features/camp/campContainer";
+@import "./features//camp/campReviewCard";
 @import "./features/camp/campRowCard";
 @import "./features/camp/campRowCardList";
-@import "./features/camp/reviewCard";
-@import "./features/camp/reviewCardList";
+@import "./features/camp/recentReviewCard";
+@import "./features/camp/recentReviewCardList";
 @import "./features/camp/searchRandomCamp";
+@import "./features/camp/writeAReview";
 
 @import "./features/findACamp/findACampContainer";
 @import "./features/findACamp/filterCamp";

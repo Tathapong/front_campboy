@@ -1,4 +1,4 @@
-import capFirstLetter from "./capFirstLetter";
+import { capFirstLetter } from "./capFirstLetter";
 
 export const selectboxFromArray = function (list) {
   return list.map((item) => {

@@ -5,14 +5,6 @@
   width: 400px;
   max-width: 100%;
 
-  .input-group {
-    @include flex-column;
-
-    .text-error {
-      color: red;
-      font-style: italic;
-    }
-  }
   .button-group {
     @include flex-row;
   }

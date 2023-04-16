@@ -1,9 +1,21 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as constant from "../../../config/constant";
-import { thunk_getCampById, selectCamp } from "../../../stores/campSlice";
+import {
+  thunk_getCampById,
+  selectCamp,
+  selectCampImage,
+  selectProvince,
+  selectCampName,
+  selectOverview,
+  selectLocation,
+  selectContact,
+  selectReviewList
+} from "../../../stores/campSlice";
+import { selectMe } from "../../../stores/myUserSlice";
+import { reviewSortItem } from "../../../constants/constant";
 
 import Carousel from "../../../components/carousel/Carousel";
 import IconText from "../../../components/iconText/IconText";
@@ -12,30 +24,47 @@ import InformationCard from "../../../components/infomationCard/InformationCard"
 import IconTextInfo from "../../../components/iconTextInfo/IconTextInfo";
 import Map from "../../../components/map/Map";
 import Button from "../../../components/button/Button";
+import CampReviewCard from "../campReviewCard/CampReviewCard";
+import SelectBox from "../../../components/selectBox/SelectBox";
+import Modal from "../../../components/modal/Modal";
+import WriteAReview from "../writeAReview/WriteAReview";
 
 function Camp() {
   const { campId } = useParams();
   const dispatch = useDispatch();
 
+  const [modalReviewIsOpen, setModalReviewIsOpen] = useState(false);
+  const [sortItem, setSortItem] = useState("");
+
+  const myUser = useSelector(selectMe);
+
   const camp = useSelector(selectCamp);
-  const imageList = camp.CampImages ? camp.CampImages.map((item) => item.image) : [];
-  const province = camp.Province ? camp.Province.name[0].toUpperCase() + camp.Province.name.slice(1).toLowerCase() : "";
-  const campName = camp.name;
-  const overview = camp.overview;
-  const location = { lat: +camp.locationLat, lng: +camp.locationLng, name: camp.name, id: camp.id };
-  const contact = camp.CampContacts ? camp.CampContacts : [];
+  const imageList = useSelector(selectCampImage);
+  const province = useSelector(selectProvince);
+  const campName = useSelector(selectCampName);
+  const overview = useSelector(selectOverview);
+  const location = useSelector(selectLocation);
+  const contact = useSelector(selectContact);
+  const reviewList = useSelector((state) => selectReviewList(state, sortItem));
 
   const general = filterInformation(constant.GENERAL);
   const service = filterInformation(constant.SERVICE);
   const activity = filterInformation(constant.ACTIVITY);
   const rule = filterInformation(constant.RULE);
 
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        await dispatch(thunk_getCampById(campId));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetch();
+  }, [campId, dispatch]);
+
   function filterInformation(type) {
-    return camp.CampInformations
-      ? camp.CampInformations.filter((item) => {
-          if (item.InformationItem.type === type) return item;
-        })
-      : [];
+    return camp.CampInformations ? camp.CampInformations.filter((item) => item.InformationItem.type === type) : [];
   }
 
   function informationContent(list) {
@@ -54,32 +83,24 @@ function Camp() {
     );
   }
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        await dispatch(thunk_getCampById(campId));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetch();
-  }, [campId, dispatch]);
-
-  const handleOpenMap = () => {
+  function handleOpenMap() {
     window.open(
       `https://www.google.com/maps/@?api=1&map_action=map&center=${location.lat}%2c${location.lng}&zoom=17`,
       "_blank"
     );
-  };
+  }
 
-  const handleOpenContact = (item) => {
+  function handleOpenContact(item) {
     if (item.type === constant.PHONE) window.location.assign(`tel:${item.contact}`);
     if (item.type === constant.FACEBOOK || item.type === constant.WEBSITE || item.type === constant.LINE)
       window.open(item.contact);
-  };
+  }
+
+  const openModalReview = () => setModalReviewIsOpen(true);
+  const closeModalReview = () => setModalReviewIsOpen(false);
 
   return (
-    <div className="camp-container col-11">
+    <div className="camp-container col-8">
       <div className="header-background" />
       <Carousel list={imageList} />
 
@@ -153,6 +174,21 @@ function Camp() {
           </InformationCard>
         </div>
       </div>
+      <div className="review-group">
+        <div className="header">
+          <div className="title">Reviews ({reviewList.length ? reviewList.length : 0})</div>
+          {myUser ? <Button onClick={openModalReview}>Write a review</Button> : ""}
+        </div>
+        <SelectBox list={reviewSortItem} setValue={setSortItem} selected={sortItem} />
+        <div className="review-list">
+          {reviewList.map((item) => {
+            return <CampReviewCard review={item} key={item.id} />;
+          })}
+        </div>
+      </div>
+      <Modal header="Write a review" isOpen={modalReviewIsOpen} closeModal={closeModalReview}>
+        <WriteAReview closeModalReview={closeModalReview} />
+      </Modal>
     </div>
   );
 }

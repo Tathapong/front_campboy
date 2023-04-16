@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 import * as customValidator from "../../../validation/validation";
-import * as authService from "../../../api/authApi";
+import { thunk_verifyLink, thunk_resetPassword } from "../../../stores/myUserSlice";
 
 import Loading from "../../../components/spinner/Loading";
 import Button from "../../../components/button/Button";
@@ -12,6 +13,7 @@ import InputText from "../../../components/inputText/InputText";
 function ResetPasswordEmail() {
   const { hashedToken, userId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const inputEl = useRef([]);
 
@@ -27,7 +29,7 @@ function ResetPasswordEmail() {
   useEffect(() => {
     const verify = async () => {
       try {
-        await authService.verifyLink({ userId, hashedToken });
+        await dispatch(thunk_verifyLink(userId, hashedToken));
         setVerified(true);
       } catch (error) {
         console.log(error.response.data.message);
@@ -35,7 +37,7 @@ function ResetPasswordEmail() {
       }
     };
     verify();
-  }, [hashedToken]);
+  }, [hashedToken, userId, dispatch]);
 
   const onSubmitForm = async (ev) => {
     ev.preventDefault();
@@ -63,13 +65,7 @@ function ResetPasswordEmail() {
       const isError = error.newPassword || error.confirmPassword;
 
       if (!isError) {
-        const input = {
-          userId,
-          hashedToken,
-          newPassword: inputValue.newPassword,
-          confirmPassword: inputValue.confirmPassword
-        };
-        await authService.resetPassword(input);
+        await dispatch(thunk_resetPassword(userId, hashedToken, inputValue.newPassword, inputValue.confirmPassword));
         inputEl.current.map((item) => (item.value = ""));
 
         setInputValue({ ...initialValue });

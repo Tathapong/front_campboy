@@ -12,18 +12,18 @@ function FilterCamp(props) {
   const [activityList, setActivityList] = useState([]);
 
   useEffect(() => {
-    const fetchFilterItem = async () => {
+    async function fetchFilterItem() {
       try {
-        const { properties, services, activities, ratings } = await informationService.getFilterList();
+        const { properties, services, activities, rating } = await informationService.getFilterList();
 
-        setRatingList((prev) => checkboxFromArray(ratings));
+        setRatingList((prev) => checkboxFromArray(rating));
         setPropertyList((prev) => checkboxFromArray(properties));
         setServiceList((prev) => checkboxFromArray(services));
         setActivityList((prev) => checkboxFromArray(activities));
       } catch (error) {
         console.log(error);
       }
-    };
+    }
     fetchFilterItem();
   }, []);
 

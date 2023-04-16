@@ -65,4 +65,34 @@
       }
     }
   }
+
+  .review-group {
+    @include flex-column;
+    @include border-radius-box-shadow;
+    width: 100%;
+    padding: 20px;
+    gap: 10px;
+
+    .header {
+      @include flex-space-between-center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid black;
+
+      .title {
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+      .btn {
+        width: fit-content;
+      }
+    }
+    .select-box-group {
+      width: 250px;
+    }
+
+    .review-list {
+      @include flex-column;
+      gap: 10px;
+    }
+  }
 }

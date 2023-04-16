@@ -2,7 +2,7 @@ import CampColumnCardList from "../../camp/campColumnCardList/CampColumnCardList
 import CardGroup from "../../../components/cardGroup/CardGroup";
 import SearchRandomCamp from "../../camp/searchRandomCamp/SearchRandomCamp";
 import MorePost from "../../blog/morePost/MorePost";
-import ReviewCardList from "../../camp/reviewCardList/ReviewCardList";
+import RecentReviewList from "../../camp/recentReviewList/RecentReviewList";
 
 function HomeContainer() {
   return (
@@ -23,7 +23,7 @@ function HomeContainer() {
       </CardGroup>
 
       <CardGroup className="card-group-recent-review" header="Recent Reviews">
-        <ReviewCardList />
+        <RecentReviewList />
       </CardGroup>
     </div>
   );

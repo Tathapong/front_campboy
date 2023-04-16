@@ -15,11 +15,9 @@ import Button from "../../../components/button/Button";
 
 function FindACamp() {
   const dispatch = useDispatch();
+
   const { state } = useLocation(); // get province Id from click at location iconText
   const provinceFilter = state?.provinceFilter;
-
-  const camps = useSelector(selectCamps);
-  const locationList = useSelector(selectLocationList);
 
   const [desination, setDestination] = useState("");
   const [province, setProvince] = useState("");
@@ -27,39 +25,44 @@ function FindACamp() {
   const [property, setProperty] = useState([]);
   const [informationItem, setInformationItem] = useState([]);
   const [sortItem, setSortItem] = useState("");
+  const [mapItem, setMapItem] = useState([]);
+
+  const camps = useSelector((state) => selectCamps(state, sortItem));
+  const locationList = useSelector(selectLocationList);
 
   useEffect(() => {
-    let query = "";
+    let query = provinceFilter ? `?province=${provinceFilter}` : "";
     if (provinceFilter) {
-      query = `?province=${provinceFilter}`;
       setProvince(provinceFilter);
-      window.history.replaceState({}, ""); // Clear state (that from previous page) because Refresh page that remain
+      window.history.replaceState({ ...window.history.state, usr: null }, ""); // Clear state (that from previous page) because Refresh page that remain
     }
+    fetchCamps(query);
+  }, []);
 
-    const fetchCamps = async () => {
-      try {
-        await dispatch(thunk_getAllCamp(query));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCamps();
-  }, [dispatch, provinceFilter]);
+  async function fetchCamps(query) {
+    try {
+      await dispatch(thunk_getAllCamp(query));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function handleClearFilter() {
+    window.location.reload();
+  }
 
   function handleSubmitFilterForm(ev) {
     ev.preventDefault();
-    const destinationQuery = desination ? `destination=${desination}` : "";
+    const destinationQuery = desination.trim() ? `destination=${desination.trim()}` : "";
     const provinceQuery = province ? `province=${province}` : "";
     const ratingQuery = queryFromArray("rating", rating);
     const propertyQuery = queryFromArray("property", property);
     const informationItemQuery = queryFromArray("informationItem", informationItem);
 
     const query = "?" + [destinationQuery, provinceQuery, ratingQuery, propertyQuery, informationItemQuery].join("&");
+    fetchCamps(query);
 
-    const fetchCamps = async () => {
-      await dispatch(thunk_getAllCamp(query));
-    };
-    fetchCamps();
+    setMapItem([]);
   }
 
   return (
@@ -73,7 +76,7 @@ function FindACamp() {
       <form className="search-filter-group" onSubmit={handleSubmitFilterForm}>
         <SearchCamp setDestination={setDestination} setProvince={setProvince} province={province} />
         <FilterCamp setRating={setRating} setProperty={setProperty} setInformationItem={setInformationItem} />
-        <Link className="clear-filter" onClick={() => window.location.reload()}>
+        <Link className="clear-filter" onClick={handleClearFilter}>
           Clear filters
         </Link>
         <Button name="Search" type="submit" />
@@ -82,13 +85,13 @@ function FindACamp() {
       <div className="result-group">
         <div className="sort-group">
           <div className="title">Result Found : {camps.length}</div>
-          <SelectBox list={resultSortItem} setValue={setSortItem} />
+          <SelectBox list={resultSortItem} setValue={setSortItem} selected={sortItem} />
         </div>
-        <CampRowCardList campList={camps} />
+        <CampRowCardList campList={camps} setMapItem={setMapItem} mapItem={mapItem} />
       </div>
 
       <div className="map">
-        <Map locationList={locationList} />
+        <Map locationList={mapItem.length ? mapItem : locationList} />
       </div>
     </div>
   );

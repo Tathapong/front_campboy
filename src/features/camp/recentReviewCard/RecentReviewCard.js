@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
 import StarRating from "../../../components/starRating/StarRating";
 
-function ReviewCard() {
+function RecentReviewCard() {
   return (
-    <div className="review-card-group">
+    <div className="recent-review-card-group">
       <Link className="province">Nakhonnayok</Link>
       <div className="title">
         <Link className="camp-name">Nakhonnayok camp</Link>
@@ -25,4 +25,4 @@ function ReviewCard() {
   );
 }
 
-export default ReviewCard;
+export default RecentReviewCard;

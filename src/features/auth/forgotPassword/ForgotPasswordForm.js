@@ -50,8 +50,8 @@ function ForgotPasswordForm(props) {
 
   return (
     <form className="forgot-password-auth-form" onSubmit={handleSubmit}>
+      <span className="title">Enter your email address</span>
       <div className="input-group">
-        <span className="title">Enter your email address</span>
         <InputText ref={inputEl} placeholder="Enter email address" onChange={onChangeEmail} errorText={errorInput} />
       </div>
       <div className="button-group">

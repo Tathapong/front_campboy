@@ -11,17 +11,21 @@ function SearchCamp(props) {
   const [provinceList, setProvinceList] = useState([]);
 
   useEffect(() => {
-    const fetchProvince = async () => {
-      const provinceList = await informationService.getProvince();
-      const province = selectboxFromArray(provinceList);
-      setProvinceList(province);
-    };
+    async function fetchProvince() {
+      try {
+        const provinceList = await informationService.getProvince();
+        const province = selectboxFromArray(provinceList);
+        setProvinceList(province);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     fetchProvince();
   }, []);
 
-  const onChangeDestination = (ev) => {
+  function onChangeDestination(ev) {
     setDestination(ev.target.value);
-  };
+  }
 
   return (
     <div className="search-camp-group">

@@ -1,4 +1,4 @@
-.review-card-group {
+.recent-review-card-group {
   @include grid-auto(auto, auto auto auto auto);
   @include border-radius-box-shadow($borderRadius);
   row-gap: 10px;
