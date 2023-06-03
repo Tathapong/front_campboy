@@ -1,27 +1,42 @@
 .profile-title-group {
-  @include flex-start-center;
+  @include flex-space-between-center;
+  gap: 10px;
 
-  .image {
+  .image-info {
     @include flex-start-center;
-    width: 36px;
-    border-radius: 50%;
-  }
 
-  .profile-info {
-    @include flex-column;
-    @include flex-start-start;
-    margin-left: 10px;
-
-    .title {
-      font-size: 0.75rem;
-      font-weight: bold;
-      text-transform: capitalize;
+    .image {
+      @include flex-start-center;
+      width: 36px;
+      border-radius: 50%;
     }
 
-    .option {
-      font-size: 0.6rem;
-      color: #757575;
-      font-style: italic;
+    .profile-info {
+      @include flex-column;
+      margin-left: 10px;
+
+      .title {
+        white-space: nowrap;
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .follower {
+        white-space: nowrap;
+        font-size: 0.6rem;
+        color: #757575;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+      }
+
+      .about {
+        @include ellipsis-multiline(2);
+        font-size: 0.7rem;
+        color: #757575;
+        letter-spacing: 0.05em;
+        max-width: 500px;
+      }
     }
   }
 }

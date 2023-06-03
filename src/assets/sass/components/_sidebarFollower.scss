@@ -1,0 +1,24 @@
+.sidebar-follower-group {
+  @include flex-column;
+  gap: 10px;
+
+  .sidebar-title {
+    @include font-bold-space;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    border-bottom: 1px solid #c7c7c7;
+    padding-bottom: 15px;
+  }
+
+  .profile-list {
+    @include flex-column;
+    gap: 10px;
+  }
+
+  .suggestions {
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 0.75rem;
+    color: #0092e4;
+  }
+}

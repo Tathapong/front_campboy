@@ -28,6 +28,17 @@
     }
   }
 
+  //+ NavbarTabs
+  .navbar-tab-menu {
+    .list-group {
+      display: none;
+    }
+
+    [class*="list-group-mobile"] {
+      display: flex;
+    }
+  }
+
   //+IconTextInfo
   .icon-text-info-group {
     .icon-group {

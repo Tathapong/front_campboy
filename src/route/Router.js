@@ -9,6 +9,9 @@ import Camp from "../pages/camp/Camp";
 import Loading from "../components/spinner/Loading";
 import VerifyEmail from "../features/auth/verifyEmail/VerifyEmail";
 import ResetPasswordEmail from "../features/auth/resetPasswordEmail/ResetPasswordEmail";
+import AllBlogContainer from "../features/blog/allBlogContainer/AllBlogContainer";
+import CreateBlogContainer from "../features/blog/createBlogContainer/CreateBlogContainer";
+import BlogContainer from "../features/blog/blogContainer/BlogContainer";
 
 function Router() {
   const loading = useSelector(selectLoading);
@@ -20,6 +23,9 @@ function Router() {
           <Route path="/" element={<Home />} />
           <Route path="findacamp" element={<FindACamp />} />
           <Route path="camp/:campId" element={<Camp />} />
+          <Route path="blog/" element={<AllBlogContainer />} />
+          <Route path="blog/:blogId" element={<BlogContainer />} />
+          <Route path="blog/create" element={<CreateBlogContainer />} />
         </Route>
         <Route path="/users/:userId/verify/:hashedToken" element={<VerifyEmail />} />
         <Route path="/users/:userId/reset-password/:hashedToken" element={<ResetPasswordEmail />} />

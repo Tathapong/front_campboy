@@ -80,3 +80,31 @@
 [class*="btn-disabled"]:disabled {
   cursor: not-allowed;
 }
+[class*="btn-follow"] {
+  min-width: 65px;
+  font-size: 0.625rem;
+  font-weight: bold;
+  color: black;
+  background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid black;
+  width: 65px;
+  height: 25px;
+}
+
+[class*="btn-follow"]:hover {
+  background-color: black;
+  color: #fff;
+}
+
+[class*="btn-following"] {
+  min-width: 65px;
+  font-size: 0.625rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000;
+  border-radius: 15px;
+  border: 1px solid black;
+  width: 65px;
+  height: 25px;
+}

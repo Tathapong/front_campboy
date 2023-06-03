@@ -11,6 +11,8 @@ import "./assets/css/main.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "react-toastify/dist/ReactToastify.css";
 
+// import "jodit/build/jodit.min.css";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>

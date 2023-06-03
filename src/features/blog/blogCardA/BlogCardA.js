@@ -22,10 +22,9 @@ function BlogCardA() {
           sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
           PageMaker including versions of Lorem Ipsum
         </div>
-        <hr />
         <div className="footer">
           <ProfileTitle name="john mayer" />
-          <IconText name="47 Likes" type="like" />
+          <IconText name="47 Likes" type="like-active" />
         </div>
       </div>
     </div>

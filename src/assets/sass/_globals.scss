@@ -68,12 +68,11 @@ a {
   z-index: -10;
 }
 
-.header-background {
+[class*="header-background"] {
   position: absolute;
   left: 0;
   top: 0;
   z-index: -10;
-  background-color: #414378;
   height: 90px;
   width: 100%;
 }

@@ -18,3 +18,15 @@ export const reviewSortItem = [
   { id: 3, name: "Highest rating", value: HIGHEST_RATING },
   { id: 4, name: "Lowest rating", value: LOWEST_RATING }
 ];
+
+export const DISCOVERY = "DISCOVERY";
+export const TOP_PICK = "TOP_PICK";
+export const FOLLOWING = "FOLLOWING";
+export const RECENTS = "RECENTS";
+
+export const tabMenuList = [
+  { id: 1, name: "Discovery", value: DISCOVERY },
+  { id: 2, name: "Top pick", value: TOP_PICK },
+  { id: 3, name: "Following", value: FOLLOWING },
+  { id: 4, name: "Recents", value: RECENTS }
+];

@@ -15,6 +15,20 @@
     }
   }
 
+  //+ BlogCardBGroup
+  .blog-card-b-group {
+    .content-group {
+      flex-direction: column-reverse;
+
+      .image-group {
+        max-height: none;
+        .image {
+          max-height: 200px;
+        }
+      }
+    }
+  }
+
   //+FilterCamp
   .filter-camp-group {
     .header {
@@ -100,7 +114,6 @@
     }
   }
 }
-
 @media only screen and (max-width: 992px) {
   //+CampRowCardList
   .camp-row-card-list-group {
@@ -146,11 +159,27 @@
       }
     }
   }
+  //+ AllBLogContainer
+  .all-blog-container {
+    display: block;
+
+    .blog-list-group {
+      padding-left: 0px;
+    }
+
+    .sidebar-follower {
+      display: none;
+    }
+  }
 }
 
 @media only screen and (max-width: 1200px) {
   //+CampColumnCard
   .camp-column-card-list-group {
     @include grid-auto(auto auto, auto auto);
+  }
+  //+ AllBLogContainer
+  .all-blog-container {
+    width: 91.66%;
   }
 }

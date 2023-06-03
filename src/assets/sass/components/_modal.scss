@@ -1,24 +1,18 @@
 .modal-group {
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  padding-block: 100px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 
-  .modal-header {
-    color: black;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-
   .modal-content {
     @include flex-column;
     @include border-radius-box-shadow;
     width: fit-content;
+    max-height: 100%;
     max-width: 83.33%;
 
     position: relative;
@@ -28,6 +22,17 @@
 
     animation-name: animatetop;
     animation-duration: 0.3s;
+
+    .modal-header {
+      color: black;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .modal-body {
+      overflow-y: auto;
+    }
 
     .fa-xmark {
       margin: 20px;

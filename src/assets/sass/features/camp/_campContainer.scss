@@ -4,6 +4,10 @@
   align-items: flex-start;
   margin-inline: auto;
 
+  .header-background-camp {
+    background-color: #414378;
+  }
+
   .location-share {
     @include flex-space-between-stretch;
     width: 100%;

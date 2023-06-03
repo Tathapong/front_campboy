@@ -1,0 +1,51 @@
+.blog-card-b-group {
+  @include flex-column;
+  gap: 10px;
+
+  @include border-radius-box-shadow(3px);
+  background-color: #eee;
+  padding: 10px;
+
+  .profile-date {
+    @include flex-space-between-center;
+
+    .date {
+      @include font-bold-space(0.05em);
+      font-size: 0.625rem;
+    }
+  }
+
+  .content-group {
+    @include flex-row;
+    gap: 10px;
+
+    .image-group {
+      min-width: 200px;
+      max-height: 150px;
+
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .info-group {
+      order: -1;
+      .title {
+        @include font-bold-space(0.05em);
+        @include ellipsis-multiline(2);
+        font-size: clamp(16px, 1.8vw, 20px);
+      }
+
+      .content {
+        @include ellipsis-multiline(7);
+        text-align: justify;
+        font-size: clamp(12px, 1.2vw, 14px);
+      }
+    }
+  }
+  .footer {
+    @include flex-space-between-center;
+  }
+}

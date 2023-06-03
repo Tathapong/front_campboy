@@ -101,7 +101,7 @@ function Camp() {
 
   return (
     <div className="camp-container col-8">
-      <div className="header-background" />
+      <div className="header-background-camp" />
       <Carousel list={imageList} />
 
       <div className="location-share">
