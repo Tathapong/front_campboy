@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const InputText = forwardRef(function InputText(props, ref) {
-  const { placeholder = "Enter input", type = "text", onChange, className = "", errorText } = props;
+  const { placeholder = "Enter input", type = "text", onChange, value, className = "", errorText } = props;
   return (
     <>
       <input
@@ -10,6 +10,7 @@ const InputText = forwardRef(function InputText(props, ref) {
         placeholder={placeholder}
         type={type}
         onChange={onChange}
+        value={value}
       ></input>
       {errorText ? <small className="text-error">{errorText}</small> : ""}
     </>

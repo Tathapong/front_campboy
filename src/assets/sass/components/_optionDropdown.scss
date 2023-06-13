@@ -1,0 +1,11 @@
+.option-dropdown {
+  @include flex-start-center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-block: 10px;
+}
+.option-dropdown:hover {
+  background-color: rgb(138, 151, 100);
+}

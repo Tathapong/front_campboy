@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 import { thunk_logout, selectMe } from "../../stores/myUserSlice";
 
 import Modal from "../../components/modal/Modal";
-import OptionDropdown from "./OptionDropdown";
 import ChangePasswordForm from "../../features/auth/changePassword/ChangePasswordForm";
 import Confirm from "../../components/confirm/Confirm";
+import OptionDropdown from "../../components/optionDropdown/OptionDropdown";
 
 function ProfileDropdown() {
   const dispatch = useDispatch();
@@ -57,6 +57,7 @@ function ProfileDropdown() {
         <img src={myUser.profileImage} alt="profile" className="profile-image"></img>
       </Link>
       <ul className={`profile-dropdown-content ${dropdown ? "d-flex" : "d-none"}`}>
+        <div className="profile-name">Hello! {myUser.firstName}</div>
         <OptionDropdown title="View profile">
           <i class="fa-solid fa-user"></i>
         </OptionDropdown>

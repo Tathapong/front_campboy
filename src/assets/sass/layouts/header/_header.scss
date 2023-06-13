@@ -22,6 +22,19 @@
       align-self: center;
       flex-grow: 0.2;
       justify-content: flex-end;
+
+      .profile-dropdown-group {
+        .profile-dropdown-content {
+          .profile-name {
+            background-color: sandybrown;
+            padding-left: 10px;
+            padding-block: 3px;
+            color: #285ed1;
+            font-weight: bold;
+            text-align: left;
+          }
+        }
+      }
     }
   }
 

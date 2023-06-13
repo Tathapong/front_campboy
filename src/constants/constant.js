@@ -4,6 +4,9 @@ export const HIGHEST_RATING = "HIGHEST_RATING";
 export const LOWEST_RATING = "LOWEST_RATING";
 export const TOP_REVIEW = "TOP_REVIEW";
 
+export const HIGHEST_LIKE = "HIGHEST_LIKE";
+export const LOWEST_LIKE = "LOWEST_LIKE";
+
 export const resultSortItem = [
   { id: 1, name: "Newest", value: NEWEST },
   { id: 2, name: "Oldest", value: OLDEST },
@@ -17,6 +20,13 @@ export const reviewSortItem = [
   { id: 2, name: "Oldest", value: OLDEST },
   { id: 3, name: "Highest rating", value: HIGHEST_RATING },
   { id: 4, name: "Lowest rating", value: LOWEST_RATING }
+];
+
+export const commentSortItem = [
+  { id: 1, name: "Newest", value: NEWEST },
+  { id: 2, name: "Oldest", value: OLDEST },
+  { id: 3, name: "Highest like", value: HIGHEST_LIKE },
+  { id: 4, name: "Lowest like", value: LOWEST_LIKE }
 ];
 
 export const DISCOVERY = "DISCOVERY";

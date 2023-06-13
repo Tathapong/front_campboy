@@ -1,12 +1,15 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { actions as loadingActions } from "./loadingSlice";
+import { actions as blogActions } from "./blogSlice";
 import * as blogService from "../api/blogApi";
 
 const blogsSlice = createSlice({
   name: "blogs",
   initialState: [],
   reducers: {
-    setBlogs: (state, action) => action.payload
+    setBlogs: (state, action) => action.payload,
+    addBlog: (state, action) => {},
+    updateBlog: (state, action) => {}
   }
 });
 
@@ -35,6 +38,20 @@ export const thunk_createBlog =
       if (getState().loading) dispatch(loadingActions.stopLoading());
     }
   };
+
+export const thunk_updateBlog = () => async (dispatch, getState) => {};
+
+export const thunk_deleteBlog = (blogId) => async (dispatch, getState) => {
+  try {
+    if (!getState().loading) dispatch(loadingActions.startLoading());
+    await blogService.deleteBlog(blogId);
+    await dispatch(blogActions.deleteBlog());
+  } catch (error) {
+    throw error;
+  } finally {
+    if (getState().loading) dispatch(loadingActions.stopLoading());
+  }
+};
 
 export const thunk_getAllBlog = () => async (dispatch, getState) => {
   try {

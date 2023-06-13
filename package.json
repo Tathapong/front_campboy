@@ -17,6 +17,7 @@
     "draft-js-import-html": "^1.4.1",
     "draftjs-to-html": "^0.9.1",
     "immutable": "^4.3.0",
+    "javascript-time-ago": "^2.5.9",
     "millify": "^6.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

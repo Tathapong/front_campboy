@@ -29,6 +29,13 @@
         font-weight: bold;
         letter-spacing: 0.05em;
       }
+      .since {
+        white-space: nowrap;
+        font-size: 0.6rem;
+        color: #757575;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+      }
 
       .about {
         @include ellipsis-multiline(2);

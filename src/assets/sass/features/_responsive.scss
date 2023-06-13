@@ -22,8 +22,30 @@
 
       .image-group {
         max-height: none;
+        width: auto;
         .image {
           max-height: 200px;
+        }
+      }
+    }
+  }
+
+  //+BlogContainer
+  .blog-container {
+    .main-group {
+      .header-group {
+        .action-group {
+          > .share-social-group {
+            display: none;
+          }
+
+          .blog-edit-dropdown-group {
+            .blog-edit-dropdown-content {
+              .option-dropdown-share {
+                display: flex;
+              }
+            }
+          }
         }
       }
     }
@@ -115,6 +137,30 @@
   }
 }
 @media only screen and (max-width: 992px) {
+  //+BlogContainer
+  .blog-container {
+    display: block;
+
+    .main-group {
+      .header-group {
+        .action-group {
+          .outdent {
+            display: block;
+          }
+        }
+      }
+    }
+    > .sidebar-group {
+      display: none;
+    }
+
+    .modal-sidebar {
+      .modal-content {
+        width: 480px;
+      }
+    }
+  }
+
   //+CampRowCardList
   .camp-row-card-list-group {
     width: 95%;
@@ -168,6 +214,15 @@
     }
 
     .sidebar-follower {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  //+BlogContainer
+  .blog-container {
+    .modal-sidebar {
       display: none;
     }
   }

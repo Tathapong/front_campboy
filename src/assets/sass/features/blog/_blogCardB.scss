@@ -17,9 +17,12 @@
 
   .content-group {
     @include flex-row;
+    justify-content: space-between;
+
     gap: 10px;
 
     .image-group {
+      width: 200px;
       min-width: 200px;
       max-height: 150px;
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { thunk_createBlog, thunk_uploadBlogImage } from "../../../stores/blogsSlice";
@@ -10,15 +10,27 @@ import Modal from "../../../components/modal/Modal";
 import Confirm from "../../../components/confirm/Confirm";
 
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, Modifier, SelectionState, ContentState } from "draft-js";
+import {
+  EditorState,
+  convertToRaw,
+  Modifier,
+  SelectionState,
+  ContentState,
+  convertFromHTML,
+  convertFromRaw,
+  DefaultDraftBlockRenderMap
+} from "draft-js";
 import { stateFromHTML } from "draft-js-import-html";
 import draftToHtml from "draftjs-to-html";
 
 import * as customValidator from "../../../validation/validation";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { Map } from "immutable";
 
-function DraftEditor() {
+function DraftEditor(props) {
+  const { initialTitle, initialContent } = props;
+
   const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
   const [title, setTitle] = useState("");
 
@@ -30,6 +42,7 @@ function DraftEditor() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const titleInputEl = useRef(null);
 
   const onChangeTitle = (ev) => setTitle((prev) => ev.target.value);
 
@@ -38,6 +51,75 @@ function DraftEditor() {
 
   const openModalConfirmCancel = () => setModalConfirmCancel(true);
   const closeModalConfirmCancel = () => setModalConfirmCancel(false);
+
+  useEffect(() => {
+    if (initialTitle) {
+      setTitle(initialTitle);
+      titleInputEl.current.value = initialTitle;
+    }
+
+    if (initialContent) {
+      const customBlockRenderMap = DefaultDraftBlockRenderMap.merge(
+        new Map({
+          test: {
+            element: "img",
+            wrapper: <figure className="test" />
+          }
+        })
+      );
+      // const initialContent =
+      //   '<div><figure><img src="https://res.cloudinary.com/duzw1g3u8/image/upload/v1686562246/Campboy/posts/16865622430415114484701.jpg"/></figure></div>';
+
+      function createBlock(element, children) {
+        // ตรวจสอบและปรับแต่ง Block Element ตามต้องการ
+        if (element.tagName === "CUSTOMBLOCK") {
+          return {
+            type: "custom-block",
+            data: {},
+            text: children[0].text,
+            children: []
+          };
+        }
+        // สร้าง Block Element ตามวิธีการปกติ
+        return {
+          type: element.tagName.toLowerCase(),
+          data: {},
+          text: "",
+          children: children
+        };
+      }
+
+      function createInlineStyle(element, children) {
+        // ตรวจสอบและปรับแต่ง Inline Style ตามต้องการ
+        if (element.tagName === "CUSTOMSTYLE") {
+          return {
+            type: "CUSTOM_STYLE",
+            data: {},
+            text: children[0].text,
+            children: []
+          };
+        }
+        // สร้าง Inline Style ตามวิธีการปกติ
+        return {
+          type: element.tagName.toLowerCase(),
+          data: {},
+          text: "",
+          children: children
+        };
+      }
+
+      const contentBlocks = convertFromHTML(initialContent);
+      // const contentBlocks = convertFromHTML(initialContent);
+      console.log(initialContent);
+      console.log(contentBlocks);
+
+      const contentState = ContentState.createFromBlockArray(contentBlocks.contentBlocks, contentBlocks.entityMap);
+      const rawContentState = convertToRaw(contentState);
+
+      const newEditorState = EditorState.createWithContent(convertFromRaw(rawContentState));
+      setEditorState(() => newEditorState);
+    }
+  }, [initialTitle, initialContent]);
 
   const handleOnChangeEditor = (newContent) => setEditorState(newContent);
 
@@ -85,10 +167,6 @@ function DraftEditor() {
     return featureImage;
   };
 
-  const handlePreviewButton = () => {
-    openModalPreview();
-  };
-
   const handlePublishButton = async () => {
     try {
       //+ Validation
@@ -121,12 +199,14 @@ function DraftEditor() {
     }
   };
 
+  const handlePreviewButton = () => openModalPreview();
   const handleCancelButton = () => openModalConfirmCancel();
   const handleConfirmCancel = () => navigate("/blog");
 
   // receive element and is wrapped in Custom Component
   function customBlockRenderFunc(contentBlock) {
     const type = contentBlock.getType();
+
     if (type === "atomic") {
       const entityKey = contentBlock.getEntityAt(0);
       const contentState = editorState.getCurrentContent();
@@ -140,9 +220,9 @@ function DraftEditor() {
           const { entity } = blockProps;
 
           return (
-            <div style={{ textAlign: entity.alignment }}>
+            <picture style={{ textAlign: entity.alignment }}>
               <img src={entity.src} alt="imageBlog" style={{ width: entity.width, height: entity.height }} />
-            </div>
+            </picture>
           );
         }
 
@@ -204,7 +284,7 @@ function DraftEditor() {
     <div className="draft-editor-group">
       <div className="title-group">
         <h4>Title</h4>
-        <InputText placeholder="Title" onChange={onChangeTitle} errorText={errorInput.title} />
+        <InputText ref={titleInputEl} placeholder="Title" onChange={onChangeTitle} errorText={errorInput.title} />
       </div>
 
       <div className="content-group">
@@ -216,7 +296,7 @@ function DraftEditor() {
           editorState={editorState}
           onEditorStateChange={handleOnChangeEditor}
           placeholder="Tell your story..."
-          customBlockRenderFunc={customBlockRenderFunc}
+          // customBlockRenderFunc={customBlockRenderFunc}
           handlePastedText={handlePastedText}
           toolbar={{
             image: {
@@ -238,6 +318,20 @@ function DraftEditor() {
         <Button name="Publish" onClick={handlePublishButton} />
         <Button name="Cancel" className="btn-cancel" onClick={handleCancelButton} />
       </div>
+
+      <Button
+        name="Test"
+        onClick={() => {
+          // editorState
+          //   .getCurrentContent()
+          //   .getBlocksAsArray()
+          //   .forEach((block) => {
+          //     console.log(block.getType());
+          //     console.log(block.getText());
+          //   });
+          console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+        }}
+      />
 
       <Modal header={title ? title : "<Title>"} isOpen={modalPreviewIsOpen} closeModal={closeModalPreview}>
         <div dangerouslySetInnerHTML={{ __html: draftToHtml(convertToRaw(editorState.getCurrentContent())) }}></div>

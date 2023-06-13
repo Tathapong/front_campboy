@@ -1,0 +1,38 @@
+.blog-edit-dropdown-group {
+  z-index: 1;
+  position: relative;
+
+  .blog-edit-dropdown-content {
+    position: absolute;
+    top: 140%;
+    right: 0%;
+    padding-block: 5px;
+    padding-inline: 10px;
+    margin: 0%;
+    list-style-type: none;
+
+    flex-direction: column;
+    border-radius: $borderRadius;
+    background-color: #ddd;
+
+    .option-dropdown {
+      color: #555;
+      font-size: 0.75rem;
+      padding: 5px;
+    }
+
+    .option-dropdown:hover {
+      background-color: #8dc4f0;
+    }
+
+    [class*="option-dropdown-share"] {
+      display: none;
+    }
+
+    .modal-share {
+      .share-social-group {
+        margin: 10px;
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ import millify from "millify";
 import avatar1 from "../../assets/images/avatar1.jpg";
 
 function ProfileTitle(props) {
-  const { profileImage = avatar1, name = "name", follower, about, onClickButton } = props;
+  const { profileImage = avatar1, name = "name", follower, about, since, onClickButton } = props;
 
   const [follow, setFollow] = useState(false);
 
@@ -23,6 +23,7 @@ function ProfileTitle(props) {
           <Link className="title">{name}</Link>
           {follower ? <span className="follower">{`${millify(follower)} Followers`}</span> : ""}
           {about ? <span className="about">{about}</span> : ""}
+          {since ? <span className="since">{since}</span> : ""}
         </div>
       </div>
 

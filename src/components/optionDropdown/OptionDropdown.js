@@ -1,7 +1,7 @@
 function OptionDropdown(props) {
-  const { children, title, onClick } = props;
+  const { children, title, onClick, className } = props;
   return (
-    <li onClick={onClick} className="option-dropdown">
+    <li onClick={onClick} className={`option-dropdown ${className}`}>
       {children}
       <span>{title}</span>
     </li>

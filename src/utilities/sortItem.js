@@ -1,4 +1,12 @@
-import { NEWEST, OLDEST, HIGHEST_RATING, LOWEST_RATING, TOP_REVIEW } from "../constants/constant";
+import {
+  NEWEST,
+  OLDEST,
+  HIGHEST_RATING,
+  LOWEST_RATING,
+  TOP_REVIEW,
+  HIGHEST_LIKE,
+  LOWEST_LIKE
+} from "../constants/constant";
 
 function orderByNewest(a, b) {
   if (a.createdAt > b.createdAt) return -1;
@@ -45,5 +53,16 @@ export function sortReview(sortItem) {
     else if (sortItem === OLDEST) return orderByOldest(a, b);
     else if (sortItem === HIGHEST_RATING) return orderByHighest(a.rating, b.rating, orderByNewest(a, b));
     else if (sortItem === LOWEST_RATING) return orderByLowest(a.rating, b.rating, orderByNewest(a, b));
+  };
+}
+
+export function sortComment(sortItem) {
+  return function (a, b) {
+    if (sortItem === NEWEST) return orderByNewest(a, b);
+    else if (sortItem === OLDEST) return orderByOldest(a, b);
+    else if (sortItem === HIGHEST_LIKE)
+      return orderByHighest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
+    else if (sortItem === LOWEST_LIKE)
+      return orderByLowest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
   };
 }
