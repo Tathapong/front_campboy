@@ -48,6 +48,13 @@
   .comment-input-form {
     flex-direction: column;
 
+    .textarea-count {
+      color: #bbb;
+      font-size: 0.625rem;
+      font-style: italic;
+      text-align: right;
+    }
+
     textarea {
       font-size: 0.75rem;
       resize: none;
@@ -55,12 +62,16 @@
       overflow-y: auto;
     }
 
-    small {
-      font-size: 0.625rem;
-      font-style: italic;
-      span {
-        color: #0d6efd;
-        cursor: pointer;
+    .small-group {
+      @include flex-space-between-center;
+
+      small {
+        font-size: 0.625rem;
+        font-style: italic;
+        span {
+          color: #0d6efd;
+          cursor: pointer;
+        }
       }
     }
   }

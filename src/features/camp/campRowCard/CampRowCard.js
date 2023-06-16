@@ -44,7 +44,7 @@ function CampRowCard(props) {
         </div>
 
         <div>
-          <StarRating type={rating} to="/findacamp" />
+          <StarRating type={rating} />
           <span className="rating-count">({reviewNo})</span>
         </div>
 

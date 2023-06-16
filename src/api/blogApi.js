@@ -3,6 +3,8 @@ import axios from "../config/axios";
 export const uploadImage = (formData) => axios.post("/blog/create/image-upload", formData);
 
 export const createBlog = (inputData) => axios.post("/blog/create/post", inputData);
+export const updateBlog = ({ title, rawContentState, featureImage, blogId }) =>
+  axios.put("/blog/" + blogId, { title, rawContentState, featureImage });
 export const deleteBlog = (blogId) => axios.delete("/blog/" + blogId);
 
 export const getAllBlog = () => axios.get("/blog");

@@ -7,6 +7,10 @@
     background-color: #8db3c3;
   }
 
+  .draft-editor-group {
+    grid-area: 1 / 1 / span 1 / span 2;
+  }
+
   .main-group {
     grid-area: 1 / 1 / span 1 / span 1;
 
@@ -58,7 +62,6 @@
 
     > .modal-content {
       animation-name: animateright;
-
       padding: 15px;
       border-radius: 0;
       float: right;
@@ -73,7 +76,7 @@
 
       > .modal-body {
         @include flex-column;
-        gap: 10px;
+        height: 100%;
       }
     }
   }
@@ -84,9 +87,6 @@
       max-width: 480px;
 
       > .modal-body {
-        height: 100%;
-        gap: 0px;
-
         .comment-form {
           @include flex-column;
           flex-shrink: 0;
@@ -104,6 +104,14 @@
             padding: 10px;
             font-size: 0.75rem;
           }
+
+          .small-text {
+            @include flex-space-between-center;
+            .textarea-count {
+              font-style: italic;
+              color: #bbb;
+            }
+          }
         }
 
         .select-box-group {
@@ -120,13 +128,10 @@
 
   .modal-sidebar {
     .modal-content {
-      height: 100vh;
-
       .modal-body {
-        height: 100%;
         overflow-y: hidden;
 
-        .sidebar-group {
+        .sidebar-blog-group {
           height: 100%;
 
           border-left: none;

@@ -5,7 +5,11 @@ import {
   LOWEST_RATING,
   TOP_REVIEW,
   HIGHEST_LIKE,
-  LOWEST_LIKE
+  LOWEST_LIKE,
+  RECENTS,
+  TOP_PICK,
+  FOLLOWING,
+  SAVE
 } from "../constants/constant";
 
 function orderByNewest(a, b) {
@@ -64,5 +68,19 @@ export function sortComment(sortItem) {
       return orderByHighest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
     else if (sortItem === LOWEST_LIKE)
       return orderByLowest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
+  };
+}
+
+export function sortBlog(sortItem) {
+  return function (a, b) {
+    if (sortItem === RECENTS) return orderByNewest(a, b);
+    else if (sortItem === TOP_PICK)
+      return orderByHighest(
+        a.BlogComments.length,
+        b.BlogComments.length,
+        orderByHighest(a.BlogLikes.length, b.BlogLikes.length, orderByNewest(a, b))
+      );
+    // else if (sortItem === LOWEST_LIKE)
+    //   return orderByLowest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
   };
 }

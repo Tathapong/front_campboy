@@ -12,6 +12,7 @@ import ResetPasswordEmail from "../features/auth/resetPasswordEmail/ResetPasswor
 import AllBlogContainer from "../features/blog/allBlogContainer/AllBlogContainer";
 import CreateBlogContainer from "../features/blog/createBlogContainer/CreateBlogContainer";
 import BlogContainer from "../features/blog/blogContainer/BlogContainer";
+import ProfileContainer from "../features/profile/profileContainer/ProfileContainer";
 
 function Router() {
   const loading = useSelector(selectLoading);
@@ -26,6 +27,7 @@ function Router() {
           <Route path="blog/" element={<AllBlogContainer />} />
           <Route path="blog/:blogId" element={<BlogContainer />} />
           <Route path="blog/create" element={<CreateBlogContainer />} />
+          <Route path="profile/:profileId" element={<ProfileContainer />} />
         </Route>
         <Route path="/users/:userId/verify/:hashedToken" element={<VerifyEmail />} />
         <Route path="/users/:userId/reset-password/:hashedToken" element={<ResetPasswordEmail />} />

@@ -7,11 +7,11 @@ import blogRecent3 from "../../../assets/images/blogRecent3.jpg";
 import blogRecent4 from "../../../assets/images/blogRecent4.jpg";
 import blogRecent5 from "../../../assets/images/blogRecent5.jpg";
 
-function Sidebar(props) {
+function SidebarBlog(props) {
   const { profile_name, profile_image, profile_about = " " } = props;
 
   return (
-    <div className="sidebar-group">
+    <div className="sidebar-blog-group">
       <ProfileTitle
         profileImage={profile_image}
         name={profile_name}
@@ -41,4 +41,4 @@ function Sidebar(props) {
   );
 }
 
-export default Sidebar;
+export default SidebarBlog;

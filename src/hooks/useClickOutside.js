@@ -9,8 +9,9 @@ export const useClickOutSide = (callback) => {
         callback();
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, [callback]);
   return dropdownEl;
 };

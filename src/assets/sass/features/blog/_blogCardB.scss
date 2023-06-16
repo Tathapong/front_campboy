@@ -50,5 +50,10 @@
   }
   .footer {
     @include flex-space-between-center;
+
+    .like-comment {
+      @include flex-row;
+      gap: 20px;
+    }
   }
 }

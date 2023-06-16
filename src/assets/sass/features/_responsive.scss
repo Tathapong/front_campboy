@@ -150,7 +150,7 @@
         }
       }
     }
-    > .sidebar-group {
+    > .sidebar-blog-group {
       display: none;
     }
 
@@ -214,6 +214,22 @@
     }
 
     .sidebar-follower {
+      display: none;
+    }
+  }
+
+  //+ ProfileContainer
+  .profile-container {
+    display: block;
+    .header-group {
+      .profile-name-group {
+        .outdent {
+          display: block;
+        }
+      }
+    }
+
+    > .sidebar-profile-group {
       display: none;
     }
   }

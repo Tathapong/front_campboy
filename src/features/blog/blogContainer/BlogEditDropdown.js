@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 
+import Confirm from "../../../components/confirm/Confirm";
 import IconText from "../../../components/iconText/IconText";
-import OptionDropdown from "../../../components/optionDropdown/OptionDropdown";
 import Modal from "../../../components/modal/Modal";
+import OptionDropdown from "../../../components/optionDropdown/OptionDropdown";
 import ShareSocial from "../../../components/shareSocial/ShareSocial";
 
 import { useClickOutSide } from "../../../hooks/useClickOutside";
-import Confirm from "../../../components/confirm/Confirm";
 
 function BlogEditDropdown(props) {
   const { onClickDelete, onClickEdit } = props;
@@ -16,44 +16,62 @@ function BlogEditDropdown(props) {
   const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
   const [modalShareIsOpen, setModalShareIsOpen] = useState(false);
 
-  const closeDropdown = () => setDropdown(false);
-  const toggleDropdown = () => setDropdown((previous) => !previous);
-
-  const openModalEdit = () => setModalEditIsOpen(true);
-  const closeModalEdit = () => setModalEditIsOpen(false);
-
-  const openModalDelete = () => setModalDeleteIsOpen(true);
-  const closeModalDelete = () => setModalDeleteIsOpen(false);
-
-  const openModalShare = () => setModalShareIsOpen(true);
-  const closeModalIsShare = () => setModalShareIsOpen(false);
-
   const dropdownEl = useClickOutSide(useCallback(closeDropdown, []));
 
-  const handleEdit = () => {
+  function closeDropdown() {
+    setDropdown(false);
+  }
+
+  function toggleDropdown() {
+    setDropdown((previous) => !previous);
+  }
+
+  function openModalEdit() {
+    setModalEditIsOpen(true);
+  }
+  function closeModalEdit() {
+    setModalEditIsOpen(false);
+  }
+
+  function openModalDelete() {
+    setModalDeleteIsOpen(true);
+  }
+  function closeModalDelete() {
+    setModalDeleteIsOpen(false);
+  }
+
+  function openModalShare() {
+    setModalShareIsOpen(true);
+  }
+
+  function closeModalIsShare() {
+    setModalShareIsOpen(false);
+  }
+
+  function handleClickEdit() {
     closeDropdown();
     openModalEdit();
-  };
+  }
 
-  const handleDelete = () => {
+  function handleClickDelete() {
     closeDropdown();
     openModalDelete();
-  };
+  }
 
-  const handleConfirmEdit = async () => {
+  async function handleClickConfirmEdit() {
     closeModalEdit();
     await onClickEdit();
-  };
+  }
 
   return (
     <div className="blog-edit-dropdown-group" ref={dropdownEl}>
       <IconText type="vertical-dot" onClick={toggleDropdown} />
       <ul className={`blog-edit-dropdown-content ${dropdown ? "d-flex" : "d-none"} `}>
-        <OptionDropdown title="Edit" onClick={handleEdit}>
+        <OptionDropdown title="Edit" onClick={handleClickEdit}>
           <i class="fa-solid fa-pen"></i>
         </OptionDropdown>
 
-        <OptionDropdown title="Delete" onClick={handleDelete}>
+        <OptionDropdown title="Delete" onClick={handleClickDelete}>
           <i class="fa-solid fa-trash"></i>
         </OptionDropdown>
         <OptionDropdown title="Share" className="option-dropdown-share" onClick={openModalShare}>
@@ -63,7 +81,7 @@ function BlogEditDropdown(props) {
 
       <Modal header="Change blog content" isOpen={modalEditIsOpen} closeModal={closeModalEdit}>
         <Confirm
-          onConfirm={handleConfirmEdit}
+          onConfirm={handleClickConfirmEdit}
           onCancel={closeModalEdit}
           text="Are you sure, you want to change the content ?"
         />

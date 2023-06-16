@@ -5,29 +5,24 @@ import { useNavigate } from "react-router-dom";
 import { selectMe } from "../../../stores/myUserSlice";
 import { selectBlogs, thunk_getAllBlog } from "../../../stores/blogsSlice";
 
-import BlogCardB from "../blogCardB/BlogCardB";
-import NavbarTab from "../../../components/navbarTab/NavbarTab";
 import Button from "../../../components/button/Button";
-import SidebarFollower from "../../../components/sidebarFollower/SidebarFollower";
 import FollowerList from "../../../components/followerList/FollowerList";
 import Modal from "../../../components/modal/Modal";
+import NavbarTab from "../../../components/navbarTab/NavbarTab";
+import SidebarFollower from "../../../components/sidebarFollower/SidebarFollower";
+import BlogCardB from "../blogCardB/BlogCardB";
 
 import { tabMenuList } from "../../../constants/constant";
 
 function AllBlogContainer() {
-  const navigate = useNavigate();
   const [tabItem, setTabItem] = useState("");
   const [modalWhoToFollowerIsOpen, setModalWhoToFollowerIsOpen] = useState(false);
   const [modalTopWriterIsOpen, setModalTopWriterIsOpen] = useState(false);
 
-  const myUser = useSelector(selectMe);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const openModalWhoToFollower = () => setModalWhoToFollowerIsOpen(true);
-  const closeModalWhoToFollower = () => setModalWhoToFollowerIsOpen(false);
-
-  const openModalTopWriter = () => setModalTopWriterIsOpen(true);
-  const closeModalTopWriter = () => setModalTopWriterIsOpen(false);
+  const myUser = useSelector(selectMe);
+  const blogs = useSelector((state) => selectBlogs(state, tabItem));
 
   useEffect(() => {
     const fetch = async () => {
@@ -38,9 +33,21 @@ function AllBlogContainer() {
       }
     };
     fetch();
-  }, []);
+  }, [dispatch, myUser]);
 
-  const blogs = useSelector(selectBlogs);
+  function openModalWhoToFollower() {
+    setModalWhoToFollowerIsOpen(true);
+  }
+  function closeModalWhoToFollower() {
+    setModalWhoToFollowerIsOpen(false);
+  }
+
+  function openModalTopWriter() {
+    setModalTopWriterIsOpen(true);
+  }
+  function closeModalTopWriter() {
+    setModalTopWriterIsOpen(false);
+  }
 
   return (
     <div className="all-blog-container col-8">
@@ -53,7 +60,7 @@ function AllBlogContainer() {
 
       <div className="blog-list-group">
         {blogs.map((blog) => (
-          <BlogCardB blog={blog} />
+          <BlogCardB blog={blog} key={blog.id} />
         ))}
       </div>
       <div className="sidebar-follower">

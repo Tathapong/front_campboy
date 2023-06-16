@@ -49,7 +49,7 @@
 @import "./features/blog/createBlogContainer";
 @import "./features/blog/draftEditor";
 @import "./features/blog/morePost";
-@import "./features/blog/sidebar";
+@import "./features/blog/sidebarBlog";
 
 @import "./features/camp/campColumnCard";
 @import "./features/camp/campColumnCardList";
@@ -61,6 +61,9 @@
 @import "./features/camp/recentReviewCardList";
 @import "./features/camp/searchRandomCamp";
 @import "./features/camp/writeAReview";
+
+@import "./features/profile/profileContainer";
+@import "./features/profile/sidebarProfile";
 
 @import "./features/findACamp/findACampContainer";
 @import "./features/findACamp/filterCamp";

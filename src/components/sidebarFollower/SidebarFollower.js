@@ -11,7 +11,7 @@ function SidebarFollower(props) {
         <ProfileTitle name="Oliver Bee" follower="10400" onClickButton={{}} />
         <ProfileTitle name="Nack Nio" follower="5900" onClickButton={{}} />
         <ProfileTitle name="Paula Teller" follower="58800" onClickButton={{}} />
-        <ProfileTitle name="Eva" follower="44400" onClickButton={{}} />
+        <ProfileTitle name="FranMorelandJohnssdfsdfsdfsdfsdfsdfsdfsdf" follower="44400" onClickButton={{}} />
       </div>
       <Link className="suggestions" onClick={onClickMore}>
         See more suggestions

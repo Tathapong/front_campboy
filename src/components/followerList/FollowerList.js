@@ -44,7 +44,7 @@ function FollowerList(props) {
         "I talk about time management🕒 and trends to help web developers level up their career & boost earnings! 🌐📈| Web dev pro w/23+ yrs exp. https://vinodsharma.com"
     },
     {
-      name: "FranMorelandJohns",
+      name: "FranMorelandJohnssdfsdfsdfsdfsdfsdfsdfsdf",
       about:
         "Lifelong newspaper & magazine writer, author, blogger at franjohns.net, agitator for justice, kindness & interfaith understanding."
     }

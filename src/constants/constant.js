@@ -29,14 +29,14 @@ export const commentSortItem = [
   { id: 4, name: "Lowest like", value: LOWEST_LIKE }
 ];
 
-export const DISCOVERY = "DISCOVERY";
+export const RECENTS = "RECENTS";
 export const TOP_PICK = "TOP_PICK";
 export const FOLLOWING = "FOLLOWING";
-export const RECENTS = "RECENTS";
+export const SAVE = "SAVE";
 
 export const tabMenuList = [
-  { id: 1, name: "Discovery", value: DISCOVERY },
+  { id: 1, name: "Recents", value: RECENTS },
   { id: 2, name: "Top pick", value: TOP_PICK },
   { id: 3, name: "Following", value: FOLLOWING },
-  { id: 4, name: "Recents", value: RECENTS }
+  { id: 4, name: "Save", value: SAVE }
 ];

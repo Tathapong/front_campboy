@@ -43,6 +43,7 @@ export const selectProvince = (state) =>
   state.camp.Province
     ? state.camp.Province.name[0].toUpperCase() + state.camp.Province.name.slice(1).toLowerCase()
     : "";
+
 export const selectCampName = (state) => state.camp.name ?? "";
 export const selectOverview = (state) => state.camp.overview ?? "";
 export const selectLocation = (state) => ({

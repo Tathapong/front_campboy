@@ -1,21 +1,19 @@
-.sidebar-group {
-  grid-area: 1 / 2 / span 1 / span 1;
+.sidebar-profile-group {
   @include flex-column;
+  gap: 30px;
+
   border-left: 1px solid #a9a9a9;
   padding-left: 15px;
 
-  .profile-title-group {
+  > .profile-title-group {
     @include flex-column;
     align-items: flex-start;
     gap: 0px;
 
-    padding-bottom: 15px;
-    border-bottom: 1px solid #c7c7c7;
-
     .image-info {
       @include flex-column;
-      gap: 10px;
       align-items: flex-start;
+      gap: 10px;
 
       .image {
         display: block;
@@ -30,22 +28,6 @@
           -webkit-line-clamp: inherit;
         }
       }
-    }
-  }
-
-  .blog-more-group {
-    > .title {
-      margin-block: 15px;
-      @include font-bold-space(0.05em);
-
-      .name {
-        color: #7b7b7b;
-      }
-    }
-
-    .blog-list {
-      @include flex-column;
-      gap: 5px;
     }
   }
 }

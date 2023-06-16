@@ -1,4 +1,6 @@
 .draft-editor-group {
+  max-width: 1080px;
+  margin-inline: auto;
   .wrapper {
     padding: 5px;
     border: 1px solid #cacaca;
@@ -37,6 +39,14 @@
       color: #aaa;
       font-size: 1.1rem;
       letter-spacing: 0.05em;
+    }
+  }
+
+  .modal-group {
+    .modal-content {
+      max-width: 1080px;
+      .modal-body {
+      }
     }
   }
 }

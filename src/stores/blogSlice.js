@@ -8,6 +8,11 @@ const blogSlice = createSlice({
   initialState: {},
   reducers: {
     setBlog: (state, action) => action.payload,
+    updateBlog: (state, action) => {
+      const blog = action.payload;
+      state.title = blog.title;
+      state.content = blog.content;
+    },
     deleteBlog: (state, action) => ({}),
     addLike: (state, action) => {
       state.BlogLikes?.push(action.payload);
@@ -41,12 +46,8 @@ const blogSlice = createSlice({
       state.BlogComments = state.BlogComments.filter((item) => item.id !== commentId);
     },
     updateComment: (state, action) => {
-      const { commentId, newTitle } = action.payload;
-      const idx = state.BlogComments.findIndex((item) => item.id === commentId);
-
-      if (idx !== -1) {
-        state.BlogComments[idx].contentText = newTitle;
-      }
+      const { idx, newTitle } = action.payload;
+      state.BlogComments[idx].contentText = newTitle;
     }
   }
 });
@@ -64,6 +65,59 @@ export const thunk_getBlogById = (blogId) => async (dispatch, getState) => {
   }
 };
 
+export const thunk_uploadImage = (formData) => async (dispatch, getState) => {
+  try {
+    if (!getState().loading) dispatch(loadingActions.startLoading());
+    const res = await blogService.uploadImage(formData);
+    const { public_id } = res.data;
+    return public_id;
+  } catch (error) {
+    throw error;
+  } finally {
+    if (getState().loading) dispatch(loadingActions.stopLoading());
+  }
+};
+
+export const thunk_createBlog =
+  ({ title, rawContentState, featureImage }) =>
+  async (dispatch, getState) => {
+    try {
+      if (!getState().loading) dispatch(loadingActions.startLoading());
+      await blogService.createBlog({ title, rawContentState, featureImage });
+    } catch (error) {
+      throw error;
+    } finally {
+      if (getState().loading) dispatch(loadingActions.stopLoading());
+    }
+  };
+
+export const thunk_updateBlog =
+  ({ title, rawContentState, featureImage, blogId }) =>
+  async (dispatch, getState) => {
+    try {
+      if (!getState().loading) dispatch(loadingActions.startLoading());
+      const res = await blogService.updateBlog({ title, rawContentState, featureImage, blogId });
+      const { blog } = res.data;
+      dispatch(actions.updateBlog(blog));
+    } catch (error) {
+      throw error;
+    } finally {
+      if (getState().loading) dispatch(loadingActions.stopLoading());
+    }
+  };
+
+export const thunk_deleteBlog = (blogId) => async (dispatch, getState) => {
+  try {
+    if (!getState().loading) dispatch(loadingActions.startLoading());
+    await blogService.deleteBlog(blogId);
+    dispatch(actions.deleteBlog());
+  } catch (error) {
+    throw error;
+  } finally {
+    if (getState().loading) dispatch(loadingActions.stopLoading());
+  }
+};
+
 export const thunk_toggleSave = (blogId) => async (dispatch, getState) => {
   try {
     const res = await blogService.toggleSave(blogId);
@@ -72,7 +126,7 @@ export const thunk_toggleSave = (blogId) => async (dispatch, getState) => {
     if (save) dispatch(actions.addSave(save));
     else dispatch(actions.deleteSave());
   } catch (error) {
-    throw error.response.data;
+    throw error;
   }
 };
 
@@ -85,9 +139,9 @@ export const thunk_toggleLike = (blogId) => async (dispatch, getState) => {
     const idx = getState().blog.BlogLikes.findIndex((item) => item.userId === myUserId);
 
     if (like && idx === -1) dispatch(actions.addLike(like));
-    else if (!like && idx !== -1) dispatch(actions.deleteLike({ like, idx }));
+    else if (!like && idx !== -1) dispatch(actions.deleteLike({ idx }));
   } catch (error) {
-    throw error.response.data;
+    throw error;
   }
 };
 
@@ -107,7 +161,7 @@ export const thunk_commentToggleLike = (commentId) => async (dispatch, getState)
     if (commentLike && idx === -1) dispatch(actions.addCommentLike({ comment_idx, commentLike }));
     else if (!commentLike && idx !== -1) dispatch(actions.deleteCommentLike({ idx, comment_idx }));
   } catch (error) {
-    throw error.response.data;
+    throw error;
   }
 };
 
@@ -120,7 +174,7 @@ export const thunk_createComment =
       const { comment } = res.data;
       dispatch(actions.addComment(comment));
     } catch (error) {
-      throw error.response.data;
+      throw error;
     } finally {
       if (getState().loading) dispatch(loadingActions.stopLoading());
     }
@@ -132,9 +186,9 @@ export const thunk_deleteComment =
     try {
       if (!getState().loading) dispatch(loadingActions.startLoading());
       await blogService.deleteComment({ blogId, commentId });
-      await dispatch(actions.deleteComment({ commentId }));
+      dispatch(actions.deleteComment({ commentId }));
     } catch (error) {
-      throw error.response.data;
+      throw error;
     } finally {
       if (getState().loading) dispatch(loadingActions.stopLoading());
     }
@@ -145,11 +199,11 @@ export const thunk_updateComment =
   async (dispatch, getState) => {
     try {
       const res = await blogService.updateComment({ blogId, commentId, title });
-
       const newTitle = res.data.comment;
-      await dispatch(actions.updateComment({ commentId, newTitle }));
+      const idx = getState().blog.BlogComments.findIndex((item) => item.id === commentId);
+      if (idx !== -1) dispatch(actions.updateComment({ idx, newTitle }));
     } catch (error) {
-      throw error.response.data;
+      throw error;
     }
   };
 
@@ -162,7 +216,7 @@ export const selectBlog = (state) => ({
     ? new Date(state.blog.createdAt).toDateString().slice(4)
     : new Date().toDateString().slice(4),
   blogTitle: state.blog.title ?? "Blog Title",
-  blogContent: state.blog.content ?? undefined,
+  blogRawContent: state.blog.content ? JSON.parse(state.blog.content) : undefined,
   blogLikeCount: state.blog.BlogLikes ? state.blog.BlogLikes.length : 0,
   commentCount: state.blog.BlogComments ? state.blog.BlogComments.length : 0,
   isSave: state.blog.BlogSaves ? state.blog.BlogSaves[0]?.userId === state.myUser?.id : false,

@@ -1,34 +1,51 @@
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { selectMe } from "../../../stores/myUserSlice";
+import { thunk_toggleSave, thunk_toggleLike } from "../../../stores/blogsSlice";
+import { convertFromRaw } from "draft-js";
+
 import IconText from "../../../components/iconText/IconText";
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
-import Immutable from "immutable";
-import { convertFromHTML, ContentState, DefaultDraftBlockRenderMap } from "draft-js";
 
 function BlogCardB(props) {
   const { blog } = props;
+  const dispatch = useDispatch();
+  const myUser = useSelector(selectMe);
 
   const date = new Date(blog.createdAt).toUTCString().slice(5, 16);
 
-  const blockRenderMap = Immutable.Map({
-    unstyled: {
-      element: "div",
-      aliasedElements: ["img"]
+  const rawContentState = JSON.parse(blog.content);
+  const contentState = convertFromRaw(rawContentState);
+  const contentText = contentState.getPlainText();
+
+  const blogId = blog.id;
+  const profileId = blog.userId;
+  const profileName = `${blog.User.firstName} ${blog.User.lastName}`;
+  const profileImage = blog.User.profileImage;
+  const blogLikeCount = blog.BlogLikes.length;
+  const blogCommentCount = blog.BlogComments.length;
+  const isLike = Boolean(blog.BlogLikes?.filter((item) => item.userId === myUser?.id).length);
+  const isSave = Boolean(blog.BlogSaves?.filter((item) => item.userId === myUser?.id).length);
+
+  async function handleClickSaveBlog() {
+    try {
+      await dispatch(thunk_toggleSave(blogId));
+    } catch (error) {
+      console.log(error);
     }
-  });
-
-  const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
-  const blocksFromHTML = convertFromHTML(blog.content, undefined, extendedBlockRenderMap);
-  const contentState = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap);
-  const content = contentState.getPlainText();
-
-  function toggleLike() {}
-
-  function toggleSavePost() {}
+  }
+  async function handleClickLikeBlog() {
+    try {
+      await dispatch(thunk_toggleLike(blogId));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="blog-card-b-group">
       <div className="profile-date">
-        <ProfileTitle name="John Mayer" />
+        <ProfileTitle name={profileName} profileImage={profileImage} />
         <div className="date">{date}</div>
       </div>
 
@@ -44,12 +61,25 @@ function BlogCardB(props) {
           <Link className="title" to={`${blog.id}`}>
             {blog.title}
           </Link>
-          <div className="content">{content}</div>
+          <div className="content">{contentText}</div>
         </div>
       </div>
       <div className="footer">
-        <IconText name="47 Likes" type="like" />
-        <IconText type="save-post" />
+        <div className="like-comment">
+          <IconText
+            name={`${blogLikeCount} Likes`}
+            type="like"
+            onClick={handleClickLikeBlog}
+            isActive={isLike}
+            unauthorized={!Boolean(myUser)}
+          />
+          <IconText name={`${blogCommentCount} Comments`} type="comment" />
+        </div>
+        {myUser ? (
+          <IconText type="save-post" onClick={handleClickSaveBlog} isActive={isSave} unauthorized={!Boolean(myUser)} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

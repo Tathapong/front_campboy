@@ -8,13 +8,14 @@ import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
 import OptionDropdown from "../../../components/optionDropdown/OptionDropdown";
 import Modal from "../../../components/modal/Modal";
 import Confirm from "../../../components/confirm/Confirm";
+import Button from "../../../components/button/Button";
 
 import { thunk_commentToggleLike, thunk_deleteComment, thunk_updateComment } from "../../../stores/blogSlice";
 import { selectMe } from "../../../stores/myUserSlice";
 
 import { timeSince } from "../../../utilities/dateFormat";
 import { useClickOutSide } from "../../../hooks/useClickOutside";
-import Button from "../../../components/button/Button";
+import * as customValidator from "../../../validation/validation";
 
 function BlogCommentCard(props) {
   const { comment } = props;
@@ -23,15 +24,10 @@ function BlogCommentCard(props) {
   const dispatch = useDispatch();
 
   const [dropdown, setDropdown] = useState(false);
-  const [commentInput, setCommentInput] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [commentInput, setCommentInput] = useState("");
+  const [errorInput, setErrorInput] = useState("");
   const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
-
-  const closeDropdown = () => setDropdown(false);
-  const toggleDropdown = () => setDropdown((previous) => !previous);
-
-  const openModalDelete = () => setModalDeleteIsOpen(true);
-  const closeModalDelete = () => setModalDeleteIsOpen(false);
 
   const dropdownEl = useClickOutSide(useCallback(closeDropdown, []));
   const commentInputEl = useRef(null);
@@ -40,63 +36,98 @@ function BlogCommentCard(props) {
   const myUser = useSelector(selectMe);
 
   const { blogId } = params;
-  const comment_id = comment.id;
+  const commentId = comment.id;
   const commentUserId = comment.userId;
+  const commentJSON = comment.contentText;
+  const commentLikeCount = comment.CommentLikes.length;
+  const isCommentLike = comment.CommentLikes.filter((item) => item.userId === myUser?.id).length;
   const date = timeSince(comment.createdAt);
-  const profile_name = `${comment.User.firstName} ${comment.User.lastName}`;
-  const profile_image = comment.User.profileImage;
-  const text = comment.contentText;
-  const comment_like_count = comment.CommentLikes.length;
-  const is_comment_like = comment.CommentLikes.filter((item) => item.userId === myUser?.id).length;
+  const profileName = `${comment.User.firstName} ${comment.User.lastName}`;
+  const profileImage = comment.User.profileImage;
 
   useEffect(() => {
-    setCommentInput(text);
-  }, [text]);
+    setCommentInput(JSON.parse(commentJSON));
+  }, [commentJSON]);
 
-  const handleCommentLike = async () => {
+  function closeDropdown() {
+    setDropdown(false);
+  }
+  function toggleDropdown() {
+    setDropdown((previous) => !previous);
+  }
+
+  function openModalDelete() {
+    setModalDeleteIsOpen(true);
+  }
+  function closeModalDelete() {
+    setModalDeleteIsOpen(false);
+  }
+
+  function onChangeCommentInput(ev) {
+    setCommentInput(ev.target.value);
+  }
+
+  async function handleClickCommentLike() {
     try {
-      await dispatch(thunk_commentToggleLike(comment_id));
+      await dispatch(thunk_commentToggleLike(commentId));
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
-  const handleClickEditButton = () => {
+  function handleClickEditButton() {
     commentInputEl.current.style.height = commentEl.current.scrollHeight + 10 + "px";
     setIsEditing(true);
     closeDropdown();
-  };
+  }
 
-  const handleClickDeleteButton = () => {
+  function handleClickDeleteButton() {
     openModalDelete();
     closeDropdown();
-  };
+  }
 
-  const handleClickCancelEditSpan = () => {
+  function handleClickCancelEditSpan() {
     setIsEditing(false);
-    setCommentInput(text);
-  };
+    setCommentInput(JSON.parse(commentJSON));
+    setErrorInput("");
+  }
 
-  const handleKeyUpCancelEdit = (ev) => {
+  function handleKeyUpCancelEdit(ev) {
     if (ev.keyCode === 27) {
       handleClickCancelEditSpan();
     }
-  };
+  }
 
-  const handleClickSaveEditButton = async () => {
+  async function handleClickSaveEditButton(ev) {
     try {
-      await dispatch(thunk_updateComment({ blogId, commentId: comment_id, title: commentInput }));
-      setIsEditing(false);
-      toast.success("Update completed");
+      ev.preventDefault();
+      const title = JSON.stringify(commentInput.replace(/\n+/g, "\n"));
+
+      //+ Validation
+      let error = "";
+      setErrorInput((prev) => "");
+
+      //- Check Title
+      if (!customValidator.isNotEmpty(commentInput)) error = "Comment is required";
+      if (comment.length > 2000) error = "Comment character length is more over 2000!";
+
+      setErrorInput(error);
+      const isError = error;
+
+      if (!isError) {
+        await dispatch(thunk_updateComment({ blogId, commentId: commentId, title }));
+        setIsEditing(false);
+        toast.success("Update completed");
+      }
     } catch (error) {
       console.log(error);
       toast.error(error);
     }
-  };
+  }
 
-  const handleClickConfirmDelete = async () => {
+  async function handleClickConfirmDelete() {
     try {
-      await dispatch(thunk_deleteComment({ blogId, commentId: comment_id }));
+      await dispatch(thunk_deleteComment({ blogId, commentId: commentId }));
       toast.success("Delete completed");
     } catch (error) {
       console.log(error);
@@ -104,22 +135,20 @@ function BlogCommentCard(props) {
     } finally {
       closeModalDelete();
     }
-  };
-
-  const onChangeCommentInput = (ev) => setCommentInput(ev.target.value);
+  }
 
   return (
     <div className="blog-comment-card-group">
       <div className="header-group">
-        <ProfileTitle profileImage={profile_image} name={profile_name} since={date} />
+        <ProfileTitle profileImage={profileImage} name={profileName} since={date} />
 
         {commentUserId === myUser?.id ? (
           isEditing ? (
             <Button name="Save" onClick={handleClickSaveEditButton} />
           ) : (
-            <div>
+            <div ref={dropdownEl}>
               <IconText type="vertical-dot" onClick={toggleDropdown} />
-              <ul className={`comment-edit-dropdown-content ${dropdown ? "d-flex" : "d-none"}`} ref={dropdownEl}>
+              <ul className={`comment-edit-dropdown-content ${dropdown ? "d-flex" : "d-none"}`}>
                 <OptionDropdown title="Edit" onClick={handleClickEditButton}>
                   <i class="fa-solid fa-pen"></i>
                 </OptionDropdown>
@@ -143,25 +172,32 @@ function BlogCommentCard(props) {
       </Modal>
 
       <form className={`comment-input-form ${isEditing ? "d-flex" : "d-none"}`}>
+        <small className="textarea-count">{commentInput.length}/2000 Characters</small>
         <textarea
+          className={`textarea ${errorInput ? "input-error" : ""}`}
           value={commentInput}
           onChange={onChangeCommentInput}
           onKeyUp={handleKeyUpCancelEdit}
           ref={commentInputEl}
         ></textarea>
-        <small>
-          Please ESC or click <span onClick={handleClickCancelEditSpan}>cancel</span>
-        </small>
+        <div className="small-group">
+          <small>
+            Please ESC or click <span onClick={handleClickCancelEditSpan}>cancel</span>
+          </small>
+          {errorInput ? <small className="text-error">{errorInput}</small> : ""}
+        </div>
       </form>
 
-      <div className={`comment ${isEditing ? "d-none" : "d-block"}`} ref={commentEl}>
-        {text}
-      </div>
+      <div
+        className={`comment ${isEditing ? "d-none" : "d-block"}`}
+        ref={commentEl}
+        dangerouslySetInnerHTML={{ __html: JSON.parse(commentJSON).replace(/\n/g, "<br>") }}
+      ></div>
       <IconText
         type="like"
-        name={`${comment_like_count} Likes`}
-        onClick={handleCommentLike}
-        isActive={is_comment_like}
+        name={`${commentLikeCount} Likes`}
+        onClick={handleClickCommentLike}
+        isActive={isCommentLike}
         unauthorized={!Boolean(myUser)}
       />
     </div>
