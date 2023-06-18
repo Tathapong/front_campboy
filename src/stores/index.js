@@ -5,6 +5,7 @@ import loadingReducer from "./loadingSlice";
 import myUserReducer from "./myUserSlice";
 import blogsReducer from "./blogsSlice";
 import blogReducer from "./blogSlice";
+import profielReducer from "./profileSlice";
 
 export default configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
     loading: loadingReducer,
     myUser: myUserReducer,
     blogs: blogsReducer,
-    blog: blogReducer
+    blog: blogReducer,
+    profile: profielReducer
   }
 });

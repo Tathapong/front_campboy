@@ -8,7 +8,6 @@
   > .profile-title-group {
     @include flex-column;
     align-items: flex-start;
-    gap: 0px;
 
     .image-info {
       @include flex-column;

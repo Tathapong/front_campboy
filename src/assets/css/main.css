@@ -751,6 +751,12 @@ figure {
   letter-spacing: 0.05em;
   max-width: 500px;
 }
+.profile-title-group .btn-edit-profile {
+  align-self: flex-start;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+}
 
 .select-box-group {
   border-radius: 5px;
@@ -2103,7 +2109,6 @@ figure {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0px;
 }
 .sidebar-profile-group > .profile-title-group .image-info {
   display: flex;
@@ -2121,6 +2126,84 @@ figure {
 .sidebar-profile-group > .profile-title-group .image-info .profile-info .about {
   margin-block: 10px;
   -webkit-line-clamp: inherit;
+}
+
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.edit-profile-form .title {
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 1.25rem;
+}
+.edit-profile-form .profile-image-group {
+  align-self: center;
+  width: 150px;
+  height: 150px;
+}
+.edit-profile-form .profile-image-group .profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.edit-profile-form .cover-image-group .cover-image {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+}
+.edit-profile-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+.edit-profile-form .form-group [class*=-input-group] {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.edit-profile-form .form-group .input-label {
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+  color: #757575;
+  align-self: center;
+  width: 80px;
+}
+.edit-profile-form .form-group .name-input-group .input-text, .edit-profile-form .form-group .name-input-group .input-text-icon-group .input-text-icon, .input-text-icon-group .edit-profile-form .form-group .name-input-group .input-text-icon {
+  background-color: #d0b9a0;
+}
+.edit-profile-form .form-group .about-input-group .textarea {
+  width: 100%;
+  height: 130px;
+  margin-block: 5px;
+  padding-block: 10px;
+  padding-inline: 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  overflow-y: hidden;
+  background-color: #d0b9a0;
+  resize: none;
+}
+.edit-profile-form .form-group .about-input-group .textarea:focus {
+  outline: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.edit-profile-form .form-group .about-input-group .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+.edit-profile-form .form-group .button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-self: center;
+  margin-top: 20px;
+}
+.edit-profile-form .form-group .button-group .btn {
+  width: 100px;
 }
 
 .find-a-camp-container {
@@ -2379,6 +2462,9 @@ figure {
 }
 @media only screen and (min-width: 992px) {
   .blog-container .modal-sidebar {
+    display: none;
+  }
+  .profile-container .modal-sidebar {
     display: none;
   }
 }

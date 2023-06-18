@@ -7,7 +7,17 @@ import millify from "millify";
 import avatar1 from "../../assets/images/avatar1.jpg";
 
 function ProfileTitle(props) {
-  const { profileImage = avatar1, name = "name", follower, about, since, onClickButton } = props;
+  const {
+    profileImage = avatar1,
+    name = "name",
+    follower,
+    about,
+    since,
+    to,
+    isMyUser,
+    onClickEditProfile,
+    onClickFollow
+  } = props;
 
   const [follow, setFollow] = useState(false);
 
@@ -20,14 +30,16 @@ function ProfileTitle(props) {
           <img src={profileImage} alt="profile" className="image" />
         </Link>
         <div className="profile-info">
-          <Link className="title">{name}</Link>
+          <Link className="title" to={to}>
+            {name}
+          </Link>
           {follower ? <span className="follower">{`${millify(follower)} Followers`}</span> : ""}
           {about ? <span className="about">{about}</span> : ""}
           {since ? <span className="since">{since}</span> : ""}
         </div>
       </div>
 
-      {onClickButton ? (
+      {onClickFollow ? (
         follow ? (
           <Button className="btn-following" onClick={toggleState}>
             Following
@@ -40,6 +52,8 @@ function ProfileTitle(props) {
       ) : (
         ""
       )}
+
+      {isMyUser ? <Button className="btn-edit-profile" name="Edit Profile" onClick={onClickEditProfile} /> : ""}
     </div>
   );
 }

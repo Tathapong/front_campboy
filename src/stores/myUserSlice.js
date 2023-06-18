@@ -22,8 +22,8 @@ export const thunk_getMe =
       isGetMe && dispatch(loadingActions.startLoading());
       const res = await authService.getMe();
       const { user } = res.data;
-      if (isGetMe) dispatch(actions.setMyUser(user));
-      else setTimeout(() => dispatch(actions.setMyUser(user)), 1);
+
+      dispatch(actions.setMyUser(user));
     } catch (error) {
       throw error;
     } finally {

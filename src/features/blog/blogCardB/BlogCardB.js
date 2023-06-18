@@ -8,7 +8,7 @@ import IconText from "../../../components/iconText/IconText";
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
 
 function BlogCardB(props) {
-  const { blog } = props;
+  const { blog, unProfile = false } = props;
   const dispatch = useDispatch();
   const myUser = useSelector(selectMe);
 
@@ -20,8 +20,8 @@ function BlogCardB(props) {
 
   const blogId = blog.id;
   const profileId = blog.userId;
-  const profileName = `${blog.User.firstName} ${blog.User.lastName}`;
-  const profileImage = blog.User.profileImage;
+  const profileName = unProfile ? "" : `${blog.User.firstName} ${blog.User.lastName}`;
+  const profileImage = unProfile ? "" : blog.User.profileImage;
   const blogLikeCount = blog.BlogLikes.length;
   const blogCommentCount = blog.BlogComments.length;
   const isLike = Boolean(blog.BlogLikes?.filter((item) => item.userId === myUser?.id).length);
@@ -44,10 +44,14 @@ function BlogCardB(props) {
 
   return (
     <div className="blog-card-b-group">
-      <div className="profile-date">
-        <ProfileTitle name={profileName} profileImage={profileImage} />
-        <div className="date">{date}</div>
-      </div>
+      {unProfile ? (
+        ""
+      ) : (
+        <div className="profile-date">
+          <ProfileTitle name={profileName} profileImage={profileImage} to={`/profile/${profileId}`} />
+          <div className="date">{date}</div>
+        </div>
+      )}
 
       <div className="content-group">
         {blog.featureImage ? (
@@ -58,7 +62,7 @@ function BlogCardB(props) {
           ""
         )}
         <div className="info-group">
-          <Link className="title" to={`${blog.id}`}>
+          <Link className="title" to={`/blog/${blog.id}`}>
             {blog.title}
           </Link>
           <div className="content">{contentText}</div>

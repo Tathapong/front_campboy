@@ -24,6 +24,7 @@ function App() {
       }
     };
     fetchMe();
+    setInitialState(false);
   }, [dispatch]);
 
   return (

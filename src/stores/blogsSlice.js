@@ -75,5 +75,12 @@ export const selectBlogs = createSelector([(state) => state.blogs, (state, sortI
   Array.from(blogs).sort(sortBlog(sortItem))
 );
 
+export const selectBlogsByProfileId = createSelector(
+  [(state) => state.blogs, (state, profileId) => profileId],
+  (blogs, profileId) => {
+    return blogs.filter((blog) => blog.userId === +profileId);
+  }
+);
+
 export default blogsSlice.reducer;
 export const actions = blogsSlice.actions;

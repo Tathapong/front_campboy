@@ -1,17 +1,28 @@
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectMe } from "../../../stores/myUserSlice";
+
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
 import SidebarFollower from "../../../components/sidebarFollower/SidebarFollower";
 
 function Sidebar(props) {
-  const { profile_name, profile_image, profile_about = " ", onClickMore } = props;
+  const { profile, onClickMore, onClickEditProfile } = props;
+
+  const params = useParams();
+  const profileId = +params.profileId;
+  const myUser = useSelector(selectMe);
 
   return (
     <div className="sidebar-profile-group">
       <ProfileTitle
-        profileImage={profile_image}
-        name={profile_name}
+        profileImage={profile?.profileImage}
+        name={profile?.profileName}
         follower="104685"
-        about={`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`}
+        about={profile.profileAbout}
         onClickButton={() => {}}
+        isMyUser={myUser?.id === profileId}
+        onClickEditProfile={onClickEditProfile}
       />
 
       <div className="sidebar-follower-list">
