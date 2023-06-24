@@ -1,5 +1,5 @@
 .blog-container {
-  @include grid-auto(4fr 1fr, auto);
+  @include grid-auto(75% 25%, auto);
   column-gap: 20px;
   margin-inline: auto;
 
@@ -16,6 +16,11 @@
 
     .header-group {
       @include flex-space-between-center;
+
+      .profile-title-group {
+        max-width: 50%;
+        overflow: hidden;
+      }
 
       .action-group {
         @include flex-space-between-center;
@@ -138,11 +143,16 @@
           padding-left: 0px;
 
           .blog-more-group {
+            @include flex-column;
             height: 100%;
             overflow: hidden;
 
+            > .title {
+              margin-block: 0px;
+              padding-block: 15px;
+            }
+
             .blog-list {
-              height: 100%;
               overflow-y: auto;
               .blog-recent-group {
                 .image-group {

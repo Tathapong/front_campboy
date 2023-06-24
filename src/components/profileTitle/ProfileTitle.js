@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Button from "../button/Button";
@@ -14,14 +13,12 @@ function ProfileTitle(props) {
     about,
     since,
     to,
-    isMyUser,
     onClickEditProfile,
-    onClickFollow
+    onClickFollowButton,
+    isMember = false,
+    isMyProfile = false,
+    isFollower = false
   } = props;
-
-  const [follow, setFollow] = useState(false);
-
-  const toggleState = () => setFollow((prev) => !prev);
 
   return (
     <div className="profile-title-group">
@@ -34,26 +31,28 @@ function ProfileTitle(props) {
             {name}
           </Link>
           {follower ? <span className="follower">{`${millify(follower)} Followers`}</span> : ""}
-          {about ? <span className="about">{about}</span> : ""}
+          {about ? (
+            <span className="about" dangerouslySetInnerHTML={{ __html: about.replace(/\n/g, "<br>") }}></span>
+          ) : (
+            ""
+          )}
           {since ? <span className="since">{since}</span> : ""}
         </div>
       </div>
 
-      {onClickFollow ? (
-        follow ? (
-          <Button className="btn-following" onClick={toggleState}>
-            Following
+      {isMember ? (
+        !isMyProfile ? (
+          <Button className={isFollower ? "btn-following" : "btn-follow"} onClick={onClickFollowButton}>
+            {isFollower ? "Following" : "Follow"}
           </Button>
         ) : (
-          <Button className="btn-follow" onClick={toggleState}>
-            Follow
-          </Button>
+          ""
         )
       ) : (
         ""
       )}
 
-      {isMyUser ? <Button className="btn-edit-profile" name="Edit Profile" onClick={onClickEditProfile} /> : ""}
+      {isMyProfile ? <Button className="btn-edit-profile" name="Edit Profile" onClick={onClickEditProfile} /> : ""}
     </div>
   );
 }

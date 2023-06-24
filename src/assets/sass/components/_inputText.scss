@@ -1,31 +1,42 @@
-.input-text {
+.input-text-group {
   width: 100%;
-  margin-block: 5px;
-  height: 50px;
-  padding-inline: 20px;
-  border: none;
-  border-radius: $borderRadius;
-  background-color: #afafaf;
-  color: white;
-  outline: none;
-  font-size: 1rem;
-}
+  .input-text {
+    width: 100%;
+    margin-block: 5px;
+    height: 50px;
+    padding-inline: 20px;
+    border: none;
+    border-radius: $borderRadius;
+    background-color: #afafaf;
+    color: white;
+    outline: none;
+    font-size: 1rem;
+  }
 
-.input-text::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.85rem;
-}
+  .input-text::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+  }
 
-.input-text:focus {
-  background-color: #a6c8db;
-  box-shadow: $dropShadow;
-}
+  .input-text:focus {
+    background-color: #a6c8db;
+    box-shadow: $dropShadow;
+  }
 
-[class*="input-error"] {
-  border: 2px solid red;
-}
+  [class*="input-error"] {
+    border: 2px solid red;
+  }
 
-.text-error {
-  color: red;
-  font-style: italic;
+  .small-text-group {
+    @include flex-space-between-center;
+    font-style: italic;
+    font-size: 0.5rem;
+
+    .text-error {
+      color: red;
+    }
+    .text-count {
+      color: #bbb;
+    }
+  }
 }

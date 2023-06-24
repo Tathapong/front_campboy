@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useClickOutSide } from "../../hooks/useClickOutside";
@@ -13,6 +13,7 @@ import OptionDropdown from "../../components/optionDropdown/OptionDropdown";
 
 function ProfileDropdown() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const myUser = useSelector(selectMe);
 
   const [dropdown, setDropdown] = useState(false);
@@ -51,6 +52,11 @@ function ProfileDropdown() {
     }
   };
 
+  function handleToProfile() {
+    navigate(`/profile/${myUser?.id}`);
+    closeDropdown();
+  }
+
   return (
     <div className="profile-dropdown-group" ref={dropdownEl}>
       <Link onClick={toggleDropdown}>
@@ -58,7 +64,7 @@ function ProfileDropdown() {
       </Link>
       <ul className={`profile-dropdown-content ${dropdown ? "d-flex" : "d-none"}`}>
         <div className="profile-name">Hello! {myUser.firstName}</div>
-        <OptionDropdown title="View profile">
+        <OptionDropdown title="View profile" onClick={handleToProfile}>
           <i class="fa-solid fa-user"></i>
         </OptionDropdown>
         <OptionDropdown title="Change password" onClick={handleChangePassword}>

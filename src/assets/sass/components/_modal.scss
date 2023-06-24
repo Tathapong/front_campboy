@@ -12,13 +12,16 @@
     @include flex-column;
     @include border-radius-box-shadow;
     width: fit-content;
-    max-height: 100%;
+    // max-height: 100%;
     max-width: 83.33%;
 
     position: relative;
     margin: auto;
     padding: 40px;
     background-color: white;
+
+    top: 50%;
+    transform: translate(0%, -50%);
 
     animation-name: animatetop;
     animation-duration: 0.3s;
@@ -53,7 +56,7 @@
     opacity: 0;
   }
   to {
-    top: 0;
+    top: 50%;
     opacity: 1;
   }
 }

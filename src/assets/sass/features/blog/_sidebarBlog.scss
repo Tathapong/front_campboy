@@ -6,20 +6,20 @@
 
   > .profile-title-group {
     @include flex-column;
-    align-items: flex-start;
-    gap: 0px;
+    align-items: stretch;
 
     padding-bottom: 15px;
     border-bottom: 1px solid #c7c7c7;
 
     .image-info {
       @include flex-column;
+      align-items: stretch;
       gap: 10px;
-      align-items: flex-start;
 
       .image {
-        display: block;
         width: 72px;
+        height: 72px;
+        object-fit: cover;
       }
 
       .profile-info {
@@ -27,7 +27,7 @@
 
         .about {
           margin-block: 10px;
-          -webkit-line-clamp: inherit;
+          -webkit-line-clamp: 6;
         }
       }
     }
@@ -37,6 +37,10 @@
     > .title {
       margin-block: 15px;
       @include font-bold-space(0.05em);
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
 
       .name {
         color: #7b7b7b;

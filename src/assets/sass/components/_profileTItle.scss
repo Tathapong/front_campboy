@@ -7,14 +7,17 @@
     min-width: 150px;
 
     .image {
-      @include flex-start-center;
+      display: flex;
       width: 36px;
+      height: 36px;
+      object-fit: cover;
       border-radius: 50%;
     }
 
     .profile-info {
       @include flex-column;
       margin-left: 10px;
+
       overflow: hidden;
 
       .title {
@@ -28,18 +31,14 @@
       }
 
       .follower {
-        white-space: nowrap;
         font-size: 0.6rem;
         color: #757575;
         font-weight: bold;
-        letter-spacing: 0.05em;
       }
       .since {
-        white-space: nowrap;
         font-size: 0.6rem;
         color: #757575;
         font-weight: bold;
-        letter-spacing: 0.05em;
       }
 
       .about {

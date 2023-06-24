@@ -1,4 +1,5 @@
 .sidebar-profile-group {
+  max-width: 360px;
   @include flex-column;
   gap: 30px;
 
@@ -7,16 +8,17 @@
 
   > .profile-title-group {
     @include flex-column;
-    align-items: flex-start;
+    align-items: stretch;
 
     .image-info {
       @include flex-column;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 10px;
 
       .image {
-        display: block;
         width: 72px;
+        height: 72px;
+        object-fit: cover;
       }
 
       .profile-info {
@@ -24,7 +26,7 @@
 
         .about {
           margin-block: 10px;
-          -webkit-line-clamp: inherit;
+          -webkit-line-clamp: 6;
         }
       }
     }

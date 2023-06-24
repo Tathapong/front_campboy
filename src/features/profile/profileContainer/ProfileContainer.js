@@ -1,21 +1,19 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-import SidebarProfile from "./SidebarProfile";
+import FollowerList from "../../../components/followerList/FollowerList";
+import IconText from "../../../components/iconText/IconText";
 import Modal from "../../../components/modal/Modal";
 import BlogCardB from "../../blog/blogCardB/BlogCardB";
-import IconText from "../../../components/iconText/IconText";
+import SidebarProfile from "./SidebarProfile";
 import EditProfileForm from "./EditProfileForm";
 
-import { selectBlogsByProfileId, thunk_getAllBlog } from "../../../stores/blogsSlice";
 import { selectMe } from "../../../stores/myUserSlice";
-import FollowerList from "../../../components/followerList/FollowerList";
+import { selectBlogsByProfileId, thunk_getAllBlog } from "../../../stores/blogsSlice";
 import { selectProfile, thunk_getProfileById } from "../../../stores/profileSlice";
 
 function ProfileContainer() {
-  const coverImageURL = "https://res.cloudinary.com/duzw1g3u8/image/upload/v1675610434/16741519048174266565066.jpg";
-
   const [modalFollowingIsOpen, setModalFollowingIsOpen] = useState(false);
   const [modalProfileIsOpen, setModalProfileIsOpen] = useState(false);
   const [modalEditProfileIsOpen, setModalEditProfileIsOpen] = useState(false);
@@ -34,7 +32,7 @@ function ProfileContainer() {
         await dispatch(thunk_getAllBlog());
         await dispatch(thunk_getProfileById(profileId));
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     };
     fetch();
@@ -72,16 +70,25 @@ function ProfileContainer() {
           <img className="image" src={profile.profileCoverImage} alt="coverImage" />
         </div>
         <div className="profile-name-group">
-          <div className="profile-name">{profile.profileName}</div>
+          <div className="profile-name">{`${profile.firstName} ${profile.lastName}`}</div>
           <IconText type="outdent" onClick={openModalProfile} />
         </div>
+        {blogs.length ? (
+          ""
+        ) : (
+          <div className="no-blog-list">{`${profile.firstName} ${profile.lastName} hasn't written any stories yet.`}</div>
+        )}
       </div>
 
-      <div className="blog-list-group">
-        {blogs.map((blog) => (
-          <BlogCardB blog={blog} key={blog.id} unProfile={true} />
-        ))}
-      </div>
+      {blogs.length ? (
+        <div className="blog-list-group">
+          {blogs.map((blog) => (
+            <BlogCardB blog={blog} key={blog.id} unProfile={true} />
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
 
       <SidebarProfile profile={profile} onClickMore={openModalFollowing} onClickEditProfile={openModalEditProfile} />
       <Modal
@@ -101,7 +108,7 @@ function ProfileContainer() {
         closeModal={closeModalEditProfile}
         className="modal-edit-profile"
       >
-        <EditProfileForm />
+        <EditProfileForm profile={profile} closeModal={closeModalEditProfile} modalIsOpen={modalEditProfileIsOpen} />
       </Modal>
     </div>
   );

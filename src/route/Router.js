@@ -13,7 +13,7 @@ import AllBlogContainer from "../features/blog/allBlogContainer/AllBlogContainer
 import CreateBlogContainer from "../features/blog/createBlogContainer/CreateBlogContainer";
 import BlogContainer from "../features/blog/blogContainer/BlogContainer";
 import ProfileContainer from "../features/profile/profileContainer/ProfileContainer";
-
+import NotFound from "../pages/notFound/NotFound";
 function Router() {
   const loading = useSelector(selectLoading);
   return (
@@ -31,6 +31,7 @@ function Router() {
         </Route>
         <Route path="/users/:userId/verify/:hashedToken" element={<VerifyEmail />} />
         <Route path="/users/:userId/reset-password/:hashedToken" element={<ResetPasswordEmail />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

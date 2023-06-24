@@ -6,9 +6,14 @@
 
   .header-group {
     @include flex-space-between-center;
+    gap: 20px;
     margin-inline: 5px;
 
     position: relative;
+
+    .profile-title-group {
+      overflow: hidden;
+    }
 
     .btn {
       width: 50px;

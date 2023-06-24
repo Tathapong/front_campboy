@@ -1,18 +1,23 @@
 import { forwardRef } from "react";
 
-const InputText = forwardRef(function InputText(props, ref) {
-  const { placeholder = "Enter input", type = "text", onChange, value, className = "", errorText, maxLength } = props;
+const Textarea = forwardRef(function Textarea(props, ref) {
+  const { placeholder, value, onChange, errorText, maxLength, maxLine = 5 } = props;
+
+  function onChangeTextarea(ev) {
+    const lines = ev.target.value.split("\n");
+    if (lines.length <= maxLine) onChange(ev);
+  }
+
   return (
-    <div className="input-text-group">
-      <input
-        ref={ref}
-        className={`input-text ${errorText ? "input-error" : ""} ${className}`}
+    <div className="textarea-group">
+      <textarea
+        className="textarea"
         placeholder={placeholder}
-        type={type}
-        onChange={onChange}
         value={value}
+        onChange={onChangeTextarea}
+        ref={ref}
         maxLength={maxLength}
-      ></input>
+      />
       <div className="small-text-group">
         {maxLength ? (
           <small className="text-count">
@@ -27,4 +32,4 @@ const InputText = forwardRef(function InputText(props, ref) {
   );
 });
 
-export default InputText;
+export default Textarea;

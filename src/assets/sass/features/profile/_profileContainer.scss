@@ -1,6 +1,5 @@
 .profile-container {
-  @include grid-auto(4fr 1fr, auto);
-  row-gap: 20px;
+  @include grid-auto(75% 25%, auto auto);
   column-gap: 10px;
   margin-inline: auto;
 
@@ -12,6 +11,8 @@
     grid-area: 1 / 1 / span 1 / span 1;
     @include flex-column;
     gap: 20px;
+
+    padding-bottom: 10px;
 
     .cover-image-group {
       height: 196px;
@@ -25,8 +26,14 @@
 
     .profile-name-group {
       @include flex-space-between-center;
+      border-bottom: 1px solid #a9a9a9;
+      padding-bottom: 10px;
 
       .profile-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         font-size: 2.5rem;
         font-weight: 600;
         font-family: Arial, Helvetica, sans-serif;
@@ -37,6 +44,12 @@
         display: none;
       }
     }
+
+    .no-blog-list {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #757575;
+    }
   }
   .blog-list-group {
     grid-area: 2 / 1 / span 1 / span 1;
@@ -46,7 +59,6 @@
 
   .sidebar-profile-group {
     grid-area: 1 / 2 / span 2 / span 1;
-    max-width: 360px;
   }
 
   .modal-sidebar {
@@ -73,5 +85,9 @@
 
   .modal-following {
     z-index: 2;
+  }
+
+  .not-found-page {
+    grid-area: 1 / 1 / span 1 / span 2;
   }
 }

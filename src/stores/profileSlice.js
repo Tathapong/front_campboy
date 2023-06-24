@@ -6,7 +6,15 @@ const profileSlice = createSlice({
   name: "profile",
   initialState: {},
   reducers: {
-    setProfile: (state, action) => action.payload
+    setProfile: (state, action) => action.payload,
+    addFollower: (state, action) => {
+      const follow = action.payload;
+      state.follower.push(follow);
+    },
+    deleteFollower: (state, action) => {
+      const idx = action.payload;
+      state.follower.splice(idx, 1);
+    }
   }
 });
 
@@ -23,15 +31,35 @@ export const thunk_getProfileById = (profileId) => async (dispatch, getState) =>
   }
 };
 
-export const selectProfile = (state) => {
-  const profile = state.profile;
-  return {
-    profileName: profile.firstName ? `${profile?.firstName} ${profile?.lastName}` : "Name",
-    profileImage: profile?.profileImage,
-    profileCoverImage: profile?.coverImage,
-    profileAbout: profile?.about
-  };
+export const thunk_toggleFollow = (profileId) => async (dispatch, getState) => {
+  try {
+    const res = await profileService.toggleFollow(profileId);
+    const { follow } = res.data;
+
+    const myUserId = getState().myUser.id;
+    const idx = getState().profile.follower.findIndex((item) => item.accountId === myUserId);
+
+    if (follow) dispatch(actions.addFollower(follow));
+    else dispatch(actions.deleteFollower(idx));
+  } catch (error) {
+    throw error;
+  }
 };
+
+export const selectProfile = createSelector([(state) => state.profile, (state) => state.myUser], (profile, myUser) => {
+  return {
+    id: profile.id ?? "",
+    firstName: profile.firstName ?? "",
+    lastName: profile.lastName ?? "",
+    profileImage: profile.profileImage ?? "",
+    profileCoverImage: profile.coverImage ?? "",
+    profileAbout: profile.about ? JSON.parse(profile.about) : "",
+    follower: profile.follower ?? [],
+    isFollower: profile.follower
+      ? Boolean(profile.follower.filter((item) => item.accountId === myUser?.id).length)
+      : false
+  };
+});
 
 export const selectBlogByProfileId = createSelector(
   [(state) => state.blogs, (state, profileId) => profileId],

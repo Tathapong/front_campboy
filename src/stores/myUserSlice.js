@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { actions as loadingActions } from "./loadingSlice";
 import * as authService from "../api/authApi";
+import * as profileService from "../api/profileApi";
 import { addAccesToken, removeAccesToken, addResendEmail, removeResendEmail } from "../utilities/localStorage";
 
 const initialState = null;
@@ -10,6 +11,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setMyUser: (state, action) => action.payload,
+    updateMyUser: (state, action) => {
+      const profile = action.payload;
+      state.firstName = profile.firstName;
+      state.lastName = profile.lastName;
+      state.about = profile.about;
+      state.profileImage = profile.profileImage;
+      state.coverImage = profile.coverImage;
+    },
     deleteMyUser: (state, action) => initialState
   }
 });
@@ -130,6 +139,19 @@ export const thunk_resetPassword =
       if (getState().loading) dispatch(loadingActions.stopLoading());
     }
   };
+
+export const thunk_updateMyUser = (formData) => async (dispatch, getState) => {
+  try {
+    if (!getState().loading) dispatch(loadingActions.startLoading());
+    const res = await profileService.updateProfile(formData);
+    const { profile } = res.data;
+    dispatch(actions.updateMyUser(profile));
+  } catch (error) {
+    throw error;
+  } finally {
+    if (getState().loading) dispatch(loadingActions.stopLoading());
+  }
+};
 
 export const selectMe = (state) => state.myUser;
 export default userSlice.reducer;
