@@ -3,12 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-import * as customValidator from "../../../validation/validation";
-import { thunk_verifyLink, thunk_resetPassword } from "../../../stores/myUserSlice";
-
 import Loading from "../../../components/spinner/Loading";
 import Button from "../../../components/button/Button";
 import InputText from "../../../components/inputText/InputText";
+
+import { isNotEmpty, isStrongPassword } from "../../../validation/validation";
+import { thunk_verifyLink, thunk_resetPassword } from "../../../stores/myUserSlice";
 
 function ResetPasswordEmail() {
   const { hashedToken, userId } = useParams();
@@ -23,8 +23,12 @@ function ResetPasswordEmail() {
   const [inputValue, setInputValue] = useState({ ...initialValue });
   const [errorInput, setErrorInput] = useState({ ...initialValue });
 
-  const onChangeNewPassword = (ev) => setInputValue((prev) => ({ ...prev, newPassword: ev.target.value }));
-  const onChangeConfirmPassword = (ev) => setInputValue((prev) => ({ ...prev, confirmPassword: ev.target.value }));
+  function handleOnChangeNewPassword(ev) {
+    setInputValue((prev) => ({ ...prev, newPassword: ev.target.value }));
+  }
+  function handleOnChangeConfirmPassword(ev) {
+    setInputValue((prev) => ({ ...prev, confirmPassword: ev.target.value }));
+  }
 
   useEffect(() => {
     const verify = async () => {
@@ -39,7 +43,7 @@ function ResetPasswordEmail() {
     verify();
   }, [hashedToken, userId, dispatch]);
 
-  const onSubmitForm = async (ev) => {
+  async function handleOnSubmitForm(ev) {
     ev.preventDefault();
     try {
       const error = { ...initialValue };
@@ -47,12 +51,11 @@ function ResetPasswordEmail() {
 
       //+Validation
       //- Check existing of input
-      if (!customValidator.isNotEmpty(inputValue.newPassword)) error.newPassword = "New password is required";
-      if (!customValidator.isNotEmpty(inputValue.confirmPassword))
-        error.confirmPassword = "Confirm password is required";
+      if (!isNotEmpty(inputValue.newPassword)) error.newPassword = "New password is required";
+      if (!isNotEmpty(inputValue.confirmPassword)) error.confirmPassword = "Confirm password is required";
 
       //- Check strong password
-      if (!customValidator.isStrongPassword(inputValue.newPassword))
+      if (!isStrongPassword(inputValue.newPassword))
         error.newPassword =
           "Password must be strong (min length : 8, min lowercase :1, min uppercase : 1, min numbers : 1, min symbols : 1)";
 
@@ -76,7 +79,7 @@ function ResetPasswordEmail() {
       console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }
-  };
+  }
 
   return (
     <>
@@ -88,7 +91,7 @@ function ResetPasswordEmail() {
             <Button onClick={() => navigate("/")}>OK</Button>
           </div>
         ) : (
-          <form className="reset-password-auth-form" onSubmit={onSubmitForm}>
+          <form className="reset-password-auth-form" onSubmit={handleOnSubmitForm}>
             <h1 className="title">Reset password</h1>
             <div className="sub-title">Enter your new password below</div>
             <div className="input-group">
@@ -96,14 +99,14 @@ function ResetPasswordEmail() {
                 type="password"
                 ref={(el) => (inputEl.current[0] = el)}
                 placeholder="New password"
-                onChange={onChangeNewPassword}
+                onChange={handleOnChangeNewPassword}
                 errorText={errorInput.newPassword}
               />
               <InputText
                 type="password"
                 ref={(el) => (inputEl.current[1] = el)}
                 placeholder="Confirm the new password"
-                onChange={onChangeConfirmPassword}
+                onChange={handleOnChangeConfirmPassword}
                 errorText={errorInput.confirmPassword}
               />
             </div>

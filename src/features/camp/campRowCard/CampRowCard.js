@@ -1,63 +1,50 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
-
-import { capFirstLetter } from "../../../utilities/capFirstLetter";
 
 import StarRating from "../../../components/starRating/StarRating";
 import IconText from "../../../components/iconText/IconText";
 import IconTextInfo from "../../../components/iconTextInfo/IconTextInfo";
 import Button from "../../../components/button/Button";
 
+import { capFirstLetter } from "../../../utilities/capFirstLetter";
+
 function CampRowCard(props) {
-  const { camp, setMapItem, mapItem } = props;
+  const { camp, setMapItem, isMap } = props;
 
-  const campId = camp.id;
-  const coverImage = camp.CampImages[0].image;
-  const rating = camp.OverallRating[0].rating;
-  const reviewNo = camp.OverallRating[0].count;
-
-  function onClickMapButton() {
-    const existMap = mapItem.find((item) => item.id === camp.id);
-
-    if (!existMap)
+  function handleOnClickMapButton() {
+    if (!isMap)
       setMapItem((prev) => [...prev, { lat: +camp.locationLat, lng: +camp.locationLng, id: camp.id, name: camp.name }]);
     else setMapItem((prev) => [...prev].filter((item) => item.id !== camp.id));
   }
 
-  const isMap = mapItem.find((item) => item.id === camp.id);
-
   return (
     <div className="camp-row-card-group">
       <div className="image-group">
-        <Link to={`/camp/${campId}`}>
-          <img src={coverImage} alt="camp" className="image" />
+        <Link to={`/camp/${camp.id}`}>
+          <img src={camp.coverImage} alt="camp" className="image" />
         </Link>
       </div>
 
       <div className="info-group">
         <div className="camp-name-group">
-          <Link className="camp-name" to={`/camp/${campId}`}>
+          <Link className="camp-name" to={`/camp/${camp.id}`}>
             {camp.name}
           </Link>
-          <Button className={isMap ? "btn-active" : ""} onClick={onClickMapButton}>
+          <Button className={isMap ? "btn-active" : ""} onClick={handleOnClickMapButton}>
             <i class="fa-solid fa-map-pin icon" />
           </Button>
         </div>
 
         <div>
-          <StarRating type={rating} />
-          <span className="rating-count">({reviewNo})</span>
+          <StarRating type={camp.scores} />
+          <span className="rating-count">({camp.reviewCount})</span>
         </div>
 
-        <IconText name={capFirstLetter(camp.Province.name)} type="location" />
+        <IconText name={capFirstLetter(camp.provinceName)} type="location" />
 
         <div className="facility-group">
           {camp.CampInformations.map((item, index) => (
-            <IconTextInfo
-              key={item.id}
-              title={item.InformationItem.title}
-              iconImage={item.InformationItem.iconImage}
-              subTitle1={item.subTitle1}
-            />
+            <IconTextInfo key={item.id} title={item.title} iconImage={item.iconImage} subTitle1={item.subTitle1} />
           ))}
         </div>
       </div>
@@ -65,4 +52,4 @@ function CampRowCard(props) {
   );
 }
 
-export default CampRowCard;
+export default memo(CampRowCard);

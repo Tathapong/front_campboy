@@ -6,17 +6,19 @@ import { thunk_getAllCamp, selectCamps, selectLocationList } from "../../../stor
 import { resultSortItem } from "../../../constants/constant";
 import { queryFromArray } from "../../../utilities/queryFromArray";
 
-import SearchCamp from "../../../features/findACamp/searchCamp/SearchCamp";
-import FilterCamp from "../../../features/findACamp/filterCamp/FilterCamp";
-import CampRowCardList from "../../../features/camp/campRowCardList/CampRowCardList";
-import SelectBox from "../../../components/selectBox/SelectBox";
-import Map from "../../../components/map/Map";
 import Button from "../../../components/button/Button";
+import Map from "../../../components/map/Map";
+import SelectBox from "../../../components/selectBox/SelectBox";
+
+import CampRowCardList from "../../../features/camp/campRowCardList/CampRowCardList";
+import FilterCamp from "../../../features/findACamp/filterCamp/FilterCamp";
+import SearchCamp from "../../../features/findACamp/searchCamp/SearchCamp";
 
 function FindACamp() {
   const dispatch = useDispatch();
 
-  const { state } = useLocation(); // get province Id from click at location iconText
+  const { state } = useLocation();
+  const randomCamp = state?.randomCamp;
   const provinceFilter = state?.provinceFilter;
 
   const [desination, setDestination] = useState("");
@@ -31,11 +33,17 @@ function FindACamp() {
   const locationList = useSelector(selectLocationList);
 
   useEffect(() => {
-    let query = provinceFilter ? `?province=${provinceFilter}` : "";
+    let query;
+
     if (provinceFilter) {
+      query = provinceFilter ? `?province=${provinceFilter}` : "";
       setProvince(provinceFilter);
-      window.history.replaceState({ ...window.history.state, usr: null }, ""); // Clear state (that from previous page) because Refresh page that remain
+    } else if (randomCamp) {
+      query = randomCamp ? `?destination=${randomCamp}` : "";
+      setDestination(randomCamp);
     }
+
+    window.history.replaceState({ ...window.history.state, usr: null }, ""); // Clear state (that from previous page) because Refresh page that remain
     fetchCamps(query);
   }, []);
 
@@ -47,11 +55,11 @@ function FindACamp() {
     }
   }
 
-  function handleClearFilter() {
+  function handleOnClickClearFilter() {
     window.location.reload();
   }
 
-  function handleSubmitFilterForm(ev) {
+  function handleOnClickSubmitForm(ev) {
     ev.preventDefault();
     const destinationQuery = desination.trim() ? `destination=${desination.trim()}` : "";
     const provinceQuery = province ? `province=${province}` : "";
@@ -73,10 +81,15 @@ function FindACamp() {
         className="image-background"
       />
 
-      <form className="search-filter-group" onSubmit={handleSubmitFilterForm}>
-        <SearchCamp setDestination={setDestination} setProvince={setProvince} province={province} />
+      <form className="search-filter-group" onSubmit={handleOnClickSubmitForm}>
+        <SearchCamp
+          setDestination={setDestination}
+          setProvince={setProvince}
+          destination={desination}
+          province={province}
+        />
         <FilterCamp setRating={setRating} setProperty={setProperty} setInformationItem={setInformationItem} />
-        <Link className="clear-filter" onClick={handleClearFilter}>
+        <Link className="clear-filter" onClick={handleOnClickClearFilter}>
           Clear filters
         </Link>
         <Button name="Search" type="submit" />

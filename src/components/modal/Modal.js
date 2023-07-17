@@ -1,4 +1,6 @@
-function Modal(props) {
+import { memo } from "react";
+
+const Modal = memo(function Modal(props) {
   const { header = "Header", children, isOpen, closeModal, className = "" } = props;
 
   return (
@@ -10,6 +12,6 @@ function Modal(props) {
       </div>
     </div>
   );
-}
+});
 
 export default Modal;

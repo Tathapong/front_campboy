@@ -2,17 +2,19 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectMe } from "../../stores/myUserSlice";
 
-import * as constant from "../../config/constant";
+import Button from "../../components/button/Button";
+import Modal from "../../components/modal/Modal";
 
 import Logo from "./Logo";
 import TextButton from "./TextButton";
-import Button from "../../components/button/Button";
 import ProfileDropdown from "./ProfileDropdown";
-import Modal from "../../components/modal/Modal";
+
 import LoginForm from "../../features/auth/loginForm/LoginForm";
 import SignupForm from "../../features/auth/signupForm/SignupForm";
 import ForgotPasswordForm from "../../features/auth/forgotPassword/ForgotPasswordForm";
 import ResendEmail from "../../features/auth/resendEmail/ResendEmail";
+
+import * as constant from "../../config/constant";
 
 function Header() {
   const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
@@ -21,35 +23,55 @@ function Header() {
   const [modalResendVerify, setModalResendVerify] = useState(false);
   const [modalResendForgot, setModalResendForgot] = useState(false);
 
-  const openModalLogin = () => setModalLoginIsOpen(true);
-  const closeModalLogin = () => setModalLoginIsOpen(false);
+  function openModalLogin() {
+    setModalLoginIsOpen(true);
+  }
+  function closeModalLogin() {
+    setModalLoginIsOpen(false);
+  }
 
-  const openModalSignup = () => setModalSignupIsOpen(true);
-  const closeModalSignup = () => setModalSignupIsOpen(false);
+  function openModalSignup() {
+    setModalSignupIsOpen(true);
+  }
+  function closeModalSignup() {
+    setModalSignupIsOpen(false);
+  }
 
-  const openModalForgot = () => setModalForgotIsOpen(true);
-  const closeModalForgot = () => setModalForgotIsOpen(false);
+  function openModalForgot() {
+    setModalForgotIsOpen(true);
+  }
+  function closeModalForgot() {
+    setModalForgotIsOpen(false);
+  }
 
-  const openModalResendVerify = () => setModalResendVerify(true);
-  const closeModalResendVerify = () => setModalResendVerify(false);
+  function openModalResendVerify() {
+    setModalResendVerify(true);
+  }
+  function closeModalResendVerify() {
+    setModalResendVerify(false);
+  }
 
-  const openModalResendForgot = () => setModalResendForgot(true);
-  const closeModalResendForgot = () => setModalResendForgot(false);
+  function openModalResendForgot() {
+    setModalResendForgot(true);
+  }
+  function closeModalResendForgot() {
+    setModalResendForgot(false);
+  }
 
-  const switchToModalSignup = () => {
+  function switchToModalSignup() {
     closeModalLogin();
     openModalSignup();
-  };
+  }
 
-  const switchToModalLogin = () => {
+  function switchToModalLogin() {
     closeModalSignup();
     openModalLogin();
-  };
+  }
 
-  const switchToModalForgot = () => {
+  function switchToModalForgot() {
     closeModalLogin();
     openModalForgot();
-  };
+  }
 
   const myUser = useSelector(selectMe);
 
@@ -81,7 +103,8 @@ function Header() {
         <TextButton name="Blog" to="blog" />
         <TextButton name="Join camp" to="join" />
       </div>
-      <Modal header="Login" isOpen={modalLoginIsOpen} closeModal={closeModalLogin}>
+
+      <Modal header="Login" className="modal-login" isOpen={modalLoginIsOpen} closeModal={closeModalLogin}>
         <LoginForm
           switchToModalSignup={switchToModalSignup}
           switchToModalForgot={switchToModalForgot}
@@ -89,17 +112,30 @@ function Header() {
           openModalVerify={openModalResendVerify}
         />
       </Modal>
-      <Modal header="Signup" isOpen={modalSignupIsOpen} closeModal={closeModalSignup}>
+
+      <Modal header="Signup" className="modal-signup" isOpen={modalSignupIsOpen} closeModal={closeModalSignup}>
         <SignupForm
           switchToModalLogin={switchToModalLogin}
           closeModalSignup={closeModalSignup}
           openModalResendVerify={openModalResendVerify}
         />
       </Modal>
-      <Modal header="Forgot password" isOpen={modalForgotIsOpen} closeModal={closeModalForgot}>
+
+      <Modal
+        header="Forgot password"
+        className="modal-forgot-password"
+        isOpen={modalForgotIsOpen}
+        closeModal={closeModalForgot}
+      >
         <ForgotPasswordForm closeModalForgot={closeModalForgot} openModalResendForgot={openModalResendForgot} />
       </Modal>
-      <Modal header="Signup successful" isOpen={modalResendVerify} closeModal={closeModalResendVerify}>
+
+      <Modal
+        header="Signup successful"
+        className="modal-resend-email"
+        isOpen={modalResendVerify}
+        closeModal={closeModalResendVerify}
+      >
         <ResendEmail
           type={constant.VERIFY_SIGNUP}
           title="Account Registered"
@@ -107,7 +143,13 @@ function Header() {
           buttonText="Resend Email Verification"
         />
       </Modal>
-      <Modal header="Reset password" isOpen={modalResendForgot} closeModal={closeModalResendForgot}>
+
+      <Modal
+        header="Reset password"
+        className="modal-resend-email"
+        isOpen={modalResendForgot}
+        closeModal={closeModalResendForgot}
+      >
         <ResendEmail
           type={constant.RESET_PASSWORD}
           title="Forgot your password?"

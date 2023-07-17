@@ -3,19 +3,18 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import IconText from "../../../components/iconText/IconText";
-import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
-import OptionDropdown from "../../../components/optionDropdown/OptionDropdown";
-import Modal from "../../../components/modal/Modal";
-import Confirm from "../../../components/confirm/Confirm";
 import Button from "../../../components/button/Button";
+import IconText from "../../../components/iconText/IconText";
+import OptionDropdown from "../../../components/optionDropdown/OptionDropdown";
+import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
+import Textarea from "../../../components/textarea/Textarea";
 
 import { thunk_commentToggleLike, thunk_deleteComment, thunk_updateComment } from "../../../stores/blogSlice";
 import { selectMe } from "../../../stores/myUserSlice";
 
 import { timeSince } from "../../../utilities/dateFormat";
 import { useClickOutSide } from "../../../hooks/useClickOutside";
-import * as customValidator from "../../../validation/validation";
+import { isNotEmpty } from "../../../validation/validation";
 
 function BlogCommentCard(props) {
   const { comment } = props;
@@ -25,9 +24,9 @@ function BlogCommentCard(props) {
 
   const [dropdown, setDropdown] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [commentInput, setCommentInput] = useState("");
   const [errorInput, setErrorInput] = useState("");
-  const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
 
   const dropdownEl = useClickOutSide(useCallback(closeDropdown, []));
   const commentInputEl = useRef(null);
@@ -36,69 +35,56 @@ function BlogCommentCard(props) {
   const myUser = useSelector(selectMe);
 
   const { blogId } = params;
-  const commentId = comment.id;
-  const commentUserId = comment.userId;
-  const commentJSON = comment.contentText;
-  const commentLikeCount = comment.CommentLikes.length;
-  const isCommentLike = comment.CommentLikes.filter((item) => item.userId === myUser?.id).length;
   const date = timeSince(comment.createdAt);
-  const profileName = `${comment.User.firstName} ${comment.User.lastName}`;
-  const profileImage = comment.User.profileImage;
 
   useEffect(() => {
-    setCommentInput(JSON.parse(commentJSON));
-  }, [commentJSON]);
+    setCommentInput(JSON.parse(comment.contentText));
+  }, [comment.contentText]);
 
   function closeDropdown() {
     setDropdown(false);
   }
+
   function toggleDropdown() {
     setDropdown((previous) => !previous);
   }
 
-  function openModalDelete() {
-    setModalDeleteIsOpen(true);
-  }
-  function closeModalDelete() {
-    setModalDeleteIsOpen(false);
-  }
-
-  function onChangeCommentInput(ev) {
+  function handleOnChangeCommentInput(ev) {
     setCommentInput(ev.target.value);
   }
 
-  async function handleClickCommentLike() {
+  async function handleOnClickCommentLike() {
     try {
-      await dispatch(thunk_commentToggleLike(commentId));
+      await dispatch(thunk_commentToggleLike(comment.id));
     } catch (error) {
       console.log(error);
     }
   }
 
-  function handleClickEditButton() {
-    commentInputEl.current.style.height = commentEl.current.scrollHeight + 10 + "px";
+  function handleOnClickEditButton() {
+    commentInputEl.current.style.height = commentEl.current.scrollHeight + 20 + "px";
     setIsEditing(true);
     closeDropdown();
   }
 
-  function handleClickDeleteButton() {
-    openModalDelete();
+  function handleOnClickDeleteButton() {
+    setIsDeleting(true);
     closeDropdown();
   }
 
-  function handleClickCancelEditSpan() {
+  function handleOnClickCancelEditSpan() {
     setIsEditing(false);
-    setCommentInput(JSON.parse(commentJSON));
+    setCommentInput(JSON.parse(comment.contentText));
     setErrorInput("");
   }
 
   function handleKeyUpCancelEdit(ev) {
     if (ev.keyCode === 27) {
-      handleClickCancelEditSpan();
+      handleOnClickCancelEditSpan();
     }
   }
 
-  async function handleClickSaveEditButton(ev) {
+  async function handleOnClickSaveEditButton(ev) {
     try {
       ev.preventDefault();
       const title = JSON.stringify(commentInput.replace(/\n+/g, "\n"));
@@ -108,14 +94,14 @@ function BlogCommentCard(props) {
       setErrorInput((prev) => "");
 
       //- Check Title
-      if (!customValidator.isNotEmpty(commentInput)) error = "Comment is required";
+      if (!isNotEmpty(commentInput)) error = "Comment is required";
       if (comment.length > 2000) error = "Comment character length is more over 2000!";
 
       setErrorInput(error);
       const isError = error;
 
       if (!isError) {
-        await dispatch(thunk_updateComment({ blogId, commentId: commentId, title }));
+        await dispatch(thunk_updateComment({ blogId, commentId: comment.id, title }));
         setIsEditing(false);
         toast.success("Update completed");
       }
@@ -125,34 +111,43 @@ function BlogCommentCard(props) {
     }
   }
 
-  async function handleClickConfirmDelete() {
+  function handleOnClickCancelDelete() {
+    setIsDeleting(false);
+  }
+
+  async function handleOnClickConfirmDelete() {
     try {
-      await dispatch(thunk_deleteComment({ blogId, commentId: commentId }));
+      await dispatch(thunk_deleteComment({ blogId, commentId: comment.id }));
       toast.success("Delete completed");
     } catch (error) {
       console.log(error);
       toast.error(error);
     } finally {
-      closeModalDelete();
+      setIsDeleting(false);
     }
   }
 
   return (
     <div className="blog-comment-card-group">
       <div className="header-group">
-        <ProfileTitle profileImage={profileImage} name={profileName} since={date} />
+        <ProfileTitle
+          profileImage={comment.profileImage}
+          name={comment.profileName}
+          since={date}
+          to={`/profile/${comment.profileId}`}
+        />
 
-        {commentUserId === myUser?.id ? (
+        {comment.profileId === myUser?.id ? (
           isEditing ? (
-            <Button name="Save" onClick={handleClickSaveEditButton} />
+            <Button name="Save" onClick={handleOnClickSaveEditButton} />
           ) : (
             <div ref={dropdownEl}>
               <IconText type="vertical-dot" onClick={toggleDropdown} />
               <ul className={`comment-edit-dropdown-content ${dropdown ? "d-flex" : "d-none"}`}>
-                <OptionDropdown title="Edit" onClick={handleClickEditButton}>
+                <OptionDropdown title="Edit" onClick={handleOnClickEditButton}>
                   <i class="fa-solid fa-pen"></i>
                 </OptionDropdown>
-                <OptionDropdown title="Delete" onClick={handleClickDeleteButton}>
+                <OptionDropdown title="Delete" onClick={handleOnClickDeleteButton}>
                   <i class="fa-solid fa-trash"></i>
                 </OptionDropdown>
               </ul>
@@ -163,43 +158,44 @@ function BlogCommentCard(props) {
         )}
       </div>
 
-      <Modal header="Delete Confirmation" isOpen={modalDeleteIsOpen} closeModal={closeModalDelete}>
-        <Confirm
-          onConfirm={handleClickConfirmDelete}
-          onCancel={closeModalDelete}
-          text="Are you sure, you want to delete the blog ?"
-        />
-      </Modal>
-
       <form className={`comment-input-form ${isEditing ? "d-flex" : "d-none"}`}>
-        <small className="textarea-count">{commentInput.length}/2000 Characters</small>
-        <textarea
-          className={`textarea ${errorInput ? "input-error" : ""}`}
+        <Textarea
+          placeholder="write your comment"
           value={commentInput}
-          onChange={onChangeCommentInput}
+          errorText={errorInput}
+          onChange={handleOnChangeCommentInput}
           onKeyUp={handleKeyUpCancelEdit}
           ref={commentInputEl}
-        ></textarea>
+          maxLength={2000}
+        />
         <div className="small-group">
           <small>
-            Please ESC or click <span onClick={handleClickCancelEditSpan}>cancel</span>
+            Please ESC or click <span onClick={handleOnClickCancelEditSpan}>cancel</span>
           </small>
-          {errorInput ? <small className="text-error">{errorInput}</small> : ""}
         </div>
       </form>
 
       <div
-        className={`comment ${isEditing ? "d-none" : "d-block"}`}
+        className={`comment-text ${isEditing ? "d-none" : "d-block"}`}
         ref={commentEl}
-        dangerouslySetInnerHTML={{ __html: JSON.parse(commentJSON).replace(/\n/g, "<br>") }}
+        dangerouslySetInnerHTML={{ __html: JSON.parse(comment.contentText).replace(/\n/g, "<br>") }}
       ></div>
+
       <IconText
         type="like"
-        name={`${commentLikeCount} Likes`}
-        onClick={handleClickCommentLike}
-        isActive={isCommentLike}
+        name={`${comment.commentLikeCount} Likes`}
+        onClick={handleOnClickCommentLike}
+        isActive={comment.isCommentLike}
         unauthorized={!Boolean(myUser)}
       />
+      {isDeleting ? (
+        <div className="delete-button-group">
+          <Button name="Delete" className="btn-delete" onClick={handleOnClickConfirmDelete} />
+          <Button name="Cancel" className="btn-cancel" onClick={handleOnClickCancelDelete} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

@@ -1,49 +1,49 @@
-import { useRef, useState } from "react";
+import { useRef, useState, memo } from "react";
 
 function Carousel(props) {
-  const { list } = props;
+  const { images } = props;
 
   const imageEl = useRef([]);
   const dotEl = useRef([]);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  function clickNextImage() {
-    if (currentImageIndex < list.length - 1) setCurrentImageIndex((prev) => prev + 1);
+  function handleOnClickNextImage() {
+    if (currentImageIndex < images.length - 1) setCurrentImageIndex((prev) => prev + 1);
     else setCurrentImageIndex(0);
   }
 
-  function clickPreviousImage() {
+  function handleOnClickPreviousImage() {
     if (currentImageIndex > 0) setCurrentImageIndex((prev) => prev - 1);
-    else setCurrentImageIndex(list.length - 1);
+    else setCurrentImageIndex(images.length - 1);
   }
 
-  function clickSelectImage(index) {
+  function handleOnClickSelectImage(index) {
     setCurrentImageIndex(index);
   }
 
   return (
     <div className="carousel-group">
-      {list.map((item, index) => (
+      {images.map((item, index) => (
         <img
-          src={item}
+          key={item.id}
+          src={item.src}
           className={`image ${currentImageIndex === index ? "d-block" : "d-none"}`}
-          key={index}
-          alt={"image" + index}
+          alt={`camp-${item.id}`}
           ref={(el) => (imageEl.current[index] = el)}
         />
       ))}
       <div className="prev-next-group">
-        <i class="fa-solid fa-angle-left icon" onClick={clickPreviousImage}></i>
-        <i class="fa-solid fa-angle-right icon" onClick={clickNextImage}></i>
+        <i class="fa-solid fa-angle-left icon" onClick={handleOnClickPreviousImage}></i>
+        <i class="fa-solid fa-angle-right icon" onClick={handleOnClickNextImage}></i>
       </div>
 
       <div className="dot-group">
-        {list.map((item, index) => {
+        {images.map((item, index) => {
           return (
             <i
               class={`fa-solid fa-circle icon ${currentImageIndex === index ? "active" : ""}`}
-              onClick={() => clickSelectImage(index)}
+              onClick={() => handleOnClickSelectImage(index)}
               ref={(el) => (dotEl.current[index] = el)}
               key={index}
             ></i>
@@ -54,4 +54,4 @@ function Carousel(props) {
   );
 }
 
-export default Carousel;
+export default memo(Carousel);

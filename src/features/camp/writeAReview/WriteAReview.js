@@ -1,14 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+import Button from "../../../components/button/Button";
+import InputText from "../../../components/inputText/InputText";
+import StarRatingForm from "../../../components/starRatingForm/StarRatingForm";
+import Textarea from "../../../components/textarea/Textarea";
+
 import { toast } from "react-toastify";
 import { thunk_writeReview } from "../../../stores/campSlice";
-import * as customValidator from "../../../validation/validation";
-
-import InputText from "../../../components/inputText/InputText";
-import Button from "../../../components/button/Button";
-import StarRatingForm from "../../../components/starRatingForm/StarRatingForm";
+import { isNotEmpty } from "../../../validation/validation";
 
 function WriteAReview(props) {
   const { closeModalReview } = props;
@@ -22,13 +23,17 @@ function WriteAReview(props) {
   const [inputValue, setInputValue] = useState({ ...initialValue, rating: 5 });
   const [errorInput, setErrorInput] = useState({ ...initialValue });
 
-  function onClickRating(type) {
+  useEffect(() => {
+    setErrorInput({ ...initialValue });
+  }, [closeModalReview]);
+
+  function handleOnClickRating(type) {
     setInputValue((prev) => ({ ...prev, rating: type }));
   }
-  function onChangeSummarize(ev) {
+  function handleOnChangeSummarize(ev) {
     setInputValue((prev) => ({ ...prev, summarize: ev.target.value }));
   }
-  function onChangeReviewText(ev) {
+  function handleOnChangeReviewText(ev) {
     setInputValue((prev) => ({ ...prev, reviewText: ev.target.value }));
   }
 
@@ -40,19 +45,19 @@ function WriteAReview(props) {
       setErrorInput((prev) => ({ ...initialValue }));
 
       //- Check summarize
-      if (!customValidator.isNotEmpty(inputValue.summarize)) error.summarize = "Summarize is required";
+      if (!isNotEmpty(inputValue.summarize)) error.summarize = "Summarize is required";
 
       //- Check reviewText
-      if (!customValidator.isNotEmpty(inputValue.reviewText)) error.reviewText = "Review Text is required";
+      if (!isNotEmpty(inputValue.reviewText)) error.reviewText = "Review Text is required";
 
       setErrorInput((prev) => ({ ...error }));
 
-      const isError = error.rating || error.reviewText || error.summarize;
+      const isError = error.reviewText || error.summarize;
       if (!isError) {
         const input = {
           rating: inputValue.rating,
           summarize: inputValue.summarize,
-          reviewText: inputValue.reviewText,
+          reviewText: JSON.stringify(inputValue.reviewText.replace(/\n+/g, "\n")),
           campId: +campId
         };
         await dispatch(thunk_writeReview(input));
@@ -71,20 +76,24 @@ function WriteAReview(props) {
   return (
     <form className="write-a-review-form" onSubmit={handleSubmit}>
       <div className="input-group">
-        <StarRatingForm onClick={onClickRating} type={inputValue.rating} />
+        <StarRatingForm onClick={handleOnClickRating} type={inputValue.rating} />
         <InputText
           ref={(el) => (inputEl.current[0] = el)}
-          placeholder="Summarize your experience here"
           className="summarize-input"
-          onChange={onChangeSummarize}
+          placeholder="Summarize your experience here"
+          onChange={handleOnChangeSummarize}
+          value={inputValue.summarize}
           errorText={errorInput.summarize}
+          maxLength={100}
         />
-        <InputText
+
+        <Textarea
           ref={(el) => (inputEl.current[1] = el)}
           placeholder="Review your experience here"
-          className="review-input"
-          onChange={onChangeReviewText}
+          value={inputValue.reviewText}
+          onChange={handleOnChangeReviewText}
           errorText={errorInput.reviewText}
+          maxLength={2000}
         />
       </div>
       <div className="button-group">

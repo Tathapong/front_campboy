@@ -1,11 +1,15 @@
 .more-post-group {
-  @include flex-center-stretch;
+  display: flex;
   gap: 20px;
 
   .blog-card-a-list {
     @include flex-column;
     gap: 20px;
     max-width: 782px;
+
+    .blog-card-a-group {
+      flex-basis: 100%;
+    }
   }
 
   .recent-post-group {
@@ -18,7 +22,6 @@
     }
 
     .blog-recent-list-title {
-      align-self: flex-start;
       font-weight: bold;
       color: #1a2f77;
       margin-block: 10px;
@@ -26,6 +29,7 @@
 
     .blog-recent-list {
       @include flex-column;
+
       gap: 10px;
       background-color: white;
       padding: 10px;

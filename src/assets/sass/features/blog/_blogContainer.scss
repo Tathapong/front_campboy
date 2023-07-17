@@ -17,7 +17,7 @@
     .header-group {
       @include flex-space-between-center;
 
-      .profile-title-group {
+      .horizontal-profile-title-group {
         max-width: 50%;
         overflow: hidden;
       }
@@ -68,9 +68,12 @@
     > .modal-content {
       animation-name: animateright;
       padding: 15px;
+      padding-right: 20px;
+
       border-radius: 0;
       float: right;
-      height: 100vh;
+      height: 100%;
+      max-height: 100vh;
 
       > .modal-header {
         @include font-bold-space(0.05em);
@@ -88,7 +91,6 @@
 
   > .modal-comment {
     > .modal-content {
-      width: 83.66%;
       max-width: 480px;
 
       > .modal-body {
@@ -96,25 +98,14 @@
           @include flex-column;
           flex-shrink: 0;
           gap: 10px;
-          margin-top: 20px;
+          margin-top: 10px;
           height: 300px;
 
-          > .textarea {
-            @include border-radius-box-shadow();
-            background-color: #eee;
+          .textarea-group {
+            flex-grow: 1;
 
-            height: 100%;
-
-            resize: none;
-            padding: 10px;
-            font-size: 0.75rem;
-          }
-
-          .small-text {
-            @include flex-space-between-center;
-            .textarea-count {
-              font-style: italic;
-              color: #bbb;
+            .textarea {
+              flex-grow: 1;
             }
           }
         }
@@ -131,11 +122,12 @@
     }
   }
 
-  .modal-sidebar {
-    .modal-content {
+  > .modal-sidebar {
+    > .modal-content {
+      max-width: 480px;
+
       .modal-body {
         overflow-y: hidden;
-
         .sidebar-blog-group {
           height: 100%;
 
@@ -143,41 +135,21 @@
           padding-left: 0px;
 
           .blog-more-group {
+            flex-grow: 1;
             @include flex-column;
-            height: 100%;
-            overflow: hidden;
+            overflow-y: hidden;
 
-            > .title {
-              margin-block: 0px;
-              padding-block: 15px;
+            .title {
+              padding-block: 10px;
             }
 
             .blog-list {
+              flex-grow: 1;
               overflow-y: auto;
-              .blog-recent-group {
-                .image-group {
-                  width: 100%;
-                  min-width: 0px;
-                }
-                .info {
-                  width: 120%;
-                }
-              }
             }
           }
         }
       }
     }
-  }
-}
-
-@keyframes animateright {
-  from {
-    right: -300px;
-    opacity: 0;
-  }
-  to {
-    right: 0;
-    opacity: 1;
   }
 }

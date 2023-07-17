@@ -1,8 +1,8 @@
-.blog-edit-dropdown-group {
+.edit-dropdown-group {
   z-index: 1;
   position: relative;
 
-  .blog-edit-dropdown-content {
+  .edit-dropdown-content {
     position: absolute;
     top: 140%;
     right: 0%;
@@ -28,11 +28,18 @@
     [class*="option-dropdown-share"] {
       display: none;
     }
+  }
+  .modal-edit,
+  .modal-delete,
+  .modal-share {
+    .modal-content {
+      max-width: fit-content;
+    }
+  }
 
-    .modal-share {
-      .share-social-group {
-        margin: 10px;
-      }
+  .modal-share {
+    .share-social-group {
+      margin: 10px;
     }
   }
 }

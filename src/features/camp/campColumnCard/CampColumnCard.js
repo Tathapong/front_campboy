@@ -1,20 +1,35 @@
-import { Link } from "react-router-dom";
-import camp1 from "../../../assets/images/camp1.jpg";
+import { useNavigate } from "react-router-dom";
 
 import IconText from "../../../components/iconText/IconText";
 import StarRating from "../../../components/starRating/StarRating";
 
+import { NO_IMAGE_AVAILABLE } from "../../../config/env";
+
 function CampColumnCard(props) {
-  const { province = "Province", campName = "Camp name", rate, noReview = "99", image = camp1 } = props;
+  const {
+    campId,
+    campName = "Camp name",
+    campImage = NO_IMAGE_AVAILABLE,
+    campProvince = "Province",
+    noReview = "0",
+    averageRating
+  } = props;
+
+  const navigate = useNavigate();
+
+  function handleOnClickCamp() {
+    navigate("/camp/" + campId);
+  }
+
   return (
-    <div className="camp-column-card-group">
-      <img className="camp-image" src={image} alt="camp" />
-      <IconText type="location" name={province} />
-      <Link className="camp-name">{campName}</Link>
-      <Link className="camp-review-group">
-        <StarRating />
+    <div className="camp-column-card-group" onClick={handleOnClickCamp}>
+      <img className="camp-image" src={campImage} alt="camp" />
+      <IconText type="location" name={campProvince} />
+      <div className="camp-name">{campName}</div>
+      <div className="camp-review-group">
+        <StarRating type={averageRating} />
         <span className="camp-review">{noReview} Reviews</span>
-      </Link>
+      </div>
     </div>
   );
 }

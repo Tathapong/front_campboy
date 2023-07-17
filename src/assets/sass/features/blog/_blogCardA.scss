@@ -1,18 +1,18 @@
 .blog-card-a-group {
-  @include grid-auto(auto auto, auto auto);
+  @include grid-auto(1.5fr 1fr, auto auto);
   background-color: white;
   box-shadow: $dropShadow;
   padding: 20px;
   column-gap: 20px;
-
   .date {
     grid-area: 1 / 1 / span 1 / span 1;
     font-size: clamp(10px, 1vw, 12px);
+    color: #878686;
+    font-style: italic;
   }
 
   .image-group {
     grid-area: 1 / 2 / span 2 / span 1;
-    width: 300px;
 
     .image {
       width: 100%;
@@ -22,14 +22,13 @@
   }
 
   .content-footer {
-    @include flex-column;
     grid-area: 2 / 1 / span 1 / span 1;
-    align-items: flex-start;
-    min-width: 200px;
+    overflow: hidden;
+    @include flex-column;
 
     > .title {
       @include font-bold-space(0.05em);
-      @include ellipsis-multiline(3);
+      @include ellipsis-multiline(2);
       font-size: clamp(16px, 1.8vw, 20px);
       margin-bottom: 10px;
     }
@@ -41,10 +40,18 @@
 
     .footer {
       @include flex-space-between-center;
-      align-self: stretch;
+      gap: 5px;
       border-top: 1px solid #7c7c7c;
       margin-top: 10px;
       padding-top: 10px;
+
+      .horizontal-profile-title-group {
+        overflow: hidden;
+      }
+      .icon-text-group {
+        min-width: fit-content;
+        cursor: default;
+      }
     }
   }
 }

@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import * as customValidator from "../../../validation/validation";
-import { thunk_signup } from "../../../stores/myUserSlice";
 import Button from "../../../components/button/Button";
 import InputText from "../../../components/inputText/InputText";
+
+import { isNotEmpty, isEmail, isStrongPassword } from "../../../validation/validation";
+import { thunk_signup } from "../../../stores/myUserSlice";
 
 function SignupForm(props) {
   const { switchToModalLogin, closeModalSignup, openModalResendVerify } = props;
@@ -23,43 +24,52 @@ function SignupForm(props) {
   const [inputValue, setInputValue] = useState({ ...initialValue });
   const [errorInput, setErrorInput] = useState({ ...initialValue });
 
-  const onChangeFirstName = (ev) => setInputValue((prev) => ({ ...prev, firstName: ev.target.value }));
-  const onChangeLastName = (ev) => setInputValue((prev) => ({ ...prev, lastName: ev.target.value }));
-  const onChangeEmail = (ev) => setInputValue((prev) => ({ ...prev, email: ev.target.value }));
-  const onChangePassword = (ev) => setInputValue((prev) => ({ ...prev, password: ev.target.value }));
-  const onChangeConfirmPassword = (ev) => setInputValue((prev) => ({ ...prev, confirmPassword: ev.target.value }));
+  function handleOnChangeFirstName(ev) {
+    setInputValue((prev) => ({ ...prev, firstName: ev.target.value }));
+  }
+  function handleOnChangeLastName(ev) {
+    setInputValue((prev) => ({ ...prev, lastName: ev.target.value }));
+  }
+  function handleOnChangeEmail(ev) {
+    setInputValue((prev) => ({ ...prev, email: ev.target.value }));
+  }
+  function handleOnChangePassword(ev) {
+    setInputValue((prev) => ({ ...prev, password: ev.target.value }));
+  }
+  function handleOnChangeConfirmPassword(ev) {
+    setInputValue((prev) => ({ ...prev, confirmPassword: ev.target.value }));
+  }
 
-  const handleSubmit = async (ev) => {
+  async function handleOnSubmit(ev) {
     ev.preventDefault();
 
     try {
       //+ Validation
       const error = { ...initialValue };
-      setErrorInput((prev) => ({ ...initialValue })); ///+ Reset error
+      setErrorInput((prev) => ({ ...initialValue }));
 
       //- Check First name
-      if (!customValidator.isNotEmpty(inputValue.firstName)) error.firstName = "First name is required";
+      if (!isNotEmpty(inputValue.firstName)) error.firstName = "First name is required";
 
       //- Check Last name
-      if (!customValidator.isNotEmpty(inputValue.lastName)) error.lastName = "Last name is required";
+      if (!isNotEmpty(inputValue.lastName)) error.lastName = "Last name is required";
 
       //- Check Email
-      if (!customValidator.isNotEmpty(inputValue.email)) error.email = "Email address is required";
-      else if (!customValidator.isEmail(inputValue.email)) error.email = "Email address is invalid format";
+      if (!isNotEmpty(inputValue.email)) error.email = "Email address is required";
+      else if (!isEmail(inputValue.email)) error.email = "Email address is invalid format";
 
       //- Check password
-      if (!customValidator.isNotEmpty(inputValue.password)) error.password = "Password is required";
-      else if (!customValidator.isStrongPassword(inputValue.password))
+      if (!isNotEmpty(inputValue.password)) error.password = "Password is required";
+      else if (!isStrongPassword(inputValue.password))
         error.password =
           "Password must be strong (min length : 8, min lowercase :1, min uppercase : 1, min numbers : 1, min symbols : 1)";
 
       //- Check confirm password
-      if (!customValidator.isNotEmpty(inputValue.confirmPassword))
-        error.confirmPassword = "Confirm password is required";
+      if (!isNotEmpty(inputValue.confirmPassword)) error.confirmPassword = "Confirm password is required";
       else if (inputValue.confirmPassword !== inputValue.password)
         error.confirmPassword = "Confirm password and password did not match";
 
-      setErrorInput((prev) => ({ ...error })); ///+ Set error
+      setErrorInput((prev) => ({ ...error }));
 
       const isError = error.firstName || error.lastName || error.email || error.password || error.confirmPassword;
       if (!isError) {
@@ -73,38 +83,38 @@ function SignupForm(props) {
         await dispatch(thunk_signup(input));
         inputEl.current.map((item) => (item.value = ""));
 
-        setInputValue({ ...initialValue }); ///+ Reset input
+        setInputValue({ ...initialValue });
         closeModalSignup();
         openModalResendVerify();
         toast.success("signup successful");
       }
     } catch (error) {
-      console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+      console.log(error.response.data.error);
+      toast.error(error.response.data.error);
     }
-  };
+  }
 
   return (
-    <form className="signup-auth-form" onSubmit={handleSubmit}>
+    <form className="signup-auth-form" onSubmit={handleOnSubmit}>
       <div className="input-group">
         <InputText
           ref={(el) => (inputEl.current[0] = el)}
           placeholder="First name"
-          onChange={onChangeFirstName}
+          onChange={handleOnChangeFirstName}
           errorText={errorInput.firstName}
         />
 
         <InputText
           ref={(el) => (inputEl.current[1] = el)}
           placeholder="Last name"
-          onChange={onChangeLastName}
+          onChange={handleOnChangeLastName}
           errorText={errorInput.lastName}
         />
 
         <InputText
           placeholder="Email address"
           ref={(el) => (inputEl.current[2] = el)}
-          onChange={onChangeEmail}
+          onChange={handleOnChangeEmail}
           errorText={errorInput.email}
         />
 
@@ -112,7 +122,7 @@ function SignupForm(props) {
           type="password"
           placeholder="Password"
           ref={(el) => (inputEl.current[3] = el)}
-          onChange={onChangePassword}
+          onChange={handleOnChangePassword}
           errorText={errorInput.password}
         />
 
@@ -120,7 +130,7 @@ function SignupForm(props) {
           type="password"
           placeholder="Confirm password"
           ref={(el) => (inputEl.current[4] = el)}
-          onChange={onChangeConfirmPassword}
+          onChange={handleOnChangeConfirmPassword}
           errorText={errorInput.confirmPassword}
         />
       </div>

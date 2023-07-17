@@ -1,14 +1,14 @@
 import { useCallback, useState } from "react";
 
-import Confirm from "../../../components/confirm/Confirm";
-import IconText from "../../../components/iconText/IconText";
-import Modal from "../../../components/modal/Modal";
-import OptionDropdown from "../../../components/optionDropdown/OptionDropdown";
-import ShareSocial from "../../../components/shareSocial/ShareSocial";
+import Confirm from "../confirm/Confirm";
+import IconText from "../iconText/IconText";
+import Modal from "../modal/Modal";
+import OptionDropdown from "../optionDropdown/OptionDropdown";
+import ShareSocial from "../shareSocial/ShareSocial";
 
-import { useClickOutSide } from "../../../hooks/useClickOutside";
+import { useClickOutSide } from "../../hooks/useClickOutside";
 
-function BlogEditDropdown(props) {
+function EditDropdown(props) {
   const { onClickDelete, onClickEdit } = props;
 
   const [dropdown, setDropdown] = useState(false);
@@ -48,30 +48,30 @@ function BlogEditDropdown(props) {
     setModalShareIsOpen(false);
   }
 
-  function handleClickEdit() {
+  function handleOnClickEdit() {
     closeDropdown();
     openModalEdit();
   }
 
-  function handleClickDelete() {
+  function handleOnClickDelete() {
     closeDropdown();
     openModalDelete();
   }
 
-  async function handleClickConfirmEdit() {
+  async function handleOnClickConfirmEdit() {
     closeModalEdit();
     await onClickEdit();
   }
 
   return (
-    <div className="blog-edit-dropdown-group" ref={dropdownEl}>
+    <div className="edit-dropdown-group" ref={dropdownEl}>
       <IconText type="vertical-dot" onClick={toggleDropdown} />
-      <ul className={`blog-edit-dropdown-content ${dropdown ? "d-flex" : "d-none"} `}>
-        <OptionDropdown title="Edit" onClick={handleClickEdit}>
+      <ul className={`edit-dropdown-content ${dropdown ? "d-flex" : "d-none"} `}>
+        <OptionDropdown title="Edit" onClick={handleOnClickEdit}>
           <i class="fa-solid fa-pen"></i>
         </OptionDropdown>
 
-        <OptionDropdown title="Delete" onClick={handleClickDelete}>
+        <OptionDropdown title="Delete" onClick={handleOnClickDelete}>
           <i class="fa-solid fa-trash"></i>
         </OptionDropdown>
         <OptionDropdown title="Share" className="option-dropdown-share" onClick={openModalShare}>
@@ -79,19 +79,24 @@ function BlogEditDropdown(props) {
         </OptionDropdown>
       </ul>
 
-      <Modal header="Change blog content" isOpen={modalEditIsOpen} closeModal={closeModalEdit}>
+      <Modal className="modal-edit" header="Change content" isOpen={modalEditIsOpen} closeModal={closeModalEdit}>
         <Confirm
-          onConfirm={handleClickConfirmEdit}
+          onConfirm={handleOnClickConfirmEdit}
           onCancel={closeModalEdit}
           text="Are you sure, you want to change the content ?"
         />
       </Modal>
 
-      <Modal header="Delete Confirmation" isOpen={modalDeleteIsOpen} closeModal={closeModalDelete}>
+      <Modal
+        className="modal-delete"
+        header="Delete Confirmation"
+        isOpen={modalDeleteIsOpen}
+        closeModal={closeModalDelete}
+      >
         <Confirm
           onConfirm={onClickDelete}
           onCancel={closeModalDelete}
-          text="Are you sure, you want to delete the blog ?"
+          text="Are you sure, you want to delete the content ?"
         />
       </Modal>
 
@@ -102,4 +107,4 @@ function BlogEditDropdown(props) {
   );
 }
 
-export default BlogEditDropdown;
+export default EditDropdown;

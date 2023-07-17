@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const Textarea = forwardRef(function Textarea(props, ref) {
-  const { placeholder, value, onChange, errorText, maxLength, maxLine = 5 } = props;
+  const { placeholder, value, onChange, onKeyUp, errorText, maxLength, maxLine = 5 } = props;
 
   function onChangeTextarea(ev) {
     const lines = ev.target.value.split("\n");
@@ -11,10 +11,11 @@ const Textarea = forwardRef(function Textarea(props, ref) {
   return (
     <div className="textarea-group">
       <textarea
-        className="textarea"
+        className={`textarea ${errorText ? "input-error" : ""}`}
         placeholder={placeholder}
         value={value}
         onChange={onChangeTextarea}
+        onKeyUp={onKeyUp}
         ref={ref}
         maxLength={maxLength}
       />

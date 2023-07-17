@@ -1,10 +1,8 @@
 .textarea-group {
-  width: 100%;
-  margin-block: 5px;
+  @include flex-column;
+  gap: 10px;
 
   .textarea {
-    width: 100%;
-    height: 100%;
     padding-block: 10px;
     padding-inline: 20px;
     border: none;
@@ -26,10 +24,13 @@
     font-size: 0.85rem;
   }
 
+  textarea[class*="input-error"] {
+    border: 2px solid red;
+  }
+
   .small-text-group {
     @include flex-space-between-center;
     font-style: italic;
-    font-size: 0.5rem;
     .text-error {
       color: red;
     }

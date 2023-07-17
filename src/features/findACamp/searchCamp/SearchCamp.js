@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-import * as informationService from "../../../api/informationApi";
-import { selectboxFromArray } from "../../../utilities/selectboxFromArray";
-
 import InputTextIcon from "../../../components/inputTextIcon/InputTextIcon";
 import SelectBox from "../../../components/selectBox/SelectBox";
 
+import * as informationService from "../../../api/informationApi";
+import { selectboxFromArray } from "../../../utilities/selectboxFromArray";
+
 function SearchCamp(props) {
-  const { setProvince, setDestination, province } = props;
+  const { setProvince, setDestination, province, destination } = props;
   const [provinceList, setProvinceList] = useState([]);
 
   useEffect(() => {
@@ -23,16 +23,12 @@ function SearchCamp(props) {
     fetchProvince();
   }, []);
 
-  function onChangeDestination(ev) {
-    setDestination(ev.target.value);
-  }
-
   return (
     <div className="search-camp-group">
       <div className="header">Search</div>
       <div className="destination">
         <div className="title">Destination/ Camp name</div>
-        <InputTextIcon placeholder="Where do you want to camp?" onChange={onChangeDestination}>
+        <InputTextIcon placeholder="Where do you want to camp?" value={destination} setValue={setDestination}>
           <i class="fa-solid fa-magnifying-glass"></i>
         </InputTextIcon>
       </div>

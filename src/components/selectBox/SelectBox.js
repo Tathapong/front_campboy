@@ -1,9 +1,13 @@
 function SelectBox(props) {
-  const { list = [], setValue, selected } = props;
+  const { list = [], setValue, selected, errorText } = props;
   const initialValue = selected ? selected : "";
 
   return (
-    <select className="select-box-group" value={initialValue} onChange={(ev) => setValue(ev.target.value)}>
+    <select
+      className={`select-box-group ${errorText ? "select-box-error" : ""}`}
+      value={initialValue}
+      onChange={(ev) => setValue(ev.target.value)}
+    >
       <option value="" className="option">
         Select
       </option>

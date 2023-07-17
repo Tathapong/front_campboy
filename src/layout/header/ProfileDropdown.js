@@ -74,10 +74,22 @@ function ProfileDropdown() {
           <i class="fa-solid fa-right-from-bracket"></i>
         </OptionDropdown>
       </ul>
-      <Modal header="Change password" isOpen={modalChangeIsOpen} closeModal={closeModalChange}>
+
+      <Modal
+        header="Change password"
+        className="modal-change-password"
+        isOpen={modalChangeIsOpen}
+        closeModal={closeModalChange}
+      >
         <ChangePasswordForm closeModal={closeModalChange} />
       </Modal>
-      <Modal header="Confirm Logout" isOpen={modalConfirmLogout} closeModal={closeModalConfirmLogout}>
+
+      <Modal
+        header="Confirm Logout"
+        className="modal-confirm-logout"
+        isOpen={modalConfirmLogout}
+        closeModal={closeModalConfirmLogout}
+      >
         <Confirm onCancel={closeModalConfirmLogout} onConfirm={handleLogout} />
       </Modal>
     </div>

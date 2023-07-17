@@ -30,7 +30,6 @@
   .small-text-group {
     @include flex-space-between-center;
     font-style: italic;
-    font-size: 0.5rem;
 
     .text-error {
       color: red;

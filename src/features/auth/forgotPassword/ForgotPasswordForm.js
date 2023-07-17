@@ -1,12 +1,13 @@
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { thunk_sendResetPassword } from "../../../stores/myUserSlice";
 import { toast } from "react-toastify";
 
-import * as customValidator from "../../../validation/validation";
-import * as constant from "../../../config/constant";
 import Button from "../../../components/button/Button";
 import InputText from "../../../components/inputText/InputText";
+
+import { thunk_sendResetPassword } from "../../../stores/myUserSlice";
+import { isNotEmpty, isEmail } from "../../../validation/validation";
+import * as constant from "../../../config/constant";
 
 function ForgotPasswordForm(props) {
   const { closeModalForgot, openModalResendForgot } = props;
@@ -16,21 +17,23 @@ function ForgotPasswordForm(props) {
   const [email, setEmail] = useState("");
   const [errorInput, setErrorInput] = useState("");
 
-  const onChangeEmail = (ev) => setEmail(ev.target.value);
+  function handleOnChangeEmail(ev) {
+    setEmail(ev.target.value);
+  }
 
-  const handleSubmit = async (ev) => {
+  async function handleOnSubmit(ev) {
     ev.preventDefault();
 
     try {
       //+ Validation
       let error;
-      setErrorInput(""); ///+ Reset error
+      setErrorInput("");
 
       //- Check Email
-      if (!customValidator.isNotEmpty(email)) error = "Email address is required";
-      else if (!customValidator.isEmail(email)) error = "Email address is invalid format";
+      if (!isNotEmpty(email)) error = "Email address is required";
+      else if (!isEmail(email)) error = "Email address is invalid format";
 
-      setErrorInput(error); ///+ Set error
+      setErrorInput(error);
 
       if (!error) {
         await dispatch(thunk_sendResetPassword(email, constant.RESET_PASSWORD));
@@ -46,13 +49,18 @@ function ForgotPasswordForm(props) {
       toast.error(error.response.data.message);
       console.log(error.response.data.message);
     }
-  };
+  }
 
   return (
-    <form className="forgot-password-auth-form" onSubmit={handleSubmit}>
+    <form className="forgot-password-auth-form" onSubmit={handleOnSubmit}>
       <span className="title">Enter your email address</span>
       <div className="input-group">
-        <InputText ref={inputEl} placeholder="Enter email address" onChange={onChangeEmail} errorText={errorInput} />
+        <InputText
+          ref={inputEl}
+          placeholder="Enter email address"
+          onChange={handleOnChangeEmail}
+          errorText={errorInput}
+        />
       </div>
       <div className="button-group">
         <Button name="Confirm" type="submit" />

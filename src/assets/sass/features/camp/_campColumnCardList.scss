@@ -1,3 +1,3 @@
 .camp-column-card-list-group {
-  @include grid-auto(auto auto auto auto, auto);
+  @include grid-auto(1fr 1fr 1fr 1fr, auto);
 }

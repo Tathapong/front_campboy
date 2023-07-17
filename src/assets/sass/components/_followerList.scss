@@ -1,8 +1,4 @@
 .follower-list {
   @include flex-column;
-  gap: 2px;
-
-  .profile-title-group {
-    height: 46px;
-  }
+  gap: 10px;
 }

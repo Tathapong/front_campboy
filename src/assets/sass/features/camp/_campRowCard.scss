@@ -63,6 +63,10 @@
       color: #fd3b00;
     }
 
+    .icon-text-group {
+      cursor: default;
+    }
+
     .facility-group {
       @include grid-auto(1fr 1fr, auto auto);
       align-self: stretch;

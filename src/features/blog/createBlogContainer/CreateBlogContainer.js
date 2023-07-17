@@ -7,10 +7,10 @@ import { EditorState, convertToRaw } from "draft-js";
 import DraftEditor from "./DraftEditor";
 
 import { thunk_createBlog } from "../../../stores/blogSlice";
-import * as customValidator from "../../../validation/validation";
+import { isNotEmpty } from "../../../validation/validation";
 import { useUploadBlogImage } from "../../../hooks/useUploadBlogImage";
 
-function CreateBlog() {
+function CreateBlogContainer() {
   const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
   const [title, setTitle] = useState("");
 
@@ -22,11 +22,11 @@ function CreateBlog() {
 
   const uploadImageReplaceURL = useUploadBlogImage();
 
-  function handleClickConfirmEditorCancel() {
+  function handleOnClickConfirmEditorCancel() {
     navigate("/blog");
   }
 
-  async function handleClickPublish() {
+  async function handleOnClickPublish() {
     try {
       const contentState = editorState.getCurrentContent();
 
@@ -35,11 +35,11 @@ function CreateBlog() {
       setErrorInput((prev) => ({ ...initialError }));
 
       //- Check Title
-      if (!customValidator.isNotEmpty(title)) error.title = "Title is required";
+      if (!isNotEmpty(title)) error.title = "Title is required";
 
       //- Check Editor
       const plainText = contentState.getPlainText();
-      if (!customValidator.isNotEmpty(plainText)) error.editor = "Content in Editor is required";
+      if (!isNotEmpty(plainText)) error.editor = "Content in Editor is required";
 
       setErrorInput((prev) => ({ ...error }));
 
@@ -68,11 +68,11 @@ function CreateBlog() {
         title={title}
         setTitle={setTitle}
         errorInput={errorInput}
-        handlePublishButton={handleClickPublish}
-        handleConfirmCancel={handleClickConfirmEditorCancel}
+        handlePublishButton={handleOnClickPublish}
+        handleConfirmCancel={handleOnClickConfirmEditorCancel}
       />
     </div>
   );
 }
 
-export default CreateBlog;
+export default CreateBlogContainer;

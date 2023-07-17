@@ -37,10 +37,10 @@ export const thunk_toggleFollow = (profileId) => async (dispatch, getState) => {
     const { follow } = res.data;
 
     const myUserId = getState().myUser.id;
-    const idx = getState().profile.follower.findIndex((item) => item.accountId === myUserId);
+    const idx = getState().profile.follower.findIndex((item) => item.profileId === myUserId);
 
-    if (follow) dispatch(actions.addFollower(follow));
-    else dispatch(actions.deleteFollower(idx));
+    if (follow && idx === -1) dispatch(actions.addFollower(follow));
+    else if (idx !== -1) dispatch(actions.deleteFollower(idx));
   } catch (error) {
     throw error;
   }
@@ -49,24 +49,24 @@ export const thunk_toggleFollow = (profileId) => async (dispatch, getState) => {
 export const selectProfile = createSelector([(state) => state.profile, (state) => state.myUser], (profile, myUser) => {
   return {
     id: profile.id ?? "",
-    firstName: profile.firstName ?? "",
-    lastName: profile.lastName ?? "",
+    firstName: profile.firstName ?? "", //
+    lastName: profile.lastName ?? "", //
     profileImage: profile.profileImage ?? "",
-    profileCoverImage: profile.coverImage ?? "",
-    profileAbout: profile.about ? JSON.parse(profile.about) : "",
+    coverImage: profile.coverImage ?? "", //
+    about: profile.about ? JSON.parse(profile.about) : "",
     follower: profile.follower ?? [],
-    isFollower: profile.follower
-      ? Boolean(profile.follower.filter((item) => item.accountId === myUser?.id).length)
-      : false
+    following: profile.following ?? [],
+    isFollower: profile.follower ? Boolean(profile.follower.find((item) => item.profileId === myUser?.id)) : false
   };
 });
 
-export const selectBlogByProfileId = createSelector(
-  [(state) => state.blogs, (state, profileId) => profileId],
-  (blogs, profileId) => {
-    return blogs.filter((blog) => blog.userId === +profileId);
-  }
-);
+export const selectTopFiveFollowing = createSelector([(state) => state.profile], (profile) => {
+  if (profile.following?.length) {
+    return Array.from(profile.following)
+      .slice(0, 5)
+      .map((profile) => ({ ...profile, profileAbout: undefined }));
+  } else return [];
+});
 
 export default profileSlice.reducer;
 export const actions = profileSlice.actions;

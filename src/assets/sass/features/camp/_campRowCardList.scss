@@ -5,7 +5,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: $borderRadius;
 
-  height: 90vh;
+  max-height: 90vh;
+  height: fit-content;
   padding-right: 10px;
   overflow-y: auto;
 }

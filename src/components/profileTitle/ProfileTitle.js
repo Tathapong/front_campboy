@@ -1,52 +1,51 @@
 import { Link } from "react-router-dom";
-
-import Button from "../button/Button";
 import millify from "millify";
 
-import avatar1 from "../../assets/images/avatar1.jpg";
+import Button from "../button/Button";
+import { DEFAULT_PROFILE_IMAGE } from "../../config/env";
 
 function ProfileTitle(props) {
   const {
-    profileImage = avatar1,
+    type = "horizontal",
+    profileImage = DEFAULT_PROFILE_IMAGE,
     name = "name",
     follower,
     about,
     since,
     to,
-    onClickEditProfile,
-    onClickFollowButton,
     isMember = false,
     isMyProfile = false,
-    isFollower = false
+    isFollower = false,
+    onClickEditProfile,
+    onClickFollowButton,
+    onClickFollowerLink
   } = props;
 
   return (
-    <div className="profile-title-group">
-      <div className="image-info">
-        <Link>
-          <img src={profileImage} alt="profile" className="image" />
+    <div className={`${type}-profile-title-group`}>
+      <Link to={to}>
+        <img src={profileImage} alt="profile" className="image" />
+      </Link>
+      <div className="profile-info">
+        <Link className="title" to={to}>
+          {name}
         </Link>
-        <div className="profile-info">
-          <Link className="title" to={to}>
-            {name}
-          </Link>
-          {follower ? <span className="follower">{`${millify(follower)} Followers`}</span> : ""}
-          {about ? (
-            <span className="about" dangerouslySetInnerHTML={{ __html: about.replace(/\n/g, "<br>") }}></span>
-          ) : (
-            ""
-          )}
-          {since ? <span className="since">{since}</span> : ""}
-        </div>
+        {follower ? (
+          <Link className="follower" onClick={onClickFollowerLink}>{`${millify(follower)} Followers`}</Link>
+        ) : (
+          ""
+        )}
+        {about ? <div className="about" dangerouslySetInnerHTML={{ __html: about.replace(/\n/g, "<br>") }}></div> : ""}
+        {since ? <div className="since">{since}</div> : ""}
       </div>
 
       {isMember ? (
-        !isMyProfile ? (
+        isMyProfile ? (
+          ""
+        ) : (
           <Button className={isFollower ? "btn-following" : "btn-follow"} onClick={onClickFollowButton}>
             {isFollower ? "Following" : "Follow"}
           </Button>
-        ) : (
-          ""
         )
       ) : (
         ""

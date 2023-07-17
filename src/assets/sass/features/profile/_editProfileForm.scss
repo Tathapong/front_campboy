@@ -1,26 +1,22 @@
 .edit-profile-form {
+  height: 100%;
   @include flex-column;
-  gap: 5px;
 
-  width: 484px;
-  max-width: 100%;
+  gap: 5px;
 
   .title {
     @include font-bold-space(0.05em);
-    font-size: 1.25rem;
+    font-size: 0.875rem;
+    color: #757575;
   }
+
   .profile-image-group {
     align-self: center;
-    width: 150px;
-    height: 150px;
     position: relative;
 
     .profile-image {
+      @include image-profile(150px);
       box-shadow: $dropShadow;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
     }
 
     .icon-text-group {
@@ -40,6 +36,7 @@
 
   .cover-image-group {
     position: relative;
+
     .cover-image {
       height: 100px;
       width: 100%;
@@ -62,19 +59,17 @@
   }
   .form-group {
     @include flex-column;
+    gap: 5px;
+    flex-grow: 1;
 
     [class*="-input-group"] {
-      @include flex-row;
-      gap: 10px;
+      @include flex-column;
     }
 
     .input-label {
       @include font-bold-space(0.05em);
-      font-size: 0.75rem;
+      font-size: 0.875rem;
       color: #757575;
-
-      align-self: center;
-      width: 100px;
     }
 
     [class*="name-input-group"] {
@@ -84,12 +79,28 @@
           background-color: #d0b9a0;
           height: 35px;
         }
+
+        .small-text-group {
+          .text-count,
+          .text-error {
+            font-size: 0.675rem;
+          }
+        }
       }
     }
 
     .about-input-group {
+      flex-grow: 1;
       .textarea-group {
-        height: 120px;
+        flex-grow: 1;
+        .textarea {
+          flex-grow: 1;
+        }
+        .small-text-group {
+          .text-count {
+            font-size: 0.675rem;
+          }
+        }
       }
     }
 

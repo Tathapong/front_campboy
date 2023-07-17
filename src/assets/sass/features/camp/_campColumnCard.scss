@@ -6,17 +6,18 @@
   background-color: white;
   gap: 10px;
   box-shadow: $dropShadow;
+  cursor: pointer;
+  overflow: hidden;
 
   .camp-image {
     cursor: pointer;
-    max-width: 100%;
-
-    width: 220px;
+    width: 100%;
     height: 200px;
     object-fit: cover;
   }
 
   .camp-name {
+    @include ellipsis-multiline(2);
     font-size: clamp(0.75rem, 1vw, 0.85rem);
     font-weight: bold;
     color: #3227b0;
@@ -24,7 +25,6 @@
 
   .camp-review-group {
     @include flex-space-between-stretch;
-    align-self: stretch;
     flex-wrap: wrap;
 
     .camp-review {

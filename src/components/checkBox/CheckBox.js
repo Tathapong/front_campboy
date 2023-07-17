@@ -4,7 +4,7 @@ function CheckBox(props) {
   const id = useId();
   const { label = "label", value, children, setValue } = props;
 
-  const handleSelectCheckbox = (ev) => {
+  function handleSelectCheckbox(ev) {
     if (ev.target.checked) {
       setValue((prev) => [...prev, ev.target.value]);
     } else
@@ -13,7 +13,7 @@ function CheckBox(props) {
         set.delete(ev.target.value);
         return Array.from(set);
       });
-  };
+  }
 
   return (
     <div className="check-box-group">

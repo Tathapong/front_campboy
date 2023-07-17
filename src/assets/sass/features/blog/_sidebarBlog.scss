@@ -4,35 +4,6 @@
   border-left: 1px solid #a9a9a9;
   padding-left: 15px;
 
-  > .profile-title-group {
-    @include flex-column;
-    align-items: stretch;
-
-    padding-bottom: 15px;
-    border-bottom: 1px solid #c7c7c7;
-
-    .image-info {
-      @include flex-column;
-      align-items: stretch;
-      gap: 10px;
-
-      .image {
-        width: 72px;
-        height: 72px;
-        object-fit: cover;
-      }
-
-      .profile-info {
-        margin-left: 0;
-
-        .about {
-          margin-block: 10px;
-          -webkit-line-clamp: 6;
-        }
-      }
-    }
-  }
-
   .blog-more-group {
     > .title {
       margin-block: 15px;

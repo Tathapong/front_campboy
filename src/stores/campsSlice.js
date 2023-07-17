@@ -25,12 +25,7 @@ export const thunk_getAllCamp = (query) => async (dispatch, getState) => {
 };
 
 export const selectCamps = createSelector([(state) => state, (state, sortItem) => sortItem], (state, sortItem) => {
-  return Array.from(state.camps)
-    .map((item) => {
-      if (!item.OverallRating.length) return { ...item, OverallRating: [{ rating: 0, count: 0 }] };
-      else return item;
-    })
-    .sort(sortCamp(sortItem));
+  return Array.from(state.camps).sort(sortCamp(sortItem));
 });
 
 export const selectLocationList = createSelector([selectCamps], (camps) =>

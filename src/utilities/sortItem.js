@@ -38,16 +38,10 @@ export function sortCamp(sortItem) {
   return function (a, b) {
     if (sortItem === NEWEST) return orderByNewest(a, b);
     else if (sortItem === OLDEST) return orderByOldest(a, b);
-    else if (sortItem === HIGHEST_RATING)
-      return orderByHighest(a.OverallRating[0].rating, b.OverallRating[0].rating, orderByNewest(a, b));
-    else if (sortItem === LOWEST_RATING)
-      return orderByLowest(a.OverallRating[0].rating, b.OverallRating[0].rating, orderByNewest(a, b));
+    else if (sortItem === HIGHEST_RATING) return orderByHighest(a.scores, b.scores, orderByNewest(a, b));
+    else if (sortItem === LOWEST_RATING) return orderByLowest(a.scores, b.scores, orderByNewest(a, b));
     else if (sortItem === TOP_REVIEW)
-      return orderByHighest(
-        a.OverallRating[0].count,
-        b.OverallRating[0].count,
-        orderByHighest(a.OverallRating[0].rating, b.OverallRating[0].rating, orderByNewest(a, b))
-      );
+      return orderByHighest(a.reviewCount, b.reviewCount, orderByHighest(a.scores, b.scores, orderByNewest(a, b)));
   };
 }
 
@@ -65,22 +59,20 @@ export function sortComment(sortItem) {
     if (sortItem === NEWEST) return orderByNewest(a, b);
     else if (sortItem === OLDEST) return orderByOldest(a, b);
     else if (sortItem === HIGHEST_LIKE)
-      return orderByHighest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
+      return orderByHighest(a.commentLikeCount, b.commentLikeCount, orderByNewest(a, b));
     else if (sortItem === LOWEST_LIKE)
-      return orderByLowest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
+      return orderByLowest(a.commentLikeCount, b.commentLikeCount, orderByNewest(a, b));
   };
 }
 
 export function sortBlog(sortItem) {
   return function (a, b) {
-    if (sortItem === RECENTS) return orderByNewest(a, b);
+    if (sortItem === RECENTS || sortItem === SAVE || sortItem === FOLLOWING) return orderByNewest(a, b);
     else if (sortItem === TOP_PICK)
       return orderByHighest(
-        a.BlogComments.length,
-        b.BlogComments.length,
-        orderByHighest(a.BlogLikes.length, b.BlogLikes.length, orderByNewest(a, b))
+        a.blogCommentCount,
+        b.blogCommentCount,
+        orderByHighest(a.blogLikeCount, b.blogLikeCount, orderByNewest(a, b))
       );
-    // else if (sortItem === LOWEST_LIKE)
-    //   return orderByLowest(a.CommentLikes.length, b.CommentLikes.length, orderByNewest(a, b));
   };
 }

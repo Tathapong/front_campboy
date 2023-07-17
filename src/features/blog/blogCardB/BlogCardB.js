@@ -1,11 +1,13 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectMe } from "../../../stores/myUserSlice";
-import { thunk_toggleSave, thunk_toggleLike } from "../../../stores/blogsSlice";
 import { convertFromRaw } from "draft-js";
 
 import IconText from "../../../components/iconText/IconText";
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
+
+import { selectMe } from "../../../stores/myUserSlice";
+import { thunk_toggleSave, thunk_toggleLike } from "../../../stores/blogsSlice";
 
 function BlogCardB(props) {
   const { blog, unProfile = false } = props;
@@ -18,25 +20,16 @@ function BlogCardB(props) {
   const contentState = convertFromRaw(rawContentState);
   const contentText = contentState.getPlainText();
 
-  const blogId = blog.id;
-  const profileId = blog.userId;
-  const profileName = unProfile ? "" : `${blog.User.firstName} ${blog.User.lastName}`;
-  const profileImage = unProfile ? "" : blog.User.profileImage;
-  const blogLikeCount = blog.BlogLikes.length;
-  const blogCommentCount = blog.BlogComments.length;
-  const isLike = Boolean(blog.BlogLikes?.filter((item) => item.userId === myUser?.id).length);
-  const isSave = Boolean(blog.BlogSaves?.filter((item) => item.userId === myUser?.id).length);
-
-  async function handleClickSaveBlog() {
+  async function handleOnClickSaveBlog() {
     try {
-      await dispatch(thunk_toggleSave(blogId));
+      await dispatch(thunk_toggleSave(blog.id));
     } catch (error) {
       console.log(error);
     }
   }
-  async function handleClickLikeBlog() {
+  async function handleOnClickLikeBlog() {
     try {
-      await dispatch(thunk_toggleLike(blogId));
+      await dispatch(thunk_toggleLike(blog.id));
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +41,7 @@ function BlogCardB(props) {
         ""
       ) : (
         <div className="profile-date">
-          <ProfileTitle name={profileName} profileImage={profileImage} to={`/profile/${profileId}`} />
+          <ProfileTitle name={blog.profileName} profileImage={blog.profileImage} to={`/profile/${blog.profileId}`} />
           <div className="date">{date}</div>
         </div>
       )}
@@ -68,19 +61,26 @@ function BlogCardB(props) {
           <div className="content">{contentText}</div>
         </div>
       </div>
+
       <div className="footer">
         <div className="like-comment">
           <IconText
-            name={`${blogLikeCount} Likes`}
+            name={`${blog.blogLikeCount} Likes`}
             type="like"
-            onClick={handleClickLikeBlog}
-            isActive={isLike}
+            onClick={handleOnClickLikeBlog}
+            isActive={Boolean(blog.isLike)}
             unauthorized={!Boolean(myUser)}
           />
-          <IconText name={`${blogCommentCount} Comments`} type="comment" />
+          <IconText name={`${blog.blogCommentCount} Comments`} type="comment" />
         </div>
+
         {myUser ? (
-          <IconText type="save-post" onClick={handleClickSaveBlog} isActive={isSave} unauthorized={!Boolean(myUser)} />
+          <IconText
+            type="save-post"
+            onClick={handleOnClickSaveBlog}
+            isActive={Boolean(blog.isSave)}
+            unauthorized={!Boolean(myUser)}
+          />
         ) : (
           ""
         )}
@@ -89,4 +89,4 @@ function BlogCardB(props) {
   );
 }
 
-export default BlogCardB;
+export default memo(BlogCardB);

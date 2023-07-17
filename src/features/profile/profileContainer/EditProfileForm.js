@@ -15,6 +15,7 @@ function EditProfileForm(props) {
 
   const initialValue = { firstName: "", lastName: "", about: "", profileFile: null, coverFile: null };
   const initialError = { firstName: "", lastName: "" };
+
   const [inputValue, setInputValue] = useState({ ...initialValue });
   const [errorInput, setErrorInput] = useState({ ...initialError });
 
@@ -28,50 +29,49 @@ function EditProfileForm(props) {
     setInputValue((prev) => ({
       firstName: profile.firstName,
       lastName: profile.lastName,
-      about: profile.profileAbout,
+      about: profile.about,
       profileFile: null,
       coverFile: null
     }));
     setErrorInput((prev) => ({ ...initialError }));
 
-    textareaEl.current.value = profile.profileAbout;
     profileImageEl.current.value = null;
     coverImageEl.current.value = null;
   }, [profile, modalIsOpen]);
 
-  function onChangeFirstNameInput(ev) {
+  function handleOnChangeFirstNameInput(ev) {
     setInputValue((prev) => ({ ...prev, firstName: ev.target.value }));
   }
 
-  function onChangeLastNameInput(ev) {
+  function handleOnChangeLastNameInput(ev) {
     setInputValue((prev) => ({ ...prev, lastName: ev.target.value }));
   }
 
-  function onChangeAboutInput(ev) {
+  function handleOnChangeAboutInput(ev) {
     setInputValue((prev) => ({ ...prev, about: ev.target.value }));
   }
 
-  function onChangeProfileImageFile(ev) {
+  function handleOnChangeProfileImageFile(ev) {
     if (ev.target.files[0]) setInputValue((prev) => ({ ...prev, profileFile: ev.target.files[0] }));
   }
 
-  function onChangeCoverImageFile(ev) {
+  function handleOnChangeCoverImageFile(ev) {
     if (ev.target.files[0]) setInputValue((prev) => ({ ...prev, coverFile: ev.target.files[0] }));
   }
 
-  function onClickUploadProfileImage() {
+  function handleOnClickUploadProfileImage() {
     profileImageEl.current.click();
   }
 
-  function onClickUploadCoverImage() {
+  function handleOnClickUploadCoverImage() {
     coverImageEl.current.click();
   }
 
-  function onClickCancel() {
+  function handleOnClickCancel() {
     closeModal();
   }
 
-  async function onClickConfirm() {
+  async function handleOnClickConfirm() {
     try {
       //+ Validation
       const error = { ...initialValue };
@@ -81,10 +81,9 @@ function EditProfileForm(props) {
       if (!isNotEmpty(inputValue.firstName)) error.firstName = "First name is required";
 
       //- Last name
-      if (!isNotEmpty(inputValue.lastName)) error.lastName = "First name is required";
+      if (!isNotEmpty(inputValue.lastName)) error.lastName = "Last name is required";
 
       setErrorInput((prev) => ({ ...error }));
-
       const isError = error.firstName || error.lastName;
 
       if (!isError) {
@@ -116,11 +115,11 @@ function EditProfileForm(props) {
           className="profile-image"
           alt="profile"
         />
-        <IconText type={`camera`} onClick={onClickUploadProfileImage} />
+        <IconText type={`camera`} onClick={handleOnClickUploadProfileImage} />
         <input
           type="file"
           className="d-none"
-          onChange={onChangeProfileImageFile}
+          onChange={handleOnChangeProfileImageFile}
           ref={profileImageEl}
           accept="image/*"
         />
@@ -130,14 +129,19 @@ function EditProfileForm(props) {
 
       <div className="cover-image-group">
         <img
-          src={inputValue.coverFile ? URL.createObjectURL(inputValue.coverFile) : profile.profileCoverImage}
+          src={inputValue.coverFile ? URL.createObjectURL(inputValue.coverFile) : profile.coverImage}
           className="cover-image"
           alt="cover"
         />
-        <IconText type={`camera`} onClick={onClickUploadCoverImage} />
-        <input type="file" className="d-none" onChange={onChangeCoverImageFile} ref={coverImageEl} accept="image/*" />
+        <IconText type={`camera`} onClick={handleOnClickUploadCoverImage} />
+        <input
+          type="file"
+          className="d-none"
+          onChange={handleOnChangeCoverImageFile}
+          ref={coverImageEl}
+          accept="image/*"
+        />
       </div>
-      <div className="title">Profile</div>
 
       <form className="form-group">
         <div className="firstname-input-group">
@@ -145,7 +149,7 @@ function EditProfileForm(props) {
           <InputText
             placeholder="Enter frst name"
             value={inputValue.firstName}
-            onChange={onChangeFirstNameInput}
+            onChange={handleOnChangeFirstNameInput}
             errorText={errorInput.firstName}
             maxLength={50}
           />
@@ -156,7 +160,7 @@ function EditProfileForm(props) {
           <InputText
             placeholder="Enter last name"
             value={inputValue.lastName}
-            onChange={onChangeLastNameInput}
+            onChange={handleOnChangeLastNameInput}
             errorText={errorInput.lastName}
             maxLength={50}
           />
@@ -167,14 +171,14 @@ function EditProfileForm(props) {
           <Textarea
             placeholder="Enter about"
             value={inputValue.about}
-            onChange={onChangeAboutInput}
+            onChange={handleOnChangeAboutInput}
             ref={textareaEl}
             maxLength={160}
           />
         </div>
         <div className="button-group">
-          <Button name="Confirm" onClick={onClickConfirm} />
-          <Button name="Cancel" onClick={onClickCancel} />
+          <Button name="Confirm" onClick={handleOnClickConfirm} />
+          <Button name="Cancel" onClick={handleOnClickCancel} />
         </div>
       </form>
     </div>

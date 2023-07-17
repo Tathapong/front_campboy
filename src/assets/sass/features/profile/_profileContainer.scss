@@ -62,18 +62,16 @@
   }
 
   .modal-sidebar {
-    padding: 0px;
-
     .modal-content {
-      max-width: 420px;
-      width: 83.66%;
+      max-width: 400px;
+      max-height: 100vh;
+      height: 100vh;
 
       animation-name: animateright;
 
       padding: 15px;
       border-radius: 0;
       float: right;
-      height: 100vh;
 
       .modal-body {
         .sidebar-profile-group {
@@ -83,11 +81,18 @@
     }
   }
 
-  .modal-following {
-    z-index: 2;
+  .modal-edit-profile {
+    .modal-content {
+      max-width: 600px;
+      height: 100%;
+    }
   }
 
-  .not-found-page {
-    grid-area: 1 / 1 / span 1 / span 2;
+  .modal-following,
+  .modal-follower {
+    z-index: 2;
+    .modal-content {
+      max-width: 600px;
+    }
   }
 }

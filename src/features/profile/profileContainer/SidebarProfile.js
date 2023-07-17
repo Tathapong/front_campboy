@@ -1,22 +1,22 @@
-import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMe } from "../../../stores/myUserSlice";
 
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
 import SidebarFollower from "../../../components/sidebarFollower/SidebarFollower";
-import { thunk_toggleFollow } from "../../../stores/profileSlice";
 
-function Sidebar(props) {
-  const { profile, onClickMore, onClickEditProfile } = props;
+import { selectTopFiveFollowing, thunk_toggleFollow } from "../../../stores/profileSlice";
 
-  const params = useParams();
+function SidebarProfile(props) {
+  const { profile, onClickEditProfile, onClickShowFollower, onClickShowFollowing } = props;
+
   const dispatch = useDispatch();
-  const profileId = +params.profileId;
+
   const myUser = useSelector(selectMe);
+  const topFollowingProfile = useSelector(selectTopFiveFollowing);
 
   async function handleToggleFollow() {
     try {
-      await dispatch(thunk_toggleFollow(profileId));
+      await dispatch(thunk_toggleFollow(profile.id));
     } catch (error) {
       console.log(error);
     }
@@ -25,22 +25,28 @@ function Sidebar(props) {
   return (
     <div className="sidebar-profile-group">
       <ProfileTitle
-        profileImage={profile.profileImage}
-        name={`${profile.firstName} ${profile.lastName}`}
+        type="vertical"
+        about={profile.about}
         follower={profile.follower.length}
-        about={profile.profileAbout}
-        onClickEditProfile={onClickEditProfile}
-        isMember={myUser}
-        isMyProfile={profile.id === myUser?.id}
         isFollower={profile.isFollower}
+        isMember={Boolean(myUser)}
+        isMyProfile={profile.id === myUser?.id}
+        name={`${profile.firstName} ${profile.lastName}`}
+        profileImage={profile.profileImage}
+        onClickEditProfile={onClickEditProfile}
         onClickFollowButton={handleToggleFollow}
+        onClickFollowerLink={onClickShowFollower}
       />
 
       <div className="sidebar-follower-list">
-        <SidebarFollower title="Following" onClickMore={onClickMore} />
+        {topFollowingProfile.length ? (
+          <SidebarFollower title="Following" followList={topFollowingProfile} onClickMore={onClickShowFollowing} />
+        ) : (
+          <div className="no-following">{`${profile.profileName} hasn't followed other yet`}</div>
+        )}
       </div>
     </div>
   );
 }
 
-export default Sidebar;
+export default SidebarProfile;

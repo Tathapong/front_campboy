@@ -28,7 +28,7 @@ function IconText(props) {
       className={`icon-text-group ${type} ${unauthorized ? "cursor-not-allowed" : ""}`}
       to={to}
       state={state}
-      onClick={unauthorized ? () => {} : onClick}
+      onClick={unauthorized ? undefined : onClick}
     >
       {iconTag}
       <span className="text">{name}</span>

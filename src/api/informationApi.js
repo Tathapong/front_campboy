@@ -11,3 +11,9 @@ export const getFilterList = async () => {
   const { filterCheckboxs } = res.data;
   return filterCheckboxs;
 };
+
+export const getPropertyList = async () => {
+  const res = await axios.get("/api/resources/properties");
+  const { properties } = res.data;
+  return properties;
+};

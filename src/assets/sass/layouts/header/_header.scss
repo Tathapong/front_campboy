@@ -2,7 +2,7 @@
 @import "./logo";
 
 .nav {
-  margin: 0 auto;
+  margin-inline: auto;
   padding-top: 20px;
 
   .nav-container {
@@ -24,14 +24,26 @@
       justify-content: flex-end;
 
       .profile-dropdown-group {
+        z-index: 2;
         .profile-dropdown-content {
           .profile-name {
-            background-color: sandybrown;
+            background-color: rgb(118, 134, 97);
             padding-left: 10px;
             padding-block: 3px;
-            color: #285ed1;
+            color: #fff;
             font-weight: bold;
             text-align: left;
+
+            cursor: default;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .modal-change-password,
+        .modal-confirm-logout {
+          .modal-content {
+            max-width: fit-content;
           }
         }
       }
@@ -61,6 +73,15 @@
       background-color: rgba(0, 0, 0, 0.5);
       color: rgba(255, 255, 255, 1);
       border-radius: var(--borderRadius);
+    }
+  }
+
+  .modal-login,
+  .modal-signup,
+  .modal-forgot-password,
+  .modal-resend-email {
+    .modal-content {
+      max-width: fit-content;
     }
   }
 }

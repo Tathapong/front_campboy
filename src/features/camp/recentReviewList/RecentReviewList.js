@@ -1,12 +1,13 @@
 import RecentReviewCard from "../recentReviewCard/RecentReviewCard";
 
-function RecentReviewList() {
+function RecentReviewList(props) {
+  const { reviewList } = props;
+
   return (
     <div className="recent-review-card-list-group">
-      <RecentReviewCard />
-      <RecentReviewCard />
-      <RecentReviewCard />
-      <RecentReviewCard />
+      {reviewList.map((review) => (
+        <RecentReviewCard key={review.id} review={review} />
+      ))}
     </div>
   );
 }

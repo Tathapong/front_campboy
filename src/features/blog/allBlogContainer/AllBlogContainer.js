@@ -2,45 +2,43 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { selectMe } from "../../../stores/myUserSlice";
-import { selectBlogs, thunk_getAllBlog } from "../../../stores/blogsSlice";
-
 import Button from "../../../components/button/Button";
-import FollowerList from "../../../components/followerList/FollowerList";
+import FollowList from "../../../components/followList/FollowList";
 import Modal from "../../../components/modal/Modal";
 import NavbarTab from "../../../components/navbarTab/NavbarTab";
 import SidebarFollower from "../../../components/sidebarFollower/SidebarFollower";
 import BlogCardB from "../blogCardB/BlogCardB";
 
+import { selectMe } from "../../../stores/myUserSlice";
+import { selectBlogs, thunk_getAllBlog } from "../../../stores/blogsSlice";
+import { selectTopFiveWriter, selectTopWriter, thunk_getTopWriter } from "../../../stores/followListSlice";
+
 import { tabMenuList } from "../../../constants/constant";
 
 function AllBlogContainer() {
   const [tabItem, setTabItem] = useState("");
-  const [modalWhoToFollowerIsOpen, setModalWhoToFollowerIsOpen] = useState(false);
   const [modalTopWriterIsOpen, setModalTopWriterIsOpen] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const myUser = useSelector(selectMe);
   const blogs = useSelector((state) => selectBlogs(state, tabItem));
+
+  const topWriter = useSelector(selectTopWriter);
+  const topFiveWriter = useSelector(selectTopFiveWriter);
 
   useEffect(() => {
     const fetch = async () => {
       try {
         await dispatch(thunk_getAllBlog());
+        await dispatch(thunk_getTopWriter());
       } catch (error) {
         console.log(error);
       }
     };
     fetch();
   }, [dispatch, myUser]);
-
-  function openModalWhoToFollower() {
-    setModalWhoToFollowerIsOpen(true);
-  }
-  function closeModalWhoToFollower() {
-    setModalWhoToFollowerIsOpen(false);
-  }
 
   function openModalTopWriter() {
     setModalTopWriterIsOpen(true);
@@ -49,13 +47,17 @@ function AllBlogContainer() {
     setModalTopWriterIsOpen(false);
   }
 
+  function handleOnClickWriteAPost() {
+    navigate("/blog/create");
+  }
+
   return (
     <div className="all-blog-container col-8">
       <div className="header-background-all-blog"></div>
 
       <div className="header-group">
         <NavbarTab list={tabMenuList} value={tabItem} setValue={setTabItem} />
-        {myUser ? <Button name="Write a post" onClick={() => navigate("/blog/create")} /> : ""}
+        {myUser ? <Button name="Write a post" onClick={handleOnClickWriteAPost} /> : ""}
       </div>
 
       <div className="blog-list-group">
@@ -64,14 +66,11 @@ function AllBlogContainer() {
         ))}
       </div>
       <div className="sidebar-follower">
-        <SidebarFollower title="Who to follow" onClickMore={openModalWhoToFollower} />
-        <SidebarFollower title="Top writer" onClickMore={openModalTopWriter} />
+        <SidebarFollower title="Top writer" followList={topFiveWriter} onClickMore={openModalTopWriter} />
       </div>
-      <Modal header="Who to follow" isOpen={modalWhoToFollowerIsOpen} closeModal={closeModalWhoToFollower}>
-        <FollowerList />
-      </Modal>
+
       <Modal header="Top writer" isOpen={modalTopWriterIsOpen} closeModal={closeModalTopWriter}>
-        <FollowerList />
+        <FollowList followList={topWriter} />
       </Modal>
     </div>
   );

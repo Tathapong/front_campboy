@@ -1,6 +1,5 @@
 .search-camp-group {
-  @include grid-auto(auto auto, auto auto);
-  width: 100%;
+  @include grid-auto(2fr 1fr, auto auto);
   column-gap: 10px;
 
   .header {

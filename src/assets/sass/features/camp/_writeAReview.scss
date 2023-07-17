@@ -1,12 +1,21 @@
 .write-a-review-form {
-  width: 500px;
-  max-width: 100%;
-  .input-text {
-    background-color: #d0b9a0;
-  }
+  .input-group {
+    @include flex-column;
+    gap: 10px;
 
-  [class*="review-input"] {
-    height: 300px;
+    .input-text-group {
+      .input-text {
+        background-color: #d0b9a0;
+      }
+    }
+
+    .textarea-group {
+      height: 300px;
+
+      .textarea {
+        flex-grow: 1;
+      }
+    }
   }
 
   .button-group {

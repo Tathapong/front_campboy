@@ -1,0 +1,142 @@
+.join-camp-group {
+  margin-inline: auto;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: $borderRadius;
+  padding: 20px;
+  width: 91.66%;
+
+  .submit-confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .icon {
+      font-size: 75px;
+      color: #2d8f3a;
+    }
+
+    .header {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .title {
+      font-style: italic;
+    }
+  }
+
+  .join-camp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .input-text-group {
+      .input-text {
+        background-color: #008890;
+        height: 40px;
+        font-size: 0.875rem;
+      }
+      .small-text-group {
+        .text-count,
+        .text-error {
+          font-size: 0.675rem;
+        }
+      }
+    }
+
+    .input-text::placeholder {
+      font-size: 0.75 rem;
+    }
+
+    .header-title {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      color: #882037;
+    }
+
+    .title {
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 0.875rem;
+    }
+
+    .province-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .select-box-group {
+        height: 40px;
+        background-color: #008890;
+        color: #fff;
+
+        option:first-child {
+          color: #ccc;
+        }
+
+        option {
+          background-color: #fff;
+          color: #000;
+        }
+      }
+
+      .text-error {
+        align-self: flex-end;
+        color: red;
+        font-size: 0.675rem;
+      }
+    }
+
+    .property-group {
+      display: flex;
+      flex-direction: column;
+
+      .checkbox-list {
+        .title {
+          font-size: 1rem;
+          color: #000;
+          margin-block: 5px;
+        }
+
+        .check-box-group {
+          margin-left: 20px;
+        }
+      }
+
+      .text-error {
+        align-self: flex-end;
+        color: red;
+        font-size: 0.675rem;
+      }
+    }
+
+    .contact-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .telephone,
+      .email,
+      .facebook,
+      .line {
+        display: flex;
+        gap: 5px;
+      }
+
+      .label {
+        min-width: 80px;
+        color: #555;
+      }
+    }
+
+    .btn {
+      background-color: #023b3f;
+    }
+  }
+}

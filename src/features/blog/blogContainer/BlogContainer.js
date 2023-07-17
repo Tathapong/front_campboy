@@ -24,14 +24,15 @@ import Modal from "../../../components/modal/Modal";
 import ProfileTitle from "../../../components/profileTitle/ProfileTitle";
 import SelectBox from "../../../components/selectBox/SelectBox";
 import ShareSocial from "../../../components/shareSocial/ShareSocial";
+import Textarea from "../../../components/textarea/Textarea";
 import SidebarBlog from "./SidebarBlog";
 import BlogCommentCard from "../blogCommentCard/BlogCommentCard";
-import BlogEditDropdown from "./BlogEditDropdown";
 import DraftEditor from "../createBlogContainer/DraftEditor";
 
 import { commentSortItem } from "../../../constants/constant";
 import { useUploadBlogImage } from "../../../hooks/useUploadBlogImage";
-import * as customValidator from "../../../validation/validation";
+import { isNotEmpty } from "../../../validation/validation";
+import EditDropdown from "../../../components/editDropdown/EditDropdown";
 
 function BlogContainer() {
   const [modalCommentIsOpen, setModalCommentIsOpen] = useState(false);
@@ -46,7 +47,7 @@ function BlogContainer() {
   const [title, setTitle] = useState("");
 
   const initialError = { title: "", editor: "" };
-  const [errorInput, setErrorInput] = useState({ ...initialError });
+  const [errorEditor, setErrorEditor] = useState({ ...initialError });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -64,14 +65,17 @@ function BlogContainer() {
         await dispatch(thunk_getBlogById(blogId));
       } catch (error) {
         console.log(error);
+        if (error.response.status === 404) navigate("/*");
       }
     };
     fetch();
+    closeModalProfile();
   }, [blogId, dispatch, myUser]);
 
   function openModalComment() {
     setModalCommentIsOpen(true);
   }
+
   function closeModalComment() {
     setErrorCommentInput("");
     setModalCommentIsOpen(false);
@@ -80,19 +84,69 @@ function BlogContainer() {
   function openModalProfile() {
     setModalProfileIsOpen(true);
   }
+
   function closeModalProfile() {
     setModalProfileIsOpen(false);
   }
-  function onChangeTextarea(ev) {
+
+  function handleOnClickEditBlog() {
+    setIsEdit(true);
+  }
+
+  function handleOnChangeTextarea(ev) {
     setCommentInput(() => ev.target.value);
   }
 
-  function handleClickConfirmEditorCancel() {
-    setIsEdit(false);
-    setErrorInput({ ...initialError });
+  const uploadImageReplaceURL = useUploadBlogImage();
+  async function handleOnClickPublish() {
+    try {
+      const contentState = editorState.getCurrentContent();
+      //+ Validation
+      const error = initialError;
+      setErrorEditor((prev) => ({ ...initialError }));
+
+      //- Check Title
+      if (!isNotEmpty(title)) error.title = "Title is required";
+
+      //- Check Editor
+      const plainText = contentState.getPlainText();
+      if (!isNotEmpty(plainText)) error.editor = "Content in Editor is required";
+
+      setErrorEditor((prev) => ({ ...error }));
+
+      const isError = error.editor || error.title;
+
+      if (!isError) {
+        const featureImage = await uploadImageReplaceURL(contentState);
+        const rawContentState = convertToRaw(contentState);
+        const inputData = { title, rawContentState, featureImage, blogId };
+        await dispatch(thunk_updateBlog(inputData));
+        setIsEdit(false);
+        toast.success("Blog post have succesful updated");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
   }
 
-  async function handleClickSaveBlog() {
+  function handleOnClickConfirmEditorCancel() {
+    setIsEdit(false);
+    setErrorEditor({ ...initialError });
+  }
+
+  async function handleOnClickDeleteBlog() {
+    try {
+      await dispatch(thunk_deleteBlog(blogId));
+      toast.success("Delete completed");
+      navigate("/blog");
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
+  }
+
+  async function handleOnClickSaveBlog() {
     try {
       await dispatch(thunk_toggleSave(blogId));
     } catch (error) {
@@ -100,7 +154,7 @@ function BlogContainer() {
     }
   }
 
-  async function handleClickLikeBlog() {
+  async function handleOnClickLikeBlog() {
     try {
       await dispatch(thunk_toggleLike(blogId));
     } catch (error) {
@@ -108,7 +162,7 @@ function BlogContainer() {
     }
   }
 
-  async function handleClickCreateComment(ev) {
+  async function handleOnClickCreateComment(ev) {
     try {
       ev.preventDefault();
 
@@ -117,7 +171,7 @@ function BlogContainer() {
       setErrorCommentInput((prev) => "");
 
       //- Check Title
-      if (!customValidator.isNotEmpty(commentInput)) error = "Comment is required";
+      if (!isNotEmpty(commentInput)) error = "Comment is required";
       if (commentInput.length > 2000) error = "Comment character length is more over 2000!";
 
       setErrorCommentInput(error);
@@ -138,85 +192,37 @@ function BlogContainer() {
     }
   }
 
-  async function handleClickEditBlog() {
-    try {
-      setIsEdit(true);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function handleClickDeleteBlog() {
-    try {
-      await dispatch(thunk_deleteBlog(blogId));
-      toast.success("Delete completed");
-      navigate("/blog");
-    } catch (error) {
-      console.log(error);
-      toast.error(error);
-    }
-  }
-
-  const uploadImageReplaceURL = useUploadBlogImage();
-
-  async function handleClickPublish() {
-    try {
-      const contentState = editorState.getCurrentContent();
-      //+ Validation
-      const error = initialError;
-      setErrorInput((prev) => ({ ...initialError }));
-
-      //- Check Title
-      if (!customValidator.isNotEmpty(title)) error.title = "Title is required";
-
-      //- Check Editor
-      const plainText = contentState.getPlainText();
-      if (!customValidator.isNotEmpty(plainText)) error.editor = "Content in Editor is required";
-
-      setErrorInput((prev) => ({ ...error }));
-
-      const isError = error.editor || error.title;
-
-      if (!isError) {
-        const featureImage = await uploadImageReplaceURL(contentState);
-        const rawContentState = convertToRaw(contentState);
-        const inputData = { title, rawContentState, featureImage, blogId };
-        await dispatch(thunk_updateBlog(inputData));
-        setIsEdit(false);
-        toast.success("Blog post have succesful updated");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error);
-    }
-  }
-
   return (
     <div className="blog-container col-10">
       <div className="header-background-blog-container"></div>
 
       {isEdit ? (
         <DraftEditor
-          initialTitle={blog.blogTitle}
-          initialRawContent={blog.blogRawContent}
+          initialTitle={blog.title}
+          initialRawContent={blog.content ? JSON.parse(blog.content) : ""}
           editorState={editorState}
           setEditorState={setEditorState}
           title={title}
           setTitle={setTitle}
-          errorInput={errorInput}
-          handlePublishButton={handleClickPublish}
-          handleConfirmCancel={handleClickConfirmEditorCancel}
+          errorInput={errorEditor}
+          handlePublishButton={handleOnClickPublish}
+          handleConfirmCancel={handleOnClickConfirmEditorCancel}
         />
       ) : (
         <>
           <div className="main-group">
             <div className="header-group">
-              <ProfileTitle profileImage={blog.profileImage} name={blog.profileName} about={blog.blogDate} />
+              <ProfileTitle
+                profileImage={blog.profileImage}
+                name={blog.profileName}
+                about={blog.createdAt ? new Date(blog.createdAt).toDateString().slice(4) : ""}
+                to={`/profile/${blog.profileId}`}
+              />
               <div className="action-group">
                 <ShareSocial />
-                {myUser ? <IconText type="save-post" isActive={blog.isSave} onClick={handleClickSaveBlog} /> : ""}
+                {myUser ? <IconText type="save-post" isActive={blog.isSave} onClick={handleOnClickSaveBlog} /> : ""}
                 {blog.profileId === myUser?.id ? (
-                  <BlogEditDropdown onClickEdit={handleClickEditBlog} onClickDelete={handleClickDeleteBlog} />
+                  <EditDropdown onClickEdit={handleOnClickEditBlog} onClickDelete={handleOnClickDeleteBlog} />
                 ) : (
                   ""
                 )}
@@ -225,19 +231,22 @@ function BlogContainer() {
             </div>
 
             <div className="blog-content-group">
-              <div className="title">{blog.blogTitle}</div>
-              <div className="content" dangerouslySetInnerHTML={{ __html: draftToHtml(blog.blogRawContent) }}></div>
+              <div className="title">{blog.title}</div>
+              <div
+                className="content"
+                dangerouslySetInnerHTML={{ __html: blog.content ? draftToHtml(JSON.parse(blog.content)) : "" }}
+              ></div>
               <div className="foot-action">
                 <IconText
                   type="like"
-                  name={`${millify(blog.blogLikeCount)} Likes`}
-                  isActive={blog.isLike}
-                  onClick={handleClickLikeBlog}
+                  name={`${blog.blogLikeCount ? millify(blog.blogLikeCount) : ""} Likes`}
+                  isActive={Boolean(blog.isLike)}
+                  onClick={handleOnClickLikeBlog}
                   unauthorized={!Boolean(myUser)}
                 />
                 <IconText
                   type="comment"
-                  name={`${millify(blog.commentCount)} Comments`}
+                  name={`${blog.blogCommentCount ? millify(blog.blogCommentCount) : ""} Comments`}
                   onClick={openModalComment}
                   isActive={modalCommentIsOpen}
                 />
@@ -246,44 +255,51 @@ function BlogContainer() {
           </div>
 
           <SidebarBlog
-            profile_name={blog.profileName}
-            profile_image={blog.profileImage}
-            profile_about={blog.profileAbout}
+            profileId={blog.profileId}
+            profileName={blog.profileName}
+            profileImage={blog.profileImage}
+            profileAbout={blog.profileAbout}
+            blogList={blog.moreBlog}
           />
 
           <Modal header="" isOpen={modalProfileIsOpen} closeModal={closeModalProfile} className="modal-sidebar">
             <SidebarBlog
-              profile_name={blog.profileName}
-              profile_image={blog.profileImage}
-              profile_about={blog.profileAbout}
+              profileId={blog.profileId}
+              profileName={blog.profileName}
+              profileImage={blog.profileImage}
+              profileAbout={blog.profileAbout}
+              blogList={blog.moreBlog}
             />
           </Modal>
 
           <Modal header="Comments" isOpen={modalCommentIsOpen} closeModal={closeModalComment} className="modal-comment">
             {myUser ? (
-              <form className="comment-form" onSubmit={handleClickCreateComment}>
-                <textarea
-                  className={`textarea ${errorCommentInput ? "input-error" : ""}`}
+              <form className="comment-form" onSubmit={handleOnClickCreateComment}>
+                <Textarea
                   placeholder="Write your comment"
-                  onChange={onChangeTextarea}
-                  ref={textareaEl}
                   value={commentInput}
-                ></textarea>
-                <div className="small-text">
-                  <small className="textarea-count"> {commentInput.length}/2000 Characters</small>
-                  {errorCommentInput ? <small className="text-error">{errorCommentInput}</small> : ""}
-                </div>
+                  onChange={handleOnChangeTextarea}
+                  errorText={errorCommentInput}
+                  ref={textareaEl}
+                  maxLength={2000}
+                />
                 <Button name="SEND" type="submit" />
               </form>
             ) : (
               ""
             )}
-            <SelectBox list={commentSortItem} setValue={setSortComment} selected={sortComment} />
-            <div className="blog-comment-list">
-              {commentList.length
-                ? commentList.map((comment) => <BlogCommentCard key={comment.id} comment={comment} />)
-                : []}
-            </div>
+            {commentList.length ? (
+              <>
+                <SelectBox list={commentSortItem} setValue={setSortComment} selected={sortComment} />
+                <div className="blog-comment-list">
+                  {commentList.map((comment) => (
+                    <BlogCommentCard key={comment.id} comment={comment} />
+                  ))}
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </Modal>
         </>
       )}

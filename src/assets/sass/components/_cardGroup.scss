@@ -1,8 +1,7 @@
 .card-group {
+  max-width: 100%;
   margin-inline: auto;
-}
 
-.card-group {
   .card-header {
     @include border-radius-top($borderRadius);
     @include flex-center-center;
@@ -12,9 +11,7 @@
     background-color: #757575;
     height: 50px;
   }
-}
 
-.card-group {
   .card-body {
     @include border-radius-bottom($borderRadius);
     padding: 10px;

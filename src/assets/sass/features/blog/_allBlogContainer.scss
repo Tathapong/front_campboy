@@ -1,6 +1,7 @@
 .all-blog-container {
-  @include grid-auto(4fr 1fr, auto);
-  margin: 0 auto;
+  @include grid-auto(75% 25%, auto auto);
+
+  margin-inline: auto;
 
   .header-background-all-blog {
     background-color: #8db3c3;
@@ -10,13 +11,9 @@
     grid-area: 1 / 1 / span 1 / span 2;
     position: relative;
 
-    .navbar-tab-menu {
-      align-self: flex-end;
-    }
-
     .btn {
       position: absolute;
-      top: -15%;
+      top: -10%;
       right: 0%;
 
       height: 40px;
@@ -25,6 +22,8 @@
   }
 
   .blog-list-group {
+    grid-area: 2 / 1 / span 1 / span 1;
+
     padding-left: 30px;
     padding-top: 20px;
     @include flex-column;
@@ -32,6 +31,8 @@
   }
 
   .sidebar-follower {
+    grid-area: 2 / 2 / span 1 / span 1;
+
     @include flex-column;
     gap: 20px;
 

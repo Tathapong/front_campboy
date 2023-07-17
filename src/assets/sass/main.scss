@@ -9,6 +9,7 @@
 @import "./components/checkbox";
 @import "./components/checkBoxList";
 @import "./components/confirm";
+@import "./components/editDropdown";
 @import "./components/followerList";
 @import "./components/iconText";
 @import "./components/iconTextInfo";
@@ -45,7 +46,6 @@
 @import "./features/blog/blogCardB";
 @import "./features/blog/blogCommentCard";
 @import "./features/blog/blogContainer";
-@import "./features/blog/blogEditDropdown";
 @import "./features/blog/blogRecent";
 @import "./features/blog/createBlogContainer";
 @import "./features/blog/draftEditor";
@@ -72,6 +72,8 @@
 @import "./features/findACamp/searchCamp";
 
 @import "./features/home/homeContainer";
+
+@import "./features/joinCamp/joinCamp";
 
 @import "./features/responsive";
 

@@ -1,53 +1,87 @@
-.profile-title-group {
-  @include flex-space-between-center;
-  gap: 10px;
+.horizontal-profile-title-group {
+  display: flex;
+  align-items: center;
 
-  .image-info {
-    @include flex-start-center;
-    min-width: 150px;
+  .image {
+    @include image-profile(36px);
+  }
 
-    .image {
-      display: flex;
-      width: 36px;
-      height: 36px;
-      object-fit: cover;
-      border-radius: 50%;
+  .profile-info {
+    @include flex-column;
+    margin-left: 10px;
+
+    overflow: hidden;
+
+    .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: capitalize;
     }
 
-    .profile-info {
-      @include flex-column;
-      margin-left: 10px;
+    .follower {
+      font-size: 0.6rem;
+      color: #3f5daf;
+      font-weight: bold;
+    }
+    .since {
+      font-size: 0.6rem;
+      color: #757575;
+      font-weight: bold;
+    }
 
-      overflow: hidden;
+    .about {
+      @include ellipsis-multiline(2);
+      font-size: 0.7rem;
+      color: #757575;
+      letter-spacing: 0.05em;
 
-      .title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      overflow-wrap: break-word;
+    }
+  }
+}
 
-        font-size: 0.75rem;
-        font-weight: bold;
-        text-transform: capitalize;
-      }
+///////////////////////////////////////+Vertical
 
-      .follower {
-        font-size: 0.6rem;
-        color: #757575;
-        font-weight: bold;
-      }
-      .since {
-        font-size: 0.6rem;
-        color: #757575;
-        font-weight: bold;
-      }
+.vertical-profile-title-group {
+  @include flex-column;
+  gap: 10px;
 
-      .about {
-        @include ellipsis-multiline(2);
-        font-size: 0.7rem;
-        color: #757575;
-        letter-spacing: 0.05em;
-        max-width: 500px;
-      }
+  .image {
+    @include image-profile(72px);
+  }
+
+  .profile-info {
+    @include flex-column;
+
+    .title {
+      overflow-wrap: break-word;
+
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .follower {
+      font-size: 0.6rem;
+      color: #3f5daf;
+      font-weight: bold;
+    }
+    .since {
+      font-size: 0.6rem;
+      color: #757575;
+      font-weight: bold;
+    }
+
+    .about {
+      font-size: 0.7rem;
+      color: #757575;
+
+      margin-block: 10px;
+      overflow-wrap: break-word;
     }
   }
 

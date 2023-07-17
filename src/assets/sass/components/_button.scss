@@ -69,6 +69,12 @@
 [class*="btn-cancel"]:hover {
   background-color: #777;
 }
+[class*="btn-delete"] {
+  background-color: red;
+}
+[class*="btn-delete"]:hover {
+  background-color: rgb(95, 2, 2);
+}
 
 [class*="btn-disabled"] {
   background-color: #aaa;

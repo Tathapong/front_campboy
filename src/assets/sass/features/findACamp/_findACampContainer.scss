@@ -15,10 +15,10 @@
 
     @include flex-column;
     gap: 10px;
-    align-items: center;
     padding: 20px;
 
     .clear-filter {
+      align-self: center;
       font-size: 0.625rem;
       text-decoration: underline;
       color: rgb(132, 136, 132);
@@ -36,7 +36,7 @@
 
       .title {
         @include font-bold-space(0.05em);
-        background-color: #d25c5c;
+        background-color: #6447e9;
         color: white;
         padding-block: 5px;
         text-align: center;

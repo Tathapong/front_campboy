@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import CheckBox from "../checkBox/CheckBox";
 import StarRating from "../starRating/StarRating";
 
@@ -16,4 +18,4 @@ function CheckBoxList(props) {
   );
 }
 
-export default CheckBoxList;
+export default memo(CheckBoxList);

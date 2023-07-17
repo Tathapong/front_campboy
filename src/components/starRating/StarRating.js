@@ -1,5 +1,5 @@
 function StarRating(props) {
-  const { type = 5 } = props;
+  const { type = 0 } = props;
   const star = [];
 
   if ([0, 1, 2, 3, 4, 5].includes(+type)) {

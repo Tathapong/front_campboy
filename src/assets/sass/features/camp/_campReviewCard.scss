@@ -1,16 +1,94 @@
 .camp-review-card-group {
   @include border-radius-box-shadow;
-  padding: 25px;
+  padding: 20px;
   background-color: #f8f8f8;
 
+  .header-group {
+    @include flex-space-between-center;
+    gap: 10px;
+    position: relative;
+
+    .horizontal-profile-title-group {
+      overflow: hidden;
+    }
+
+    .comment-edit-dropdown-content {
+      z-index: 1;
+      position: absolute;
+      top: 100%;
+      right: 0%;
+      padding-block: 5px;
+      padding-inline: 10px;
+      margin: 0%;
+      list-style-type: none;
+
+      flex-direction: column;
+      border-radius: $borderRadius;
+      background-color: #ddd;
+
+      .option-dropdown {
+        color: #555;
+        font-size: 0.75rem;
+        padding: 5px;
+      }
+
+      .option-dropdown:hover {
+        background-color: #8dc4f0;
+      }
+    }
+  }
+
+  .review-input-form {
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+
+    .button-group {
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+
+      .btn {
+        width: 50px;
+        height: 20px;
+      }
+    }
+
+    .input-text-group {
+      .input-text {
+        height: 30px;
+        background-color: #bbb;
+        color: rgb(78, 113, 194);
+        font-size: 0.875rem;
+        font-weight: bold;
+      }
+    }
+
+    .textarea-group {
+      .textarea {
+        font-size: 0.75rem;
+        background-color: #bbb;
+      }
+
+      .textarea:focus {
+        background-color: #a6c8db;
+      }
+    }
+  }
+
   .info-group {
-    margin-top: 20px;
+    margin-top: 10px;
 
     .summarize {
       color: #4a65f3;
       font-weight: bold;
       font-style: italic;
       letter-spacing: 0.05em;
+      word-wrap: break-word;
     }
 
     .date {
@@ -38,7 +116,25 @@
       }
       .content {
         font-size: 0.75rem;
+        word-wrap: break-word;
       }
     }
+
+    .button-group {
+      padding: 5px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+
+      .btn {
+        width: 50px;
+        height: 20px;
+      }
+    }
+  }
+
+  .info-group-isDeleting {
+    border: 2px solid red;
+    border-radius: $borderRadius;
   }
 }

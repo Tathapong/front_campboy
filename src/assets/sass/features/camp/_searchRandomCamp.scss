@@ -1,9 +1,10 @@
 .search-random-camp-group {
   @include flex-column;
-  align-items: center;
   gap: 10px;
-  width: 300px;
-  margin: 100px auto;
+  max-width: 300px;
+  width: 100%;
+  margin-inline: auto;
+  margin-top: 100px;
 
   .random-group {
     @include flex-center-center;
@@ -26,13 +27,16 @@
 
     .icon:hover {
       background-color: #bebebe;
-    }
 
-    .icon i {
-      color: #615a5a;
+      i {
+        color: #fff;
+      }
     }
-    .icon i:hover {
-      color: white;
-    }
+  }
+  .btn {
+    align-self: center;
+    background-color: #5a51d4;
+    width: 75px;
+    height: 30px;
   }
 }

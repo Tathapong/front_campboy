@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+
+import CheckBoxList from "../../../components/checkBoxList/CheckBoxList";
+
 import * as informationService from "../../../api/informationApi";
 import { checkboxFromArray } from "../../../utilities/checkboxFromArray";
-import CheckBoxList from "../../../components/checkBoxList/CheckBoxList";
 
 function FilterCamp(props) {
   const { setRating, setProperty, setInformationItem } = props;

@@ -1,16 +1,24 @@
 .input-text-icon-group {
   position: relative;
-  width: 100%;
+  height: 50px;
 
   .input-text-icon {
-    @extend .input-text;
-    margin-block: 0;
+    width: 100%;
+    height: 100%;
     padding-left: 35px;
     background-color: #5d8f6e;
+    color: #fff;
+    border: none;
+    border-radius: $borderRadius;
   }
 
   .input-text-icon:focus {
     background-color: #3e614a;
+    outline: none;
+  }
+
+  .input-text-icon::placeholder {
+    color: #eee;
   }
 
   i {

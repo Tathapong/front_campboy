@@ -39,8 +39,8 @@
             display: none;
           }
 
-          .blog-edit-dropdown-group {
-            .blog-edit-dropdown-content {
+          .edit-dropdown-group {
+            .edit-dropdown-content {
               .option-dropdown-share {
                 display: flex;
               }
@@ -51,24 +51,9 @@
     }
   }
 
-  //+FilterCamp
-  .filter-camp-group {
-    .header {
-      grid-area: 1/1 / span 1 / span 2;
-    }
-
-    [class*="facilities"] {
-      grid-area: 2/2 / span 2 / span 1;
-    }
-  }
-
   //+SearchCamp
   .search-camp-group {
-    @include grid-auto(auto, auto auto auto);
-
-    .header {
-      grid-area: 1 / 1 / span 1 / span 1;
-    }
+    @include flex-column;
   }
 
   //+CampColumnCard
@@ -153,12 +138,6 @@
     > .sidebar-blog-group {
       display: none;
     }
-
-    .modal-sidebar {
-      .modal-content {
-        width: 480px;
-      }
-    }
   }
 
   //+CampRowCardList
@@ -170,9 +149,18 @@
   .more-post-group {
     flex-direction: column;
 
+    .blog-card-a-list {
+      max-width: none;
+    }
+
     .recent-post-group {
-      max-width: 100%;
       min-width: 0;
+      max-width: none;
+      .blog-recent-list {
+        .blog-recent-group {
+          @include grid-auto(1fr 2fr, auto);
+        }
+      }
     }
   }
   //+FindACampContainer
@@ -254,7 +242,7 @@
 @media only screen and (max-width: 1200px) {
   //+CampColumnCard
   .camp-column-card-list-group {
-    @include grid-auto(auto auto, auto auto);
+    @include grid-auto(1fr 1fr, auto auto);
   }
   //+ AllBLogContainer
   .all-blog-container {

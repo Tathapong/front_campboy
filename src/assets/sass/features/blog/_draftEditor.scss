@@ -1,6 +1,7 @@
 .draft-editor-group {
   max-width: 1080px;
   margin-inline: auto;
+
   .wrapper {
     padding: 5px;
     border: 1px solid #cacaca;
@@ -42,11 +43,19 @@
     }
   }
 
-  .modal-group {
+  .content-group {
+    @include flex-column;
+
+    .text-error {
+      align-self: flex-end;
+      font-style: italic;
+      color: red;
+    }
+  }
+
+  .modal-cancel {
     .modal-content {
-      max-width: 1080px;
-      .modal-body {
-      }
+      max-width: fit-content;
     }
   }
 }

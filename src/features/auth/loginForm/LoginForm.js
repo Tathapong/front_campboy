@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import * as customValidator from "../../../validation/validation";
-import { thunk_login } from "../../../stores/myUserSlice";
 import Button from "../../../components/button/Button";
 import InputText from "../../../components/inputText/InputText";
+
+import { isNotEmpty, isEmail } from "../../../validation/validation";
+import { thunk_login } from "../../../stores/myUserSlice";
 
 function LoginForm(props) {
   const { switchToModalSignup, switchToModalForgot, closeModalLogin, openModalVerify } = props;
@@ -18,51 +19,55 @@ function LoginForm(props) {
   const [inputValue, setInputValue] = useState({ ...initialValue });
   const [errorInput, setErrorInput] = useState({ ...initialValue });
 
-  const onChangeEmail = (ev) => setInputValue((prev) => ({ ...prev, email: ev.target.value }));
-  const onChangePassword = (ev) => setInputValue((prev) => ({ ...prev, password: ev.target.value }));
+  function handleOnChangeEmail(ev) {
+    setInputValue((prev) => ({ ...prev, email: ev.target.value }));
+  }
+  function handleOnChangePassword(ev) {
+    setInputValue((prev) => ({ ...prev, password: ev.target.value }));
+  }
 
-  const handleSubmitForm = async (ev) => {
+  async function handleOnSubmitForm(ev) {
     ev.preventDefault();
 
     try {
       //+ Validation
       const error = { ...initialValue };
-      setErrorInput((prev) => ({ ...initialValue })); ///+ Reset error
+      setErrorInput((prev) => ({ ...initialValue }));
 
       //- Check Email
-      if (!customValidator.isNotEmpty(inputValue.email)) error.email = "Email address is required";
-      else if (!customValidator.isEmail(inputValue.email)) error.email = "Email address is invalid format";
+      if (!isNotEmpty(inputValue.email)) error.email = "Email address is required";
+      else if (!isEmail(inputValue.email)) error.email = "Email address is invalid format";
 
       //- Check Password
-      if (!customValidator.isNotEmpty(inputValue.password)) error.password = "Password is required";
+      if (!isNotEmpty(inputValue.password)) error.password = "Password is required";
       else if (inputValue.password.length < 8)
         error.password = "Password is invalid format (length is less than 8 characters)";
 
-      setErrorInput((prev) => ({ ...error })); ///+ Set error
+      setErrorInput((prev) => ({ ...error }));
 
       const isError = error.email || error.password;
       if (!isError) {
         const verify = await dispatch(thunk_login({ email: inputValue.email, password: inputValue.password }));
 
         inputEl.current.map((item) => (item.value = ""));
-        setInputValue({ ...initialValue }); ///+ Reset input
+        setInputValue({ ...initialValue });
         closeModalLogin();
 
         if (verify) toast.success("login successful");
         else openModalVerify();
       }
     } catch (error) {
-      console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+      console.log(error.response.data.error);
+      toast.error(error.response.data.error);
     }
-  };
+  }
 
   return (
-    <form className="login-auth-form" onSubmit={handleSubmitForm}>
+    <form className="login-auth-form" onSubmit={handleOnSubmitForm}>
       <div className="input-group">
         <InputText
           placeholder="Email address"
-          onChange={onChangeEmail}
+          onChange={handleOnChangeEmail}
           ref={(el) => (inputEl.current[0] = el)}
           errorText={errorInput.email}
         />
@@ -70,7 +75,7 @@ function LoginForm(props) {
         <InputText
           placeholder="Password"
           type="password"
-          onChange={onChangePassword}
+          onChange={handleOnChangePassword}
           ref={(el) => (inputEl.current[1] = el)}
           errorText={errorInput.password}
         />

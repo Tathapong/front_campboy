@@ -1,10 +1,9 @@
-import logo from "../../assets/images/logo.png";
-
 import { Link } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 
 function Logo() {
   return (
-    <Link reloadDocument>
+    <Link reloadDocument to="/">
       <img src={logo} className="logo" alt="logo" />
     </Link>
   );

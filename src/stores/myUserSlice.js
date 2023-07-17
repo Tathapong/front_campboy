@@ -140,6 +140,7 @@ export const thunk_resetPassword =
     }
   };
 
+///+                                                                                                                              +
 export const thunk_updateMyUser = (formData) => async (dispatch, getState) => {
   try {
     if (!getState().loading) dispatch(loadingActions.startLoading());

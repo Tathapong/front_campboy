@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 import Button from "../../../components/button/Button";
-import { getResendEmail } from "../../../utilities/localStorage";
+
 import * as authService from "../../../api/authApi";
 import * as constant from "../../../config/constant";
+
+import { getResendEmail } from "../../../utilities/localStorage";
 
 function ResendEmail(props) {
   const { title, subTitle, buttonText, type } = props;
 
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [timer, setTimer] = useState("");
   const email = getResendEmail();
 
@@ -29,7 +31,7 @@ function ResendEmail(props) {
     return () => clearInterval(id);
   }, [timer]);
 
-  const handleResendEmail = async () => {
+  async function handleResendEmail() {
     try {
       setDisabled(true);
       await authService.sendEmail({ email, type });
@@ -39,10 +41,10 @@ function ResendEmail(props) {
 
       setTimer(60);
     } catch (error) {
-      toast.error(error.response.data.message);
-      console.log(error.response.data.message);
+      toast.error(error.response.data.error);
+      console.log(error.response.data);
     }
-  };
+  }
   return (
     <div className="verify-auth-form">
       <i class="fa-sharp fa-solid fa-circle-check icon"></i>

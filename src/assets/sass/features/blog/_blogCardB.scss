@@ -8,10 +8,15 @@
 
   .profile-date {
     @include flex-space-between-center;
+    gap: 10px;
+    .horizontal-profile-title-group {
+      overflow: hidden;
+    }
 
     .date {
       @include font-bold-space(0.05em);
       font-size: 0.625rem;
+      min-width: fit-content;
     }
   }
 

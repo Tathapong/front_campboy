@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-import blogRecent1 from "../../../assets/images/blogRecent1.jpg";
+import { NO_IMAGE_AVAILABLE } from "../../../config/env";
 
 function BlogRecent(props) {
-  const { image = blogRecent1, title = "Title", date = "date" } = props;
+  const { blog } = props;
+
+  const date = new Date(blog.createdAt).toUTCString().slice(5, 16);
+
   return (
-    <Link className="blog-recent-group">
+    <Link className="blog-recent-group" to={`/blog/${blog.id}`}>
       <div className="image-group">
-        <img src={image} alt="img-recent" className="image" />
+        <img src={blog.featureImage ?? NO_IMAGE_AVAILABLE} alt="img-recent" className="image" />
       </div>
       <div className="info">
-        <div className="title">{title}</div>
+        <div className="title">{blog.title}</div>
         <div className="date">{date}</div>
       </div>
     </Link>

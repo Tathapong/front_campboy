@@ -3,10 +3,10 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 
-import InputText from "../../../components/inputText/InputText";
 import Button from "../../../components/button/Button";
-import Modal from "../../../components/modal/Modal";
 import Confirm from "../../../components/confirm/Confirm";
+import InputText from "../../../components/inputText/InputText";
+import Modal from "../../../components/modal/Modal";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
@@ -38,12 +38,12 @@ function DraftEditor(props) {
       const newEditorState = EditorState.createWithContent(convertFromRaw(initialRawContent));
       setEditorState(() => newEditorState);
     }
-  }, [initialTitle, initialRawContent, setEditorState, setTitle]);
+  }, []);
 
-  function onChangeTitle(ev) {
+  function handleOnChangeTitle(ev) {
     setTitle(() => ev.target.value);
   }
-  function onEditorStateChange(newContent) {
+  function handleOnChangeEditorState(newContent) {
     setEditorState(newContent);
   }
 
@@ -63,11 +63,11 @@ function DraftEditor(props) {
     setModalConfirmCancel(false);
   }
 
-  function handleClickPreviewButton() {
+  function handleOnClickPreviewButton() {
     openModalPreview();
   }
 
-  function handleClickCancelButton() {
+  function handleOnClickCancelButton() {
     openModalConfirmCancel();
   }
 
@@ -92,7 +92,14 @@ function DraftEditor(props) {
     <div className="draft-editor-group">
       <div className="title-group">
         <h4>Title</h4>
-        <InputText ref={titleInputEl} placeholder="Title" onChange={onChangeTitle} errorText={errorInput.title} />
+        <InputText
+          ref={titleInputEl}
+          placeholder="Title"
+          value={title}
+          onChange={handleOnChangeTitle}
+          errorText={errorInput.title}
+          maxLength={100}
+        />
       </div>
 
       <div className="content-group">
@@ -102,7 +109,7 @@ function DraftEditor(props) {
           wrapperClassName="wrapper"
           editorClassName="editor"
           editorState={editorState}
-          onEditorStateChange={onEditorStateChange}
+          onEditorStateChange={handleOnChangeEditorState}
           placeholder="Tell your story..."
           handlePastedText={() => false}
           toolbar={{
@@ -118,12 +125,13 @@ function DraftEditor(props) {
             }
           }}
         />
+        {errorInput.editor ? <small className="text-error">{errorInput.editor}</small> : ""}
       </div>
 
       <div className="button-group">
-        <Button name="Preview" onClick={handleClickPreviewButton} />
+        <Button name="Preview" onClick={handleOnClickPreviewButton} />
         <Button name="Publish" onClick={handlePublishButton} />
-        <Button name="Cancel" className="btn-cancel" onClick={handleClickCancelButton} />
+        <Button name="Cancel" className="btn-cancel" onClick={handleOnClickCancelButton} />
       </div>
 
       <Modal header={title ? title : "<Title>"} isOpen={modalPreviewIsOpen} closeModal={closeModalPreview}>
@@ -133,7 +141,12 @@ function DraftEditor(props) {
           }}
         ></div>
       </Modal>
-      <Modal header="Confirm Cancel" isOpen={modalConfirmCancel} closeModal={closeModalConfirmCancel}>
+      <Modal
+        header="Confirm Cancel"
+        className="modal-cancel"
+        isOpen={modalConfirmCancel}
+        closeModal={closeModalConfirmCancel}
+      >
         <Confirm onCancel={closeModalConfirmCancel} onConfirm={handleConfirmCancel} />
       </Modal>
     </div>

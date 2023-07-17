@@ -1,10 +1,40 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import CampColumnCardList from "../../camp/campColumnCardList/CampColumnCardList";
 import CardGroup from "../../../components/cardGroup/CardGroup";
-import SearchRandomCamp from "../../camp/searchRandomCamp/SearchRandomCamp";
+
 import MorePost from "../../blog/morePost/MorePost";
 import RecentReviewList from "../../camp/recentReviewList/RecentReviewList";
+import SearchRandomCamp from "../../camp/searchRandomCamp/SearchRandomCamp";
+
+import {
+  thunk_getTopCamps,
+  thunk_getMorePosts,
+  thunk_getRecentReviews,
+  selectTopCamps,
+  selectMorePost,
+  selectRecentReview
+} from "../../../stores/homeSlice";
 
 function HomeContainer() {
+  const dispatch = useDispatch();
+  const topCamp = useSelector(selectTopCamps);
+  const morePost = useSelector(selectMorePost);
+  const recentReviews = useSelector(selectRecentReview);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        await dispatch(thunk_getTopCamps());
+        await dispatch(thunk_getMorePosts());
+        await dispatch(thunk_getRecentReviews());
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetch();
+  }, [dispatch]);
   return (
     <div className="home-container col-11">
       <img
@@ -15,16 +45,20 @@ function HomeContainer() {
       <SearchRandomCamp />
 
       <CardGroup className="card-group-top-camp" header="Top Campgrounds">
-        <CampColumnCardList />
+        <CampColumnCardList campList={topCamp} />
       </CardGroup>
 
       <CardGroup className="card-group-more-post" header="More Posts">
-        <MorePost />
+        <MorePost morePost={morePost} />
       </CardGroup>
 
-      <CardGroup className="card-group-recent-review" header="Recent Reviews">
-        <RecentReviewList />
-      </CardGroup>
+      {recentReviews.length ? (
+        <CardGroup className="card-group-recent-review" header="Recent Reviews">
+          <RecentReviewList reviewList={recentReviews} />
+        </CardGroup>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

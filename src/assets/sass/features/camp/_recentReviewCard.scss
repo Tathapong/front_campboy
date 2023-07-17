@@ -1,7 +1,8 @@
 .recent-review-card-group {
-  @include grid-auto(auto, auto auto auto auto);
+  @include flex-column;
   @include border-radius-box-shadow($borderRadius);
-  row-gap: 10px;
+  gap: 5px;
+
   max-width: 782px;
   background-color: white;
   padding: 20px;
@@ -15,17 +16,22 @@
 
   > .title {
     @include flex-space-between-center;
+
+    gap: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #7c7c7c;
 
     .camp-name {
       @include font-bold-space(0.05em);
+      @include ellipsis-multiline(2);
+
       font-size: clamp(0.85rem, 1vw, 1rem);
       color: #0076c5;
       text-transform: capitalize;
     }
 
     .date {
+      min-width: fit-content;
       font-size: clamp(0.65rem, 1vw, 0.75rem);
       color: #888eaa;
     }
@@ -34,26 +40,20 @@
   .summarize {
     @include font-bold-space(0.05em);
     font-size: clamp(0.85rem, 1vw, 0.9rem);
+    word-wrap: break-word;
   }
-  .content {
-    position: relative;
 
-    .star-rating-group {
-      position: absolute;
-      left: 0%;
-      top: 0%;
-      display: flex;
-    }
+  .star-rating-group {
+    display: flex;
+  }
 
-    .review {
-      @include ellipsis-multiline(4);
-      font-size: clamp(0.75rem, 1vw, 0.9rem);
-      line-height: 150%;
-      text-indent: 100px;
-    }
+  .review {
+    @include ellipsis-multiline(8);
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    word-wrap: break-word;
   }
 }
 
-.review-card-group:hover {
+.recent-review-card-group:hover {
   background-color: #dadada;
 }
