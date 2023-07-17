@@ -2,10 +2,10 @@
 
 # dependencies
 /node_modules
-/src/assets/data
-/src/assets/images
-/src/assets/location
+
 todos.md
+
+
 /.pnp
 .pnp.js
 
@@ -25,3 +25,4 @@ todos.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+

@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# Campboy web application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🏀Description
 
-## Available Scripts
+Campboy is for finding campsite and sharing experience by blog content. Allows users to search and filter campsite options showing results by Google Maps and allow users toperform CRUD operations on blog posts with reaction (Like,Comment).
 
-In the project directory, you can run:
+The project used with backend project as following :
+https://github.com/Tathapong/back_campboy
 
-### `npm start`
+#### Technologies used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Front-end : React-JS, Redux, Draft-JS, Sass
+- Back-end : Node-JS, Express-JS, Sequelize-JS, Bcrypt-JS, JWT, Google API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🏀Features
 
-### `npm test`
+### 1. Authentication
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Feature         | Content                                     |
+| --------------- | ------------------------------------------- |
+| Sign up         | register to member and verify by email      |
+| Log in          | authenticate with system for member feature |
+| Forgot password | change password in forgot password case     |
+| Change password | change password in knowing password case    |
 
-### `npm run build`
+### 2. Home page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Feature        | Content                              |
+| -------------- | ------------------------------------ |
+| Random camp    | Random campsite for users            |
+| Top camps      | Show top scores campsite             |
+| More blogs     | Show top scores blog and recent blog |
+| Recent reviews | Show recent reviews in campsite      |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Finding campsite page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Feature     | Content                                                                          |
+| ----------- | -------------------------------------------------------------------------------- |
+| Filter camp | Search and filter camp by options (rating, province, type, activities, services) |
+| Result camp | Show number and result campsite from filtering                                   |
+| Map         | Show markup on the map for each filtered campsite                                |
 
-### `npm run eject`
+### 4. Camp page
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Feature     | Content                                        | Remark                       |
+| ----------- | ---------------------------------------------- | ---------------------------- |
+| Image       | Show image slide of campsite                   | -                            |
+| Information | Show information of campsite                   | -                            |
+| Contact     | Show contact of campsite                       | -                            |
+| Map         | Show markup on the map                         | -                            |
+| Review      | Show recent reviews and enable to write review | Only member can write review |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 5. All blogs page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Feature           | Content                                                          | Remark                                               |
+| ----------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
+| Blog              | Show blog lsit by sorting (Recents, Top pick, *Following, *Save) | Only member show more for Following and save sorting |
+| Writer suggestion | Show top writer (member) by follower descending                  | -                                                    |
+| Create blog       | Create blog                                                      | Only member                                          |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 6. Blog page
 
-## Learn More
+| Feature        | Content                                      | Remark      |
+| -------------- | -------------------------------------------- | ----------- |
+| Blog content   | Show all blog content                        | -           |
+| Blog operation | Update and delete blog                       | Only member |
+| Like & Save    | Member can like and save the blog to my list | Only member |
+| Comment        | Member can write comment on the blog         | Only member |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 7. Profile page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Feature              | Content                                                         | Remark      |
+| -------------------- | --------------------------------------------------------------- | ----------- |
+| Profile              | Show information of the profile                                 | -           |
+| Edit profile         | Update profile                                                  | Only member |
+| Following & Follower | Show account list what is following or follower of the profile. | -           |
+| Follow profile       | Member can follow the profile to get content from them          | Only member |
+| Blog of profile      | Show the blog that writed by the profile                        | -           |
 
-### Code Splitting
+### 8. Join camp page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Feature        | Content                                                                | Remark |
+| -------------- | ---------------------------------------------------------------------- | ------ |
+| Join camp form | Users can send the information about new campsite to the admin by form | -      |
 
-### Analyzing the Bundle Size
+## 🏀How to Install and Run the project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- use git clone
+- open project and change directory to the project
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 1. Front-end project
 
-### Advanced Configuration
+- /src/config/env - change API_ENDPOINT_URL as back-end project IP address and port (default : http://192.168.1.33:8000 )
+- use "npm install" in terminal
+- use "npm start" to run project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 2. Back-end project
 
-### Deployment
+- create env file at root directory of project and create variable as following
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+        //Server
+        - MY_IP (example : http://192.168.1.1)
+        - PORT (example : 8000)
 
-### `npm run build` fails to minify
+        //Cloudinary
+        - CLOUDINARY_NAME - cloud_name of cloudinary
+        - CLOUDINARY_API_KEY - api_key of cloudinary
+        - CLOUDINARY_API_SECRET - api_secret of cloudinary
+        - CLOUDINARY_BLOG_FOLDER - folder path for blog image (example : /Campboy/blogs)
+        - CLOUDINARY_PROFILE_FOLDER - folder path for profile image (example : /Campboy/users/profile)
+        - CLOUDINARY_COVER_FOLDER - folder path for cover image (example : /Campboy/users/cover)
+        - CLOUDINARY_DEFAULT_PROFILE_IMAGE - default profile image url for new member
+        - CLOUDINARY_DEFAULT_COVER_IMAGE - default cover image url for new member
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        //JSON web token
+        - JWT_SECRET_KEY - key for jwt (example : password)
+        - JWT_EXPIRES - expires condition of jwt (example : 7d or 30d )
+
+        //Google API
+        - EMAIL - email for using to admin email
+        - PASS  - password for google api
+        - REFRESH_TOKEN - refresh_token for google api
+        - CLIENT_SECRET - client_secret for google api
+        - CLIENT_ID - client_id for google api
+
+- /src/config/config.json - change arguments as your database environment
+- /src/app.js - un-comment the line number 14 - 15
+
+- use "npm install" in terminal
+- use "npm start" to run first project
+- /src/app.js - delete or comment on the line number 14 - 15
+- use "npm start" to run project
+
+---
