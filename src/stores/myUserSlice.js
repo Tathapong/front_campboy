@@ -19,7 +19,13 @@ const userSlice = createSlice({
       state.profileImage = profile.profileImage;
       state.coverImage = profile.coverImage;
     },
-    deleteMyUser: (state, action) => initialState
+    deleteMyUser: (state, action) => initialState,
+    toggleFollowing: (state, action) => {
+      const profileId = action.payload;
+      const idx = state.following.findIndex((item) => item === profileId);
+      if (idx === -1) state.following.push(profileId);
+      else state.following.splice(idx, 1);
+    }
   }
 });
 

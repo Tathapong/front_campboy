@@ -1,5 +1,6 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { actions as loadingActions } from "./loadingSlice";
+import { actions as myUserActions } from "./myUserSlice";
 import * as profileService from "../api/profileApi";
 
 const profileSlice = createSlice({
@@ -41,6 +42,8 @@ export const thunk_toggleFollow = (profileId) => async (dispatch, getState) => {
 
     if (follow && idx === -1) dispatch(actions.addFollower(follow));
     else if (idx !== -1) dispatch(actions.deleteFollower(idx));
+
+    dispatch(myUserActions.toggleFollowing(profileId));
   } catch (error) {
     throw error;
   }
