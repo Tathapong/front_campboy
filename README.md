@@ -133,4 +133,5 @@ https://github.com/Tathapong/back_campboy
 - /src/app.js - delete or comment on the line number 14 - 15
 - use "npm start" to run project
 
+can see sample video on >>> https://www.youtube.com/watch?v=6bJIOshedlE
 ---
