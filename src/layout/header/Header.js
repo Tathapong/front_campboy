@@ -10,7 +10,7 @@ import TextButton from "./TextButton";
 import ProfileDropdown from "./ProfileDropdown";
 
 import LoginForm from "../../features/auth/loginForm/LoginForm";
-import SignupForm from "../../features/auth/signupForm/SignupForm";
+import SignupForm from "../../features/auth/signup/SignupForm";
 import ForgotPasswordForm from "../../features/auth/forgotPassword/ForgotPasswordForm";
 import ResendEmail from "../../features/auth/resendEmail/ResendEmail";
 

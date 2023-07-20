@@ -28,7 +28,6 @@ import {
 } from "../../../stores/campSlice";
 import { selectMe } from "../../../stores/myUserSlice";
 import { reviewSortItem } from "../../../constants/constant";
-import NotFound from "../../../pages/notFound/NotFound";
 
 function Camp() {
   const { campId } = useParams();
