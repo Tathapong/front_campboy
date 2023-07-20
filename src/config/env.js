@@ -1,4 +1,4 @@
-export const API_ENDPOINT_URL = "http://192.168.1.33:8000";
+export const API_ENDPOINT_URL = "https://red-dull-caterpillar.cyclic.app";
 
 export const DEFAULT_PROFILE_IMAGE =
   "https://res.cloudinary.com/duzw1g3u8/image/upload/v1687257141/Campboy/users/initial/campboy_user_v2ctuu.png";
